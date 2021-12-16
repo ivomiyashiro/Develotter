@@ -4,7 +4,7 @@ import { Buttons } from './Buttons';
 
 import Logo from 'components/Icons/Logo';
 import { theme } from 'styles/theme';
-import { Hightlight } from 'styles/global';
+import { Hightlight } from 'styles/commun';
 import { Footer, Header, SubTitle, Text, Title } from './styles';
 
 export const HeaderWrapper = () => {

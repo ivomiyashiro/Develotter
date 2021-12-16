@@ -1,5 +1,4 @@
 import {createGlobalStyle} from 'styled-components';
-import styled from 'styled-components';
 import { theme } from './theme';
 
 export default createGlobalStyle`
@@ -21,8 +20,4 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
   }
-`;
-
-export const Hightlight = styled.span`
-  color: ${theme.hack};
 `;
