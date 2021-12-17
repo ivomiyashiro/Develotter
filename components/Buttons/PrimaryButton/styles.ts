@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface IButton {
-  style: 'normal' | 'outline'
+  outline: boolean
   color: string
   textColor: string
 }
@@ -15,8 +15,8 @@ export const Button = styled.button<IButton>`
   justify-content: center;
   width: 100%;
   font-weight: 800;
-  background: ${(props: IButton) => props.style === 'normal' ? props.color : 'transparent'};
-  border: 2px solid ${(props: IButton) => props.style === 'normal' ? 'transparent' : props.color};
+  background: ${(props: IButton) => !props.outline ? props.color : 'transparent'};
+  border: 1px solid ${(props: IButton) => !props.outline ? 'transparent' : props.color};
   color: ${(props: IButton) => props.textColor};
 
   :disabled {
@@ -24,7 +24,7 @@ export const Button = styled.button<IButton>`
   }
 `;
 
-export const Anchor = styled.a<IButton>`
+export const Anchor = styled.div<IButton>`
   align-items: center;
   border-radius: 9999px;
   display: flex;
@@ -33,8 +33,10 @@ export const Anchor = styled.a<IButton>`
   justify-content: center; 
   width: 100%;
   font-weight: 800;
-  background: ${(props: IButton) => props.style === 'normal' ? props.color : 'transparent'};
-  border: 2px solid ${(props: IButton) => props.style === 'normal' ? 'transparent' : props.color};
+  background: ${(props: IButton) => 
+    !props.outline ? props.color : 'transparent'};
+  border: 1px solid ${(props: IButton) => 
+    !props.outline ? 'transparent' : props.color};
   color: ${(props: IButton) => props.textColor};
   transition: background .2s ease-in-out;
 

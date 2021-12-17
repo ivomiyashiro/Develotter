@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Link from 'next/link';
 
 import { Modal } from 'components/Modal';
@@ -11,6 +12,11 @@ import Logo from 'components/Icons/Logo';
 const Signup = () => {
   return (
     <>
+
+      <Head>
+        <title>Sign up for Develotter / Develotter</title>
+      </Head>
+
       <Modal
         isOpen={true}
       >

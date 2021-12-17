@@ -22,3 +22,9 @@ export const IconWrapper = styled.div`
   left: 16px;
   top: 12px;
 `;
+
+export const Span = styled.span`
+  font-weight: 400;
+`;
+
+export const Test = styled.div``;

@@ -1,7 +1,7 @@
 import { ButtonPrimary } from 'components/Buttons/PrimaryButton/ButtonPrimary';
 import MessagesIcon from 'components/Icons/Messages';
 import { theme } from 'styles/theme';
-import { ButtonChild, ButtonsWrapper, ButtonWrapper, IconWrapper } from './styles';
+import { ButtonChild, ButtonsWrapper, ButtonWrapper, IconWrapper, Span } from './styles';
 
 export const Buttons = () => {
   return (
@@ -10,7 +10,7 @@ export const Buttons = () => {
         <ButtonPrimary
           color={theme.hack}
           textColor={theme.hack}
-          style="outline"
+          outline={true}
           type="link"
           href="/signin"
         >
@@ -22,7 +22,7 @@ export const Buttons = () => {
                 color={theme.hack}
               />
             </IconWrapper>
-            <span> Sign in with email </span>
+            <Span> Sign in with email </Span>
           </ButtonChild>
         </ButtonPrimary>
       </ButtonWrapper>
@@ -31,7 +31,7 @@ export const Buttons = () => {
           <ButtonPrimary
             color={theme.hack}
             textColor={theme.hack}
-            style="outline"
+            outline={true}
             type="link"
             href="/signup"
           >
@@ -43,7 +43,7 @@ export const Buttons = () => {
                   color={theme.hack}
                 />
               </IconWrapper>
-              <span> Sign up with email </span>
+              <Span> Sign up with email </Span>
             </ButtonChild>
           </ButtonPrimary>
         </ButtonWrapper>

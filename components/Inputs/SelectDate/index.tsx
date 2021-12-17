@@ -48,6 +48,7 @@ export const SelectDate = ({
         onChange={handleInputChange}
         onBlur={handleInputError}
         error={error.length > 0 ? true : false}
+        hasChanged={value.length > 0 ? true: false}
       />
       <Small>{error}</Small>
     </SelectWrapper>

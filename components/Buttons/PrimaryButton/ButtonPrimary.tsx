@@ -6,7 +6,7 @@ import { Anchor, Button } from './styles';
 interface IProps {
   children: ReactNode,
   type?: 'button' | 'link'
-  style?: 'normal' | 'outline'
+  outline?: boolean
   textColor: string
   color: string
   href?: string
@@ -22,7 +22,7 @@ export const ButtonPrimary = ({
   href,
   color,
   textColor,
-  style = 'normal',
+  outline = false,
   action = 'submit',
   onClick,
 }: IProps) => {
@@ -31,34 +31,32 @@ export const ButtonPrimary = ({
     <>
       {
         type === 'button'
-        &&
-        <Button
-          style={style}
-          disabled={isDisabled}
-          type={action}
-          color={color}
-          textColor={textColor}
-          onClick={onClick}
-        >
-          { children }
-        </Button>
-      }
-
-      {
-        type === 'link'
-        &&
-        <Link
-          href={href as string}
-          passHref
-        >
-          <Anchor
-            style={style}
-            color={color}
-            textColor={textColor}
-          >
-            {children}
-          </Anchor>
-        </Link>
+          ? (
+            <Button
+              outline={outline}
+              disabled={isDisabled}
+              type={action}
+              color={color}
+              textColor={textColor}
+              onClick={onClick}
+            >
+              { children }
+            </Button>
+          )
+          : (
+            <Link
+              href={href as string}
+              passHref
+            >
+              <Anchor
+                outline={outline}
+                color={color}
+                textColor={textColor}
+              >
+                {children}
+              </Anchor>
+            </Link>
+          )
       }
     </>
   );

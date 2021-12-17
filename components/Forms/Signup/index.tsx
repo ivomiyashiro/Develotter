@@ -6,16 +6,11 @@ import { SelectDate } from 'components/Inputs/SelectDate';
 import { ButtonPrimary } from 'components/Buttons/PrimaryButton/ButtonPrimary';
 import { Spinner } from 'components/Spinner';
 
+import { regEx } from 'helpers/regEx';
 import { theme } from 'styles/theme';
 import { ButtonWrapper, Form, InputsWrapper, Subtitle, Title } from './styles';
 
 export const SignupForm = () => {
-
-  const regEx = {
-    name: /^[a-z ,.'-]+$/i,
-    email: /^\S+@\S+\.\S+$/,
-    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-  };
 
   const [nameInputState, setNameInputState] = useState(NAME_INPUT_INIT_STATE);
   const [emailInputState, setEmailInputState] = useState(EMAIL_INPUT_INIT_STATE);
