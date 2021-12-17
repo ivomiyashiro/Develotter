@@ -18,6 +18,10 @@ export const Button = styled.button<IButton>`
   background: ${(props: IButton) => props.style === 'normal' ? props.color : 'transparent'};
   border: 2px solid ${(props: IButton) => props.style === 'normal' ? 'transparent' : props.color};
   color: ${(props: IButton) => props.textColor};
+
+  :disabled {
+    opacity: 0.6;
+  }
 `;
 
 export const Anchor = styled.a<IButton>`

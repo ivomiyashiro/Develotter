@@ -1,4 +1,4 @@
-import { ButtonPrimary } from 'components/Buttons/ButtonPrimary';
+import { ButtonPrimary } from 'components/Buttons/PrimaryButton/ButtonPrimary';
 import MessagesIcon from 'components/Icons/Messages';
 import { theme } from 'styles/theme';
 import { ButtonChild, ButtonsWrapper, ButtonWrapper, IconWrapper } from './styles';
@@ -33,7 +33,7 @@ export const Buttons = () => {
             textColor={theme.hack}
             style="outline"
             type="link"
-            href="/signin"
+            href="/signup"
           >
             <ButtonChild>
               <IconWrapper>
