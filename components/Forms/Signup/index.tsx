@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import { BIRTH_INPUT_INIT_STATE, EMAIL_INPUT_INIT_STATE, NAME_INPUT_INIT_STATE, PASSWORD_INPUT_INIT_STATE } from 'helpers/InitStates';
 import { InputControl } from 'components/Inputs/InputControl';
@@ -17,9 +17,13 @@ export const SignupForm = () => {
   const [passwordInputState, setPasswordInputState] = useState(PASSWORD_INPUT_INIT_STATE);
   const [birthInputState, setBirthInputState] = useState(BIRTH_INPUT_INIT_STATE);
   const [isLoading, setLoading] = useState(false);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div>
         <Title>Create your account</Title>
         <InputsWrapper>

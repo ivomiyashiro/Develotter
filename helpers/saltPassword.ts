@@ -6,6 +6,6 @@ export const saltPassword = (password: string) => {
   return bcrypt.hashSync(password, salt);
 };
 
-export const isValidPassword = (userPassword: string, bodyPassword: string) => {
+export const verifyPassword = (userPassword: string, bodyPassword: string) => {
   return bcrypt.compareSync(bodyPassword, userPassword);
 };
