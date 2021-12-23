@@ -27,6 +27,7 @@ export const Button = styled.button<IButton>`
 export const Anchor = styled.div<IButton>`
   align-items: center;
   border-radius: 9999px;
+  cursor: pointer;
   display: flex;
   font-size: 1rem;
   height: 100%;
