@@ -1,10 +1,11 @@
+import { PrivateRoute } from 'components/PrivateRoute';
 import { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <PrivateRoute>
       hola!
-    </div>
+    </PrivateRoute>
   );
 };
 

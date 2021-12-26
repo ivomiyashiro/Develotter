@@ -1,4 +1,5 @@
 import { FormEvent, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { EMAIL_INPUT_INIT_STATE, FORM_ERROR_INIT_STATE, PASSWORD_INPUT_INIT_STATE } from 'helpers/InitStates';
 import { regEx } from 'helpers/regEx';
@@ -20,6 +21,7 @@ export const SigninForm = () => {
   const [emailInputState, setEmailInputState] = useState(EMAIL_INPUT_INIT_STATE);
   const [passwordInputState, setPasswordInputState] = useState(PASSWORD_INPUT_INIT_STATE);
   const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ export const SigninForm = () => {
 
     setLoading(true);
     await signin(data, setFormError, userDispatch);
+    router.push('/home');
     setLoading(false);
   };
 

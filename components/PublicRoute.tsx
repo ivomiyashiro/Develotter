@@ -36,17 +36,15 @@ export const PublicRoute = ({children}: IProps) => {
 
   return (
     <>
-      <div>
-        {
-          isLoading
-            ? (
-              <div>
-                <Spinner size="32px" color={theme.white} />
-              </div>
-            )
-            : children
-        }
-      </div>
+      {
+        isLoading
+          ? (
+            <div>
+              <Spinner size="28px" color={theme.white} />
+            </div>
+          )
+          : children
+      }
 
       <style jsx>{`
         div {
@@ -54,7 +52,7 @@ export const PublicRoute = ({children}: IProps) => {
           align-items: center;
           justify-content: center;
           width: 100%;
-          heigth: 100vh;
+          height: 100vh;
         }
       `}</style>
     </>
