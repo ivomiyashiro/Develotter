@@ -1,14 +1,14 @@
 import { NextApiRequest, NextApiResponse,  } from 'next';
 import jwt from 'jsonwebtoken';
 
-export const jwtValidator = async(req: NextApiRequest, res: NextApiResponse) => {
+export const validateJWT = async(req: NextApiRequest, res: NextApiResponse) => {
 
   const headers = req.headers;
   const token = headers['x-token'];
 
   if (!token) {
     return res.status(401).json({
-      success: false,
+      ok: false,
       msg: 'No token in the request'
     });
   }
@@ -23,7 +23,7 @@ export const jwtValidator = async(req: NextApiRequest, res: NextApiResponse) => 
 
   } catch (error) {
     return res.status(401).json({
-      success: false,
+      ok: false,
       msg: 'Token is not valid'
     });
   };

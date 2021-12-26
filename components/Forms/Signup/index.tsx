@@ -1,29 +1,54 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 
-import { BIRTH_INPUT_INIT_STATE, EMAIL_INPUT_INIT_STATE, NAME_INPUT_INIT_STATE, PASSWORD_INPUT_INIT_STATE } from 'helpers/InitStates';
+import { FORM_ERROR_INIT_STATE, BIRTH_INPUT_INIT_STATE, EMAIL_INPUT_INIT_STATE, NAME_INPUT_INIT_STATE, PASSWORD_INPUT_INIT_STATE } from 'helpers/InitStates';
+import { regEx } from 'helpers/regEx';
+import { signup } from 'actions/auth';
+
+import { AppContext } from 'context/AppContext';
 import { InputControl } from 'components/Inputs/InputControl';
 import { SelectDate } from 'components/Inputs/SelectDate';
 import { ButtonPrimary } from 'components/Buttons/PrimaryButton/ButtonPrimary';
 import { Spinner } from 'components/Spinner';
+import { Toast } from 'components/Toast';
 
-import { regEx } from 'helpers/regEx';
 import { theme } from 'styles/theme';
 import { ButtonWrapper, Form, InputsWrapper, Subtitle, Title } from './styles';
 
 export const SignupForm = () => {
 
+  const { userDispatch } = useContext(AppContext);
+  const [formError, setFormError] = useState(FORM_ERROR_INIT_STATE);
   const [nameInputState, setNameInputState] = useState(NAME_INPUT_INIT_STATE);
   const [emailInputState, setEmailInputState] = useState(EMAIL_INPUT_INIT_STATE);
   const [passwordInputState, setPasswordInputState] = useState(PASSWORD_INPUT_INIT_STATE);
   const [birthInputState, setBirthInputState] = useState(BIRTH_INPUT_INIT_STATE);
   const [isLoading, setLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const data = ({
+      name: nameInputState.value,
+      email: emailInputState.value,
+      password: passwordInputState.value,
+      birth_date: birthInputState.value
+    });
+
+    setLoading(true);
+    await signup(data, setFormError, userDispatch);
+    setLoading(false);
   };
   
   return (
     <Form onSubmit={handleSubmit}>
+      {
+        formError.isOpen 
+          &&
+          <Toast
+            message={formError.msg} 
+            isError={true} 
+          />
+      }
       <div>
         <Title>Create your account</Title>
         <InputsWrapper>

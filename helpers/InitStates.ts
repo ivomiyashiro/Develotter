@@ -1,3 +1,9 @@
+export const FORM_ERROR_INIT_STATE = {
+  isOpen: false,
+  error: false,
+  msg: ''
+};
+
 export const NAME_INPUT_INIT_STATE = {
   value: '',
   error: '',

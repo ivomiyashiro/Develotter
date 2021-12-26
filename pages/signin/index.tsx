@@ -1,27 +1,24 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import { Modal } from 'components/Modal';
-import { SignupForm } from 'components/Forms/Signup';
+import { SigninForm } from 'components/Forms/Signin';
 import { FormWrapper } from 'components/FormWrapper';
+import { Modal } from 'components/Modal';
 import { PublicRoute } from 'components/PublicRoute';
 
-
-const Signup: NextPage = () => {
-
+const Signin: NextPage = () => {
   return (
     <>
-
       <Head>
-        <title>Sign up for Develotter / Develotter</title>
+        <title>Sign in for Develotter / Develotter</title>
       </Head>
-      
+
       <PublicRoute>
         <Modal
           isOpen={true}
         >
           <FormWrapper>
-            <SignupForm/>
+            <SigninForm />
           </FormWrapper>
         </Modal>
       </PublicRoute>
@@ -29,4 +26,4 @@ const Signup: NextPage = () => {
   );
 };
 
-export default Signup;
+export default Signin;

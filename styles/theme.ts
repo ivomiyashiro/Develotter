@@ -9,6 +9,7 @@ interface IColors {
   comments: string
   revits: string
   red: string
+  green: string
 }
 
 export const theme: IColors = {
@@ -21,5 +22,6 @@ export const theme: IColors = {
   fav: '#f91880',
   comments: '#1d9bf0',
   revits: '#64ffda',
-  red: '#ff5555'
+  red: '#F4212E',
+  green: '#05AC72'
 };

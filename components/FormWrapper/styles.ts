@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints } from 'styles/breakpoints';
 import { theme } from 'styles/theme';
 
-export const SignupFormWrapper = styled.div`
+export const Wrapper = styled.div`
   background: ${theme.blue};
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@ export const SignupFormWrapper = styled.div`
   }
 `;
 
-export const SignupFormHeader = styled.header`
+export const Header = styled.header`
   align-self: center;
 `;
 

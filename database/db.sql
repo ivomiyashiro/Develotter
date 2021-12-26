@@ -12,3 +12,5 @@ CREATE TABLE IF NOT EXISTS dev (
 )
 
 INSERT INTO dev (name, username, email, password, birth_date) VALUES ($1, $2, $3, $4, $5)
+
+SELECT * FROM dev WHERE id = ($1)
