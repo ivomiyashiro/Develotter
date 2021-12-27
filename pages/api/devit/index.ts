@@ -10,7 +10,7 @@ const devit = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
   case 'GET':
     try {
-      const query = 'SELECT * FROM devit';
+      const query = 'SELECT * FROM devit ORDER BY created_at DESC';
       const resp = await conn.query(query);
       
       return res.status(200).json({

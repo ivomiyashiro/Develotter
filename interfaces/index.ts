@@ -20,10 +20,7 @@ export interface IDevit {
   uid: string
   content: string
   img: string
-  comments: Array<any>
-  favs: Array<any>
-  revits: Array<any>
-  createdAt: Date
+  created_at: Date
   updatedAt : Date
 }
 

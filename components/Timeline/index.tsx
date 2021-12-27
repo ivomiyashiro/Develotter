@@ -15,6 +15,7 @@ import { Modal } from 'components/Modal';
 import { Div, Section, SpinnerWrapper } from './styles';
 import { CreateDevitTimeline } from 'components/Forms/CreateDevitTimeline';
 import { getDevits } from 'services/devit';
+import { Devit } from 'components/Devit';
 
 export const Timeline = () => {
 
