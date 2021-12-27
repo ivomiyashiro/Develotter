@@ -9,9 +9,9 @@ export interface IUser {
   username: string
   email: string
   bio: string
-  profilePicture: string
-  coverPicture: string
-  birthDate: Date
+  profile_picture: string
+  cover_picture: string
+  birth_date: Date
   followers: Array<any>
   followins: Array<any>
   devits: IDevit[],

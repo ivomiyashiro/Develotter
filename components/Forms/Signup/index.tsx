@@ -8,7 +8,7 @@ import { signup } from 'actions/auth';
 import { AppContext } from 'context/AppContext';
 import { InputControl } from 'components/Inputs/InputControl';
 import { SelectDate } from 'components/Inputs/SelectDate';
-import { ButtonPrimary } from 'components/Buttons/PrimaryButton/ButtonPrimary';
+import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 import { Spinner } from 'components/Spinner';
 import { Toast } from 'components/Toast';
 

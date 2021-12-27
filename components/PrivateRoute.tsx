@@ -1,5 +1,7 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+
+import { AppContext } from 'context/AppContext';
 
 import { Spinner } from './Spinner';
 
@@ -12,6 +14,7 @@ interface IProps {
 
 export const PrivateRoute = ({children}: IProps) => {
 
+  const {userDispatch} = useContext(AppContext);
   const router = useRouter();
   const [isLoading, setLoading] = useState(true);
   
@@ -27,6 +30,10 @@ export const PrivateRoute = ({children}: IProps) => {
         }
 
         localStorage.setItem('token', res.token);
+        userDispatch({
+          type: 'SIGN IN',
+          payload: res.user
+        });
       })
       .catch(error => {
         throw new Error(error);
@@ -34,7 +41,7 @@ export const PrivateRoute = ({children}: IProps) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [router]);
+  }, [router, userDispatch]);
 
   return (
     <>

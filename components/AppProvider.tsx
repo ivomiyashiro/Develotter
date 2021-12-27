@@ -8,7 +8,7 @@ type IProps = {
 
 export const AppProvider = ({ children }: IProps) => {
 
-  const [userState, userDispatch] = useReducer(userReducer, []);
+  const [userState, userDispatch] = useReducer(userReducer, {});
   // const [devitState, devitDispatch] = useReducer(devitReducer, DEVIT_INIT_STATE);
   // const [uiState, uiDispatch] = useReducer(uiReducer, UI_INIT_STATE);
   

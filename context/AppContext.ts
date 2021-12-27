@@ -2,7 +2,7 @@ import { createContext, Dispatch } from 'react';
 import { IDevit, IUser } from './../interfaces';
 
 interface IContext {
-  userState: IUser[] | []
+  userState: IUser
   userDispatch: Dispatch<any>
   // devitState: IDevit[]
   // devitDispatch: Dispatch<any>
@@ -12,7 +12,7 @@ interface IContext {
   // uiDispatch: Dispatch<any>
 }
 
-export const USER_INIT_STATE: IUser[] = [{
+export const USER_INIT_STATE = {
   id: '',
   username: '',
   name: '',
@@ -27,7 +27,7 @@ export const USER_INIT_STATE: IUser[] = [{
   revits: [],
   favs: [],
   created_at: new Date(),
-}];
+};
 
 // export const DEVIT_INIT_STATE: IDevit[] = [];
 
@@ -36,7 +36,7 @@ export const USER_INIT_STATE: IUser[] = [{
 // };
 
 export const AppContext = createContext<IContext>({ 
-  userState: [],
+  userState: USER_INIT_STATE,
   userDispatch: () => null,
   // devitState: DEVIT_INIT_STATE,
   // devitDispatch: () => null,

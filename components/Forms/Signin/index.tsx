@@ -7,7 +7,7 @@ import { signin } from 'actions/auth';
 
 import { AppContext } from 'context/AppContext';
 import { Spinner } from '../../Spinner';
-import { ButtonPrimary } from 'components/Buttons/PrimaryButton/ButtonPrimary';
+import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 import { InputControl } from 'components/Inputs/InputControl';
 import { Toast } from 'components/Toast';
 
