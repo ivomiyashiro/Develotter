@@ -23,3 +23,13 @@ export const Div = styled.div`
     grid-template-columns: 260px 600px minmax(290px, 375px);
   }
 `;
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 4em;
+  right: 1.25em;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    display: none;
+  }
+`;

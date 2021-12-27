@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-// import { handleOpenCreateDevitForm } from '../../../actions/ui';
+import { handleOpenCreateDevitForm } from 'actions/ui';
 import { AppContext } from 'context/AppContext';
 
 import { MenuItem } from './MenuItem';
@@ -20,7 +20,7 @@ import { Div, Menu, Section, Ul } from './styles';
 
 export const AsideLeftMenuItems = () => {
 
-  const { userState } = useContext(AppContext);
+  const { userState, uiDispatch } = useContext(AppContext);
 
   return (
     <>
@@ -66,7 +66,7 @@ export const AsideLeftMenuItems = () => {
           <ButtonPrimary
             textColor={theme.blue}
             color={theme.hack}
-            // onClick={() => handleOpenCreateDevitForm(uiDispatch)}
+            onClick={() => handleOpenCreateDevitForm(uiDispatch)}
           >
             Devit
           </ButtonPrimary>

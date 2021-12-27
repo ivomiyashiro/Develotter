@@ -13,6 +13,7 @@ interface IProps {
   isDisabled?: boolean
   action?: 'submit' | 'reset' | 'button'
   onClick?: MouseEventHandler<HTMLButtonElement>
+  hover?: boolean
 }
 
 export const ButtonPrimary = ({
@@ -25,6 +26,7 @@ export const ButtonPrimary = ({
   outline = false,
   action = 'submit',
   onClick,
+  hover = false
 }: IProps) => {
 
   return (
@@ -39,6 +41,7 @@ export const ButtonPrimary = ({
               color={color}
               textColor={textColor}
               onClick={onClick}
+              hover={hover}
             >
               { children }
             </Button>
@@ -52,6 +55,7 @@ export const ButtonPrimary = ({
                 outline={outline}
                 color={color}
                 textColor={textColor}
+                hover={hover}
               >
                 {children}
               </Anchor>

@@ -27,8 +27,6 @@ export const HoverableButton = ({
           width={width}
           heigth={height}
           stroke="currentColor"
-          stroke-width="0"
-          fill="currentColor"
         />
       </Button>
     </>

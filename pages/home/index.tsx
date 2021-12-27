@@ -1,15 +1,25 @@
+import { NextPage } from 'next';
+import Head from 'next/head';
+
 import { AsideLeftMenu } from 'components/AsideMenuLeft';
 import { DevelotterLayout } from 'components/DevelotterLayout';
 import { PrivateRoute } from 'components/PrivateRoute';
-import { NextPage } from 'next';
+import { Timeline } from 'components/Timeline';
 
 const Home: NextPage = () => {
   return (
-    <PrivateRoute>
-      <DevelotterLayout>
-        <AsideLeftMenu />
-      </DevelotterLayout>
-    </PrivateRoute>
+    <>
+      <Head>
+        <title>Home / Develotter</title>
+      </Head>
+
+      <PrivateRoute>
+        <DevelotterLayout>
+          <AsideLeftMenu />
+          <Timeline />
+        </DevelotterLayout>
+      </PrivateRoute>
+    </>
   );
 };
 

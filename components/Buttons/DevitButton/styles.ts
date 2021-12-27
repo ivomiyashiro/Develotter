@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
-export const Button = styled.button`
-  height: 56px;
-  width: 56px;
-  border-radius: 50%;
+export const Div = styled.div`
+  align-items: center;
   background: ${theme.hack};
+  border-radius: 50%;
   border: none;
   color: ${theme.blue};
+  cursor: pointer;
   display: flex;
-  align-items: center;
+  height: 56px;
   justify-content: center;
+  width: 56px;
 `;

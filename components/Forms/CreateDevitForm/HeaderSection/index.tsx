@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-// import { handleCloseCreateDevitForm } from '../../../actions/ui';
+import { handleCloseCreateDevitForm } from 'actions/ui';
 
 import { AppContext } from 'context/AppContext';
 import { Spinner } from 'components/Spinner';
@@ -25,7 +25,7 @@ export const HeaderSection = ({
   buttonChild
 }: IProps) => {
 
-  // const { uiDispatch } = useContext(AppContext);
+  const { uiDispatch } = useContext(AppContext);
 
   return (
     <>
@@ -35,11 +35,11 @@ export const HeaderSection = ({
           width="22px"
           height="22px"
           color={theme.darker_white}
-          // onClick={
-          //   handleOpenModal !== undefined 
-          //     ? () => handleOpenModal(false)
-          //     : () => handleCloseCreateDevitForm(uiDispatch)
-          // }
+          onClick={
+            handleOpenModal !== undefined 
+              ? () => handleOpenModal(false)
+              : () => handleCloseCreateDevitForm(uiDispatch)
+          }
         />
         <Div>
           <ButtonPrimary 

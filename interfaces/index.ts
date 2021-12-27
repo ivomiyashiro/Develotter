@@ -12,11 +12,6 @@ export interface IUser {
   profile_picture: string
   cover_picture: string
   birth_date: Date
-  followers: Array<any>
-  followins: Array<any>
-  devits: IDevit[],
-  revits: IRevit[],
-  favs: Array<any>,
   created_at: Date
 }
 

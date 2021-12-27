@@ -4,6 +4,7 @@ interface IButton {
   outline: boolean
   color: string
   textColor: string
+  hover: boolean
 }
 
 export const Button = styled.button<IButton>`
@@ -40,9 +41,12 @@ export const Anchor = styled.div<IButton>`
     !props.outline ? 'transparent' : props.color};
   color: ${(props: IButton) => props.textColor};
   transition: background .2s ease-in-out;
+  
+  ${props => props.hover && `
+    :hover {
+      background: ${(props: IButton) => props.color + '33'};
+      transition: background .2s ease-in-out;
+    }
+  `}
 
-  :hover {
-    background: ${(props: IButton) => props.color + '33'};
-    transition: background .2s ease-in-out;
-  }
 `;

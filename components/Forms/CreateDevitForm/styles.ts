@@ -9,7 +9,6 @@ export const Form = styled.form`
   top: 0;
   width: 100%;
   z-index: 100;
-  padding: 0 1em;
 
   @media (min-width: ${breakpoints.tablet}) {
     min-width: 600px;
@@ -29,4 +28,5 @@ export const Form = styled.form`
 
 export const Div = styled.div`
   margin-top: 1em;
+  padding: 0 1em;
 `;

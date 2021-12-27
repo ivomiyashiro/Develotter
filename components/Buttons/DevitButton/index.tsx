@@ -1,22 +1,26 @@
+import { useContext } from 'react';
+import { handleOpenCreateDevitForm } from 'actions/ui';
+
+import { AppContext } from 'context/AppContext';
+
 import DevitIcon from 'components/Icons/Devit';
 import { theme } from 'styles/theme';
-import { Button } from './styles';
+import { Div } from './styles';
 
 export const DevitButton = () => {
 
-  // const { uiDispatch } = useContext(AppContext);
+  const { uiDispatch } = useContext(AppContext);
 
   return (
     <>      
-      {/* <Button onClick={() => handleOpenCreateDevitForm(uiDispatch)}> */}
-      <Button>
+      <Div onClick={() => handleOpenCreateDevitForm(uiDispatch)}>
         <DevitIcon 
           height="24px"
           width="24px"
           color={theme.blue}
           fill={theme.blue}
         />
-      </Button>
+      </Div>
     </>
   );
 };

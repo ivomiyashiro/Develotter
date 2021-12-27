@@ -1,5 +1,6 @@
 const GithubIcon = (props: any) => (
   <svg
+    strokeWidth={0}
     stroke="currentColor"
     fill="currentColor"
     viewBox="0 0 16 16"

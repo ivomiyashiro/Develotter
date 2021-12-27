@@ -1,4 +1,9 @@
-import { MouseEvent, ReactNode, useRef } from 'react';
+import { MouseEvent, ReactNode, useContext, useRef } from 'react';
+
+import { handleCloseCreateDevitForm } from 'actions/ui';
+
+import { AppContext } from 'context/AppContext';
+
 import { ModalWrapper } from './styles';
 
 interface IProps {
@@ -16,16 +21,16 @@ export const Modal = ({
 }: IProps) => {
 
   const modalRef = useRef(null);
-  // const { uiDispatch } = useContext(AppContext);
+  const { uiDispatch } = useContext(AppContext);
 
   const handleModalOpen = (e: MouseEvent<HTMLDivElement>) => {
     if ((modalRef.current === e.target) && handleOpenModal) {
       return handleOpenModal(false);
     } 
     
-    // if ((modalRef.current === e.target) && !handleOpenModal) {
-    //   return handleCloseCreateDevitForm(uiDispatch);
-    // }
+    if ((modalRef.current === e.target) && !handleOpenModal) {
+      return handleCloseCreateDevitForm(uiDispatch);
+    }
   };
 
   return (

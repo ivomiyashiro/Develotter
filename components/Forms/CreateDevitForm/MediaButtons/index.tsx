@@ -49,7 +49,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading }: IProps) 
         </Section>
         <ButtonWrapper className="submit-button-container">
           <ButtonPrimary
-            isDisabled={isDisabled}
+            isDisabled={!isDisabled}
             textColor={theme.blue}
             color={theme.hack}
           >

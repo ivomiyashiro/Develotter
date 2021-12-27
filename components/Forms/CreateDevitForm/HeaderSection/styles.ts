@@ -8,13 +8,13 @@ export const Header = styled.header`
   display: flex;
   height: 53px;
   justify-content: space-between;
-  padding-right: 1em;
-  padding-left: 0;
+  padding: 0 0.5em;
 `;
 
 export const Div = styled.div`
   width: auto;
   height: 32px;
+  width: 80px;
 
   @media (min-width: ${breakpoints.tablet}) {
     display: none;
