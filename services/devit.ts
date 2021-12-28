@@ -22,6 +22,11 @@ export const getDevits = async () => {
   return await resp.json();
 };
 
+export const delDevit = async (id: string) => {
+  const resp = await fetchWithToken(`devit/${id}`, {},'DELETE');
+  return await resp.json();
+};
+
 export const postDevitFav = async (id: string) => {
   const resp = await fetchWithToken(`devit/${id}/fav`, 'POST');
   return await resp.json();

@@ -1,8 +1,11 @@
-import { ProfileImage } from 'components/ProfileImage';
-import { IDevit } from 'interfaces';
 import { useEffect, useState } from 'react';
+
+import { IDevit, IUser } from 'interfaces';
 import { getUser } from 'services/user';
-import { MainSection } from '../MainSection';
+
+import { ProfileImage } from 'components/ProfileImage';
+import { MainSection } from './MainSection';
+
 import { Div, ProfileImageContainer, Section, Span } from './styles';
 
 interface IProps {
@@ -30,6 +33,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
     profile_picture: '',
     cover_picture: '',
     birth_date: new Date(),
+    created_at: new Date(),
   });
 
   useEffect(() => {
@@ -57,8 +61,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
       <Section>
         <MainSection
           id={id}
-          favs={favs}
-          user={user !== undefined && user}
+          user={user}
           content={content}
           created_at={created_at}
           img={img}

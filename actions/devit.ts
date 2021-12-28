@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { getDevitFavs, postDevit, postDevitFav } from 'services/devit';
+import { delDevit, getDevitFavs, postDevit, postDevitFav } from 'services/devit';
 
 
 interface ICreateDevit {
@@ -21,6 +21,23 @@ export const createDevit = async (
       payload: response.devit
     });
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteDevit = async (
+  id: string,
+  dispatch: Dispatch<any>
+) => {
+  try{
+    const response: any = await delDevit(id);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'DELETE DEVIT',
+      payload: id
+    });
+  } catch(error) {
     console.log(error);
   }
 };

@@ -15,7 +15,6 @@ import { favDevit, unFavDevit } from 'actions/devit';
 
 interface IProps {
   id: string
-  favs: IFav[]
   // revits: any
   // comments: any
   // handleCommentOpen: (value: boolean) => void
@@ -24,7 +23,6 @@ interface IProps {
 
 export const FooterSection = ({
   id,
-  favs,
   // revits,
   // comments,
   // handleCommentOpen,
