@@ -3,6 +3,7 @@ const FavFill = (props: any) => (
     strokeWidth={0}
     stroke="currentColor"
     fill="currentColor"
+    color="rgb(249, 24, 128)"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     {...props}

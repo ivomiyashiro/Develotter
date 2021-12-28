@@ -1,11 +1,12 @@
-import { IComment, IDevit, IRevit } from '../interfaces';
+import { IComment, IDevit, IFav, IRevit } from '../interfaces';
 
 export type ActionType = 
   | {type: 'LOAD DEVITS', payload: IDevit[]}
   | {type: 'CREATE DEVIT', payload: IDevit} 
-  | {type: 'DELETE DEVIT', payload: string} 
-  | {type: 'UNFAV DEVIT', payload: {devitId: string, uid: string}}
-  | {type: 'FAV DEVIT', payload: {devitId: string, uid: string}}
+  | {type: 'DELETE DEVIT', payload: string}
+  | {type: 'LOAD FAVS', payload: {id: string, favs: IFav[]}} 
+  | {type: 'UNFAV DEVIT', payload: {devit_id: string, uid: string}}
+  | {type: 'FAV DEVIT', payload: {devit_id: string, fav: IFav}}
   | {type: 'CREATE COMMENT', payload: IDevit}
   | {type: 'FAV COMMENT', payload: {devitId: string, commentId: string, uid: string}}
   | {type: 'UNFAV COMMENT', payload: {devitId: string, commentId: string, uid: string}}
@@ -16,7 +17,7 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
   switch (action.type) {
   case 'LOAD DEVITS':
     return [
-      ...action.payload
+      ...action.payload,
     ];
 
   case 'CREATE DEVIT':
@@ -32,18 +33,28 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
       }}
     );
 
-  case 'UNFAV DEVIT':
-    const devitsFilteredArr: IDevit[] = state.filter(devit => {
-      if (devit.id === action.payload.devitId) return devit;
-    });
-    const newUnFavedArr = devitsFilteredArr[0].favs.filter(fav => {
-      if (fav !== action.payload.uid) return fav;
-    });
+  case 'LOAD FAVS':
     return state.map(devit => {
-      if (devit.id === action.payload.devitId) {
+      if (devit.id === action.payload.id) {
         return {
           ...devit,
-          favs: newUnFavedArr
+          favs: action.payload.favs
+        };
+      }
+      return devit;
+    });
+
+  case 'UNFAV DEVIT':
+    return state.map(devit => {
+      if (devit.id === action.payload.devit_id) {
+        const filteredFavs = devit.favs.filter(fav => {
+          if (fav.uid !== action.payload.uid) {
+            return fav;
+          }
+        });
+        return {
+          ...devit,
+          favs: filteredFavs
         };
       }
       return devit;
@@ -51,12 +62,12 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
   
   case 'FAV DEVIT':
     return state.map(devit => {
-      if (devit.id === action.payload.devitId) {
+      if (devit.id === action.payload.devit_id) {
         return {
           ...devit,
           favs: [
             ...devit.favs,
-            action.payload.uid
+            action.payload.fav
           ]
         };
       }

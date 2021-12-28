@@ -1,14 +1,16 @@
 import { useContext, useState } from 'react';
 
-import { IUser } from 'interfaces';
+import { IFav, IUser } from 'interfaces';
 
 import { HeaderSection } from './HeaderSection';
 import { BodySection } from './BodySection';
+import { FooterSection } from './FooterSection';
 
 
 interface IProps {
   id: string,
   user: IUser,
+  favs: IFav[]
   img: string
   content: string
   created_at: Date
@@ -17,6 +19,7 @@ interface IProps {
 export const MainSection = ({
   id,
   user,
+  favs,
   content,
   created_at,
   img,
@@ -42,14 +45,12 @@ export const MainSection = ({
           content={content}
           img={img}
         />
-        {/* <ContentFooter 
+        <FooterSection
           id={id}
           favs={favs}
-          revits={revits}
-          comments={comments}
-          handleCommentOpen={setCommentFormOpen}
-          handleRevitMenuOpen={setRevitMenuOpen}
-        /> */}
+          // handleCommentOpen={setCommentFormOpen}
+          // handleRevitMenuOpen={setRevitMenuOpen}
+        />
       </>
     </>
   );

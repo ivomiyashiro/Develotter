@@ -39,6 +39,7 @@ const devit = async (req: NextApiRequest, res: NextApiResponse) => {
         ok: true,
         devit: {
           id,
+          uid,
           content: respContent,
           img: respImg,
           created_at

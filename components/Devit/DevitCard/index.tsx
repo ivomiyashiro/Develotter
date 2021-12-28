@@ -15,12 +15,22 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
   const {
     id,
     uid,
+    favs,
     content,
     img,
     created_at,
   } = devit;
 
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<IUser>({
+    id: '',
+    username: '',
+    name: '',
+    email: '',
+    bio: '',
+    profile_picture: '',
+    cover_picture: '',
+    birth_date: new Date(),
+  });
 
   useEffect(() => {
     getUser(uid)
@@ -47,6 +57,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
       <Section>
         <MainSection
           id={id}
+          favs={favs}
           user={user !== undefined && user}
           content={content}
           created_at={created_at}

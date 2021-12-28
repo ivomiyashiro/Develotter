@@ -20,6 +20,7 @@ export interface IDevit {
   uid: string
   content: string
   img: string
+  favs: IFav[]
   created_at: Date
   updatedAt : Date
 }
@@ -45,4 +46,10 @@ export interface IRevit {
   img: string
   favs: IDevitFavs
   comments: IComment
+}
+
+export interface IFav {
+  id: string,
+  uid: string,
+  devit_id: string
 }
