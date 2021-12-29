@@ -6,7 +6,7 @@ import { getUser } from 'services/user';
 import { ProfileImage } from 'components/ProfileImage';
 import { MainSection } from './MainSection';
 
-import { Div, ProfileImageContainer, Section, Span } from './styles';
+import { Div, Line, ProfileImageContainer, Section } from './styles';
 
 interface IProps {
   devit: IDevit
@@ -18,7 +18,6 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
   const {
     id,
     uid,
-    favs,
     content,
     img,
     created_at,
@@ -54,8 +53,8 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
         />
         {
           userComments.length !== 0
-            &&
-            <Span></Span>
+          &&
+          <Line></Line>
         }
       </ProfileImageContainer>
       <Section>

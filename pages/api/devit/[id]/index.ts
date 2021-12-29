@@ -43,8 +43,6 @@ const devit = async (req: NextApiRequest, res: NextApiResponse) => {
       msg: 'Method not allowed.'
     });
   }
-
-
 }; 
 
 export default devit;

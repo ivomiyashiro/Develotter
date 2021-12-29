@@ -36,9 +36,11 @@ export const ProfileImageContainer = styled.section`
   padding: 0.75em 1em;
 `;
 
-export const Span = styled.span`
+export const Line = styled.div`
   background-color: rgb(61, 84, 102);
-  height: 100%;
+  height: 45%;
   padding: 0;
   width: 2px;
+  margin-left: 1.44em;
+  margin-top: 0.45em;
 `;

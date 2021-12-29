@@ -21,6 +21,7 @@ export interface IDevit {
   content: string
   img: string
   favs: IFav[]
+  comments: IComment[]
   created_at: Date
   updatedAt : Date
 }
@@ -32,10 +33,10 @@ export interface IDevitFavs {
 export interface IComment {
   id: string
   uid: string
+  devit_id: string
   content: string
-  url: string
-  favs: string[]
-  createdAt: Date
+  img: string
+  created_at: Date
 }
 
 export interface IRevit {

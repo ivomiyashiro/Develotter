@@ -52,3 +52,25 @@ export const postComment = async (data: ICreateComment) => {
   }, 'POST');
   return await resp.json();
 };
+
+export const getComment = async (id: string) => {
+  const resp = await fetchWithToken(`devit/${id}/comment`);
+  return await resp.json();
+};
+
+export const getUserComments = async (id: string, uid: string) => {
+  const resp = await fetchWithoutToken(`devit/${id}/comment`, {
+    uid
+  }, 'POST');
+  return await resp.json();
+};
+
+export const postCommentFav = async (devit_id: string, comment_id: string) => {
+  const resp = await fetchWithToken(`devit/${devit_id}/comment/${comment_id}/fav`);
+  return await resp.json();
+};
+
+export const getCommentFavs = async (devit_id: string, comment_id: string) => {
+  const resp = await fetchWithToken(`devit/${devit_id}/comment/${comment_id}/favs`);
+  return await resp.json();
+};

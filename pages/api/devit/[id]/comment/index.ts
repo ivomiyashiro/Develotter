@@ -14,7 +14,7 @@ const comment = async (req: NextApiRequest, res: NextApiResponse) => {
       const query = 'SELECT * FROM comment WHERE devit_id = $1';
       const values = [id];
       const resp = await conn.query(query, values);
-      console.log(resp);
+      (resp);
 
       return res.status(200).json({
         ok: true,
@@ -30,8 +30,20 @@ const comment = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
   case 'POST':
-    const { content, img } = req.body;
     try {
+      const { content, img, uid: reqUid } = req.body;
+
+      if (!!reqUid) {
+        const query = 'SELECT * FROM comment WHERE uid = $1';
+        const value = [reqUid];
+
+        const resp = await conn.query(query, value);
+
+        return res.status(200).json({
+          ok: true,
+          comments: resp.rows
+        });
+      }
 
       const { uid }: any = await validateJWT(req, res);
 

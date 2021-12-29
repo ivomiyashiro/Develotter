@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 
-import { IFav, IUser } from 'interfaces';
+import { IComment, IFav, IUser } from 'interfaces';
 import { AppContext } from 'context/AppContext';
 
 import { HeaderSection } from './HeaderSection';

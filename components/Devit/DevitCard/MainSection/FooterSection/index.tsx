@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { AppContext } from 'context/AppContext';
-import { IFav } from 'interfaces';
+import { IComment, IFav } from 'interfaces';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
 import { useDevitInfo } from 'hooks/useDevitInfo';
 
@@ -15,32 +15,36 @@ import { favDevit, unFavDevit } from 'actions/devit';
 
 interface IProps {
   id: string
-  // revits: any
-  // comments: any
   handleCommentOpen: (value: boolean) => void
-  // handleRevitMenuOpen: (value: boolean) => void
+  handleRevitMenuOpen: (value: boolean) => void
 }
 
 export const FooterSection = ({
   id,
-  // revits,
-  // comments,
   handleCommentOpen,
-  // handleRevitMenuOpen
+  handleRevitMenuOpen
 }: IProps) => {
 
-  const {userState, devitDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, devitState} = useContext(AppContext);
   const { isFaved, favLength }: any = useDevitInfo(id);
   const [favsCouter, setFavsCounter] = useState(0);
-  const [ isDevitFaved, setDevitFaved ] = useState(false);
+  const [isDevitFaved, setDevitFaved] = useState(false);
+  const [commentsCounter, setCommentsCounter] = useState(0);
 
   useEffect(() => {
     setFavsCounter(favLength);
     setDevitFaved(isFaved);
-  }, [favLength, isFaved]);
+
+    const devit = devitState.filter(devit => {
+      if (devit.id === id) return devit;
+    });
+    if (!!devit[0].comments) {
+      setCommentsCounter(devit[0].comments.length);
+    }
+
+  }, [favLength, isFaved, id, devitState]);
 
   const handleFavDevit = async() => {
-
     setDevitFaved((prev: boolean) => !prev);
 
     if (isDevitFaved) {
@@ -65,10 +69,10 @@ export const FooterSection = ({
               height="16px"
               color={theme.comments}
             />
-            {/* <Span>{comments.length}</Span> */}
+            <Span>{commentsCounter}</Span>
           </ListItemComments>
           <ListItemRevits
-            // onClick={() => handleRevitMenuOpen(true)}
+            onClick={() => handleRevitMenuOpen(true)}
           >
             <HoverableButton
               icon={RedevitIcon}

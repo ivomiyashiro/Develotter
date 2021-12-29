@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { delDevit, getDevitFavs, postComment, postDevit, postDevitFav } from 'services/devit';
+import { delDevit, getComment, getDevitFavs, postComment, postCommentFav, postDevit, postDevitFav } from 'services/devit';
 
 
 interface ICreateDevit {
@@ -116,7 +116,7 @@ export const createComment = async (
   data: ICreateComment,
   dispatch: Dispatch<any>
 ) => {
-  const {id, uid, content, img} = data;
+  const {id, content, img} = data;
 
   try {
     const response: any = await postComment({id, content, img});
@@ -125,10 +125,61 @@ export const createComment = async (
     dispatch({
       type: 'CREATE COMMENT',
       payload: {
-        
+        devit_id: id,
+        comment: response.comment
       }
     });
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDevitComments = async (
+  id: string,
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const response: any = await getComment(id);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'LOAD COMMENTS',
+      payload: {
+        devit_id: id,
+        comments: response.comments
+      }
+    });
+
+    return response.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const favComment = async (
+  data: {devit_id: string, comment_id: string},
+) => {
+
+  const { devit_id, comment_id } = data;
+
+  try {
+    const response: any = await postCommentFav(devit_id, comment_id);
+    if (!response.ok) return;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unFavComment = async (
+  data: {devit_id: string, comment_id: string},
+) => {
+
+  const { devit_id, comment_id } = data;
+
+  try {
+    const response: any = await postCommentFav(devit_id, comment_id);
+    if (!response.ok) return;
+  }catch(error) {
     console.log(error);
   }
 };

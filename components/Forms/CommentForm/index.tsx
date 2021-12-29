@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../context/AppContext';
 
-// import { createComment } from '../../../actions/comments';
+import { createComment } from 'actions/devit';
 import { useValidDevit } from 'hooks/useValidDevit';
 
 import { FormHeader } from '../CreateDevitForm/HeaderSection';

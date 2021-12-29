@@ -7,7 +7,8 @@ export type ActionType =
   | {type: 'LOAD FAVS', payload: {id: string, favs: IFav[]}} 
   | {type: 'UNFAV DEVIT', payload: {devit_id: string, uid: string}}
   | {type: 'FAV DEVIT', payload: {devit_id: string, fav: IFav}}
-  | {type: 'CREATE COMMENT', payload: IDevit}
+  | {type: 'LOAD COMMENTS', payload: {devit_id: string, comments: IComment[]}}
+  | {type: 'CREATE COMMENT', payload: {devit_id: string, comment: IComment}}
   | {type: 'FAV COMMENT', payload: {devitId: string, commentId: string, uid: string}}
   | {type: 'UNFAV COMMENT', payload: {devitId: string, commentId: string, uid: string}}
   | {type: 'CREATE REVIT', payload: IRevit}
@@ -74,10 +75,29 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
       return devit;
     });
 
+  case 'LOAD COMMENTS':
+    return state.map(devit => {
+      if (devit.id === action.payload.devit_id) {
+        return {
+          ...devit,
+          comments: [
+            ...action.payload.comments
+          ]
+        };
+      };
+      return devit;
+    });
+
   case 'CREATE COMMENT':
     return state.map(devit => {
-      if (devit.id === action.payload.id) {
-        return action.payload;
+      if (devit.id === action.payload.devit_id) {
+        return {
+          ...devit,
+          comments: [
+            ...devit.comments,
+            action.payload.comment
+          ]
+        };
       };
       return devit;
     });
