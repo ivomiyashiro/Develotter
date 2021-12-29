@@ -18,7 +18,7 @@ interface IProps {
   buttonChild: string
 }
 
-export const HeaderSection = ({
+export const FormHeader = ({
   handleOpenModal,
   isSubmitButtonDisabled,
   isLoading,

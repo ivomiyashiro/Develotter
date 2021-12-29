@@ -12,14 +12,12 @@ import { Div, Ul, Li, Section, P } from './styles';
 
 interface IProps {
   devitUser: IUser
-  isLoading: boolean
   handleOpenModal: (value: boolean) => void
   handleDeleteModalOpen: (value: boolean) => void
 }
 
 export const ActionMenuMobile = ({
   devitUser,
-  isLoading,
   handleOpenModal,
   handleDeleteModalOpen
 }: IProps) => {
@@ -67,11 +65,7 @@ export const ActionMenuMobile = ({
                 textColor={theme.white}
                 color={theme.darker_white}
               >
-                {
-                  isLoading
-                    ? <Spinner color={theme.white} size="32px" />
-                    : 'Cancel'
-                }
+                Cancel
               </ButtonPrimary>
             </Section>
           </Li>

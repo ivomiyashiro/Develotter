@@ -2,7 +2,13 @@ import { fetchWithoutToken } from 'helpers/fetchWithoutToken';
 import { fetchWithToken } from 'helpers/fetchWithToken';
 
 interface ICreateDevit {
-  content: string,
+  content: string
+  img: string
+}
+
+interface ICreateComment {
+  id: string
+  content: string
   img: string
 }
 
@@ -34,5 +40,15 @@ export const postDevitFav = async (id: string) => {
 
 export const getDevitFavs = async (id: string) => {
   const resp = await fetchWithoutToken(`devit/${id}/favs`);
+  return await resp.json();
+};
+
+export const postComment = async (data: ICreateComment) => {
+  const { id, content, img } = data;
+
+  const resp = await fetchWithToken(`devit/${id}/comment`, {
+    content,
+    img,
+  }, 'POST');
   return await resp.json();
 };

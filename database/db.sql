@@ -38,14 +38,17 @@ INSERT INTO devit (uid, content, img) VALUES ($1, $2, $3);
 
 CREATE TABLE IF NOT EXISTS comment (
   id SERIAL PRIMARY KEY,
+  uid INT,
   devit_id INT,
   content VARCHAR(280) NOT NULL,
-  imt VARCHAR(2048),
+  img VARCHAR(2048),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_devit
-  FOREIGN KEY(devit_id)
-  REFERENCES devit(id)
+  CONSTRAINT fk_uid
+  FOREIGN KEY(uid)
+  REFERENCES dev(id)
 );
+
+ALTER TABLE comment ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id);
 
 /* FAVS */
 

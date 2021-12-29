@@ -10,7 +10,7 @@ import { Modal } from 'components/Modal';
 import { ActionMenuMobile } from '../ActionsMenu/ActionMenuMobile';
 import { ActionMenuDesktop } from '../ActionsMenu/ActionMenuDesktop';
 import { DeleteDevitToast } from '../DeleteDevitToast';
-
+import { CommentForm } from 'components/Forms/CommentForm';
 
 interface IProps {
   id: string,
@@ -29,12 +29,11 @@ export const MainSection = ({
 }: IProps) => {
 
   // const {userState} = useContext(AppContext);
-  // const [isCommentFormOpen, setCommentFormOpen] = useState(false);
+  const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   // const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
   // const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
   const [isHeaderActionsMenuOpen, setHeaderActionsMenuOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [isLoading, setLoading] = useState(false);
 
   return (
     <>
@@ -51,10 +50,27 @@ export const MainSection = ({
         />
         <FooterSection
           id={id}
-          // handleCommentOpen={setCommentFormOpen}
+          handleCommentOpen={setCommentFormOpen}
           // handleRevitMenuOpen={setRevitMenuOpen}
         />
 
+        {
+          isCommentFormOpen
+          &&
+          <Modal 
+            handleOpenModal={setCommentFormOpen}
+            isOpen={isCommentFormOpen}
+          >
+            <CommentForm
+              id={id}
+              user={user}
+              content={content}
+              created_at={created_at}
+              img={img}
+              handleOpenModal={setCommentFormOpen}
+            />
+          </Modal>
+        }
         {
           isHeaderActionsMenuOpen
           &&
@@ -65,7 +81,6 @@ export const MainSection = ({
           >
             <ActionMenuMobile
               devitUser={user}
-              isLoading={isLoading}
               handleOpenModal={setHeaderActionsMenuOpen}
               handleDeleteModalOpen={setDeleteModalOpen}
             />
@@ -89,8 +104,6 @@ export const MainSection = ({
           >
             <DeleteDevitToast
               id={id}
-              isLoading={isLoading}
-              setLoading={setLoading}
               handleDeleteModalOpen={setDeleteModalOpen}
             />
           </Modal>

@@ -1,9 +1,16 @@
 import { Dispatch } from 'react';
-import { delDevit, getDevitFavs, postDevit, postDevitFav } from 'services/devit';
+import { delDevit, getDevitFavs, postComment, postDevit, postDevitFav } from 'services/devit';
 
 
 interface ICreateDevit {
   content: string,
+  img: string
+}
+
+interface ICreateComment {
+  id: string
+  uid: string
+  content: string
   img: string
 }
 
@@ -101,6 +108,27 @@ export const unFavDevit = async (
       }
     });
   }catch(error) {
+    console.log(error);
+  }
+};
+
+export const createComment = async (
+  data: ICreateComment,
+  dispatch: Dispatch<any>
+) => {
+  const {id, uid, content, img} = data;
+
+  try {
+    const response: any = await postComment({id, content, img});
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'CREATE COMMENT',
+      payload: {
+        
+      }
+    });
+  } catch (error) {
     console.log(error);
   }
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export const useValidDevit = (value: string, img: any) => {
 
-  const [isDevitValid, setDevitValid] = useState(false);
+  const [isDevitValid, setDevitValid] = useState<boolean>(false);
 
   useEffect(() => {
     const valueLength = value.length;

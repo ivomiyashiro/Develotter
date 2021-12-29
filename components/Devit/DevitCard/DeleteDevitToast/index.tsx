@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { deleteDevit } from 'actions/devit';
 
@@ -11,19 +11,16 @@ import { Div, Wrapper, Section, H2, P, ButtonsContainer, ButtonWrapper } from '.
 
 interface IProps {
   id: string
-  isLoading: boolean
-  setLoading: (value: boolean) => void
   handleDeleteModalOpen: (value: boolean) => void
 }
 
 export const DeleteDevitToast = ({
   id,
-  isLoading,
-  setLoading,
   handleDeleteModalOpen,
 }: IProps) => {
 
   const { devitDispatch } = useContext(AppContext);
+  const [isLoading, setLoading] = useState(false);
 
   const handleDeleteDevit = async () => {
     setLoading(true);

@@ -17,7 +17,7 @@ interface IProps {
   id: string
   // revits: any
   // comments: any
-  // handleCommentOpen: (value: boolean) => void
+  handleCommentOpen: (value: boolean) => void
   // handleRevitMenuOpen: (value: boolean) => void
 }
 
@@ -25,7 +25,7 @@ export const FooterSection = ({
   id,
   // revits,
   // comments,
-  // handleCommentOpen,
+  handleCommentOpen,
   // handleRevitMenuOpen
 }: IProps) => {
 
@@ -57,7 +57,7 @@ export const FooterSection = ({
       <Footer>
         <Ul>
           <ListItemComments
-            // onClick={() => handleCommentOpen(true)}
+            onClick={() => handleCommentOpen(true)}
           >
             <HoverableButton
               icon={CommentIcon}

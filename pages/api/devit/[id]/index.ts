@@ -7,7 +7,7 @@ const devit = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { id } = req.query;
   const method = req.method;
-  console.log(method);
+
   switch (method) {
   case 'DELETE':
     try {

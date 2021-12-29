@@ -5,7 +5,7 @@ import { createDevit } from 'actions/devit';
 
 import { AppContext } from 'context/AppContext';
 
-import { HeaderSection } from './HeaderSection';
+import { FormHeader } from './HeaderSection';
 import { MainSection } from './MainSection';
 
 import { Div, Form } from './styles';
@@ -41,7 +41,7 @@ export const CreateDevitForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <HeaderSection
+        <FormHeader
           isSubmitButtonDisabled={isDevitValid}
           isLoading={isLoading}
           buttonChild="Devit"
