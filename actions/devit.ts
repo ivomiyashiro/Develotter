@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { delDevit, getComment, getDevitFavs, postComment, postCommentFav, postDevit, postDevitFav } from 'services/devit';
+import { delDevit, delRevit, getComment, getDevitFavs, getRevits, postComment, postCommentFav, postDevit, postDevitFav, postRevit } from 'services/devit';
 
 
 interface ICreateDevit {
@@ -180,6 +180,70 @@ export const unFavComment = async (
     const response: any = await postCommentFav(devit_id, comment_id);
     if (!response.ok) return;
   }catch(error) {
+    console.log(error);
+  }
+};
+
+export const getDevitRevits = async (
+  id: string,
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const response: any = await getRevits(id);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'LOAD REVITS',
+      payload: {
+        id,
+        revits: response.revits
+      }
+    });
+
+    return response.revits;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createRevit = async (
+  id: string,
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const response: any = await postRevit(id, {content: '', img: ''});
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'CREATE REVIT',
+      payload: {
+        id,
+        revit: response.revit
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteRevit = async (
+  data: {id: string, revit_id: string},
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const { id, revit_id } = data;
+
+    const response: any = await delRevit(id, revit_id);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'DELETE REVIT',
+      payload: {
+        id,
+        revit_id,
+      }
+    });
+  } catch (error) {
     console.log(error);
   }
 };

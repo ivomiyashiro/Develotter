@@ -91,3 +91,23 @@ CREATE TABLE IF NOT EXISTS comment_fav (
 ALTER TABLE comment_fav ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id) ON DELETE CASCADE;
 
 ALTER TABLE comment_fav ADD CONSTRAINT fk_comment_id FOREIGN KEY(comment_id) REFERENCES comment(id) ON DELETE CASCADE;
+
+/* REVITS */
+
+CREATE TABLE IF NOT EXISTS revit (
+  id SERIAL PRIMARY KEY,
+  uid INT,
+  devit_id INT,
+  content VARCHAR(280) NOT NULL,
+  img VARCHAR(2048),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(uid)
+  REFERENCES dev(id)
+  ON DELETE CASCADE
+);
+
+ALTER TABLE revit ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id) ON DELETE CASCADE;
+
+INSERT INTO revit (uid, devit_id, content, img) VALUES ($1, $2, $3, $4) RETURNING *;
+
+SELECT * FROM revit WHERE uid = $1 AND devit_id = $id;

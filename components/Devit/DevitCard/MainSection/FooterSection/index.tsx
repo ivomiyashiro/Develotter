@@ -25,34 +25,39 @@ export const FooterSection = ({
   handleRevitMenuOpen
 }: IProps) => {
 
+  useDevitInfo(id);
   const {userState, devitDispatch, devitState} = useContext(AppContext);
-  const { isFaved, favLength }: any = useDevitInfo(id);
   const [favsCouter, setFavsCounter] = useState(0);
   const [isDevitFaved, setDevitFaved] = useState(false);
   const [commentsCounter, setCommentsCounter] = useState(0);
+  const [revitsCounter, setRevitsCounter] = useState(0);
 
   useEffect(() => {
-    setFavsCounter(favLength);
-    setDevitFaved(isFaved);
-
     const devit = devitState.filter(devit => {
       if (devit.id === id) return devit;
     });
-    if (!!devit[0].comments) {
+    
+    if (!!devit[0].comments && !!devit[0].favs && !!devit[0].revits) {
+      devit[0].favs.filter(fav => {
+        if (fav.devit_id === id) setDevitFaved(true);
+      });
       setCommentsCounter(devit[0].comments.length);
+      setRevitsCounter(devit[0].revits.length);
+      setFavsCounter(devit[0].favs.length);
     }
 
-  }, [favLength, isFaved, id, devitState]);
+  }, [id, devitState]);
 
   const handleFavDevit = async() => {
-    setDevitFaved((prev: boolean) => !prev);
-
+    
     if (isDevitFaved) {
       unFavDevit(id, userState.id, devitDispatch);
+      setDevitFaved(false);
       return setFavsCounter(prev => (prev - 1));
     }
 
     favDevit(id, devitDispatch);
+    setDevitFaved(true);
     setFavsCounter(prev => (prev + 1));
   };
 
@@ -80,7 +85,7 @@ export const FooterSection = ({
               height="16px"
               color={theme.revits}
             />
-            {/* <Span>{revits.length}</Span> */}
+            <Span>{revitsCounter}</Span>
           </ListItemRevits>
           <ListItemFav
             onClick={handleFavDevit}

@@ -11,6 +11,7 @@ import { ActionMenuMobile } from '../ActionsMenu/ActionMenuMobile';
 import { ActionMenuDesktop } from '../ActionsMenu/ActionMenuDesktop';
 import { DeleteDevitToast } from '../DeleteDevitToast';
 import { CommentForm } from 'components/Forms/CommentForm';
+import { RevitMenuDesktop } from '../RevitMenu/RevitMenuDesktop';
 
 interface IProps {
   id: string,
@@ -30,8 +31,8 @@ export const MainSection = ({
 
   // const {userState} = useContext(AppContext);
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
-  // const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
-  // const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
+  const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
+  const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
   const [isHeaderActionsMenuOpen, setHeaderActionsMenuOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -51,7 +52,7 @@ export const MainSection = ({
         <FooterSection
           id={id}
           handleCommentOpen={setCommentFormOpen}
-          // handleRevitMenuOpen={setRevitMenuOpen}
+          handleRevitMenuOpen={setRevitMenuOpen}
         />
 
         {
@@ -69,6 +70,48 @@ export const MainSection = ({
               img={img}
               handleOpenModal={setCommentFormOpen}
             />
+          </Modal>
+        }
+        {
+          isRevitMenuOpen
+          &&
+          <Modal 
+            handleOpenModal={setRevitMenuOpen}
+            isOpen={isRevitMenuOpen}
+            isVisible={false}
+          >
+            {/* <RevitMenu
+              id={id}
+              user={user}
+              handleOpenModal={setRevitMenuOpen}
+              handleQuoteDevitFormOpen={setQuoteDevitFormOpen}
+            /> */}
+          </Modal>
+        }
+        {
+          isRevitMenuOpen
+          &&
+          <RevitMenuDesktop
+            id={id}
+            user={user}
+            handleOpenModal={setRevitMenuOpen}
+            handleQuoteDevitFormOpen={setQuoteDevitFormOpen}
+          />
+        }
+        {
+          isQuoteDevitFormOpen
+          &&
+          <Modal
+            handleOpenModal={setQuoteDevitFormOpen}
+            isOpen={isQuoteDevitFormOpen}
+          >
+            {/* <QuoteDevitForm
+              id={id}
+              content={content}
+              created_at={created_at}
+              img={img}
+              handleOpenModal={setQuoteDevitFormOpen}
+            /> */}
           </Modal>
         }
         {

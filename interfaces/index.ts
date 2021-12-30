@@ -22,6 +22,7 @@ export interface IDevit {
   img: string
   favs: IFav[]
   comments: IComment[]
+  revits: IRevit[]
   created_at: Date
   updatedAt : Date
 }
@@ -45,8 +46,6 @@ export interface IRevit {
   uid: string
   content: string
   img: string
-  favs: IDevitFavs
-  comments: IComment
 }
 
 export interface IFav {

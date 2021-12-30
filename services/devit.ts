@@ -74,3 +74,22 @@ export const getCommentFavs = async (devit_id: string, comment_id: string) => {
   const resp = await fetchWithToken(`devit/${devit_id}/comment/${comment_id}/favs`);
   return await resp.json();
 };
+
+export const getRevits = async (devit_id: string) => {
+  const resp = await fetchWithoutToken(`devit/${devit_id}/revit`);
+  return await resp.json();
+};
+
+export const postRevit = async (devit_id: string, data: { content: string, img: string }) => {
+  const { content, img } = data;
+  const resp = await fetchWithToken(`devit/${devit_id}/revit`, {
+    content,
+    img 
+  }, 'POST');
+  return await resp.json();
+};
+
+export const delRevit = async (devit_id: string, revit_id: string) => {
+  const resp = await fetchWithToken(`devit/${devit_id}/revit/${revit_id}`, {}, 'DELETE');
+  return await resp.json();
+};

@@ -9,10 +9,9 @@ export type ActionType =
   | {type: 'FAV DEVIT', payload: {devit_id: string, fav: IFav}}
   | {type: 'LOAD COMMENTS', payload: {devit_id: string, comments: IComment[]}}
   | {type: 'CREATE COMMENT', payload: {devit_id: string, comment: IComment}}
-  | {type: 'FAV COMMENT', payload: {devitId: string, commentId: string, uid: string}}
-  | {type: 'UNFAV COMMENT', payload: {devitId: string, commentId: string, uid: string}}
-  | {type: 'CREATE REVIT', payload: IRevit}
-  | {type: 'DELETE REVIT', payload: {id: string, revitId: string}};
+  | {type: 'LOAD REVITS', payload: {id: string, revits: IRevit[]}}
+  | {type: 'CREATE REVIT', payload: {id: string, revit: IRevit}}
+  | {type: 'DELETE REVIT', payload: {id: string, revit_id: string}};
 
 export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
   switch (action.type) {
@@ -102,47 +101,12 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
       return devit;
     });
 
-  case 'FAV COMMENT':
+  case 'LOAD REVITS':
     return state.map(devit => {
-      if (devit.id === action.payload.devitId) {
-        const newComment = devit.comments.map(comment => {
-          if (comment.id === action.payload.commentId) {
-            return {
-              ...comment,
-              favs: [
-                action.payload.uid,
-                ...comment.favs
-              ]
-            };
-          }
-          return comment;
-        });
+      if (devit.id === action.payload.id) {
         return {
           ...devit,
-          comments: newComment
-        };
-      }
-      return devit;
-    });
-
-  case 'UNFAV COMMENT': 
-    return state.map(devit => {
-      if (devit.id === action.payload.devitId) {
-        const newComment = devit.comments.map((comment: IComment) => {
-          if (comment.id === action.payload.commentId) {
-            const commentFavsArr = comment.favs.filter(fav => {
-              if (fav !== action.payload.uid) return fav;
-            });
-            return {
-              ...comment,
-              favs: commentFavsArr
-            };
-          }
-          return comment;
-        });
-        return {
-          ...devit,
-          comments: newComment
+          revits: action.payload.revits
         };
       }
       return devit;
@@ -150,12 +114,12 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
 
   case 'CREATE REVIT':
     return state.map(devit => {
-      if (devit.id === action.payload.devitId) {
+      if (devit.id === action.payload.id) {
         return {
           ...devit,
           revits: [
             ...devit.revits,
-            action.payload
+            action.payload.revit
           ]
         };
       }
@@ -168,7 +132,7 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
         return {
           ...devit,
           revits: devit.revits.filter(revit => {
-            if (revit.id !== action.payload.revitId) {
+            if (revit.id !== action.payload.revit_id) {
               return revit;
             }
           })
