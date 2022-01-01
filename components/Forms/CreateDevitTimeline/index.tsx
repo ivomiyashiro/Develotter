@@ -27,7 +27,7 @@ export const CreateDevitTimeline = () => {
 
     const data = {
       content: textAreaValue,
-      img: imageUrl.fileUrl
+      img: imageUrl.file
     };
 
     setLoading(true);

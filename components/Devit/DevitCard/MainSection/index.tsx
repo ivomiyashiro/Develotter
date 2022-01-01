@@ -12,6 +12,7 @@ import { ActionMenuDesktop } from '../ActionsMenu/ActionMenuDesktop';
 import { DeleteDevitToast } from '../DeleteDevitToast';
 import { CommentForm } from 'components/Forms/CommentForm';
 import { RevitMenuDesktop } from '../RevitMenu/RevitMenuDesktop';
+import { CreateQuoteDevitForm } from 'components/Forms/CreateQuoteRevitForm';
 
 interface IProps {
   id: string,
@@ -93,7 +94,6 @@ export const MainSection = ({
           &&
           <RevitMenuDesktop
             id={id}
-            user={user}
             handleOpenModal={setRevitMenuOpen}
             handleQuoteDevitFormOpen={setQuoteDevitFormOpen}
           />
@@ -105,13 +105,13 @@ export const MainSection = ({
             handleOpenModal={setQuoteDevitFormOpen}
             isOpen={isQuoteDevitFormOpen}
           >
-            {/* <QuoteDevitForm
+            <CreateQuoteDevitForm
               id={id}
-              content={content}
               created_at={created_at}
+              content={content}
               img={img}
               handleOpenModal={setQuoteDevitFormOpen}
-            /> */}
+            />
           </Modal>
         }
         {

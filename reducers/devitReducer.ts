@@ -1,17 +1,5 @@
-import { IComment, IDevit, IFav, IRevit } from '../interfaces';
-
-export type ActionType = 
-  | {type: 'LOAD DEVITS', payload: IDevit[]}
-  | {type: 'CREATE DEVIT', payload: IDevit} 
-  | {type: 'DELETE DEVIT', payload: string}
-  | {type: 'LOAD FAVS', payload: {id: string, favs: IFav[]}} 
-  | {type: 'UNFAV DEVIT', payload: {devit_id: string, uid: string}}
-  | {type: 'FAV DEVIT', payload: {devit_id: string, fav: IFav}}
-  | {type: 'LOAD COMMENTS', payload: {devit_id: string, comments: IComment[]}}
-  | {type: 'CREATE COMMENT', payload: {devit_id: string, comment: IComment}}
-  | {type: 'LOAD REVITS', payload: {id: string, revits: IRevit[]}}
-  | {type: 'CREATE REVIT', payload: {id: string, revit: IRevit}}
-  | {type: 'DELETE REVIT', payload: {id: string, revit_id: string}};
+import { IDevit } from '../interfaces';
+import { ActionType } from 'types';
 
 export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
   switch (action.type) {
@@ -134,6 +122,47 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
           revits: devit.revits.filter(revit => {
             if (revit.id !== action.payload.revit_id) {
               return revit;
+            }
+          })
+        };
+      }
+      return devit;
+    });
+
+  case 'LOAD QUOTE REVITS':
+    return state.map(devit => {
+      if (devit.id === action.payload.id) {
+        return {
+          ...devit,
+          quote_revits: action.payload.quote_revits
+        };
+      }
+      return devit;
+    });
+
+    
+  case 'CREATE QUOTE REVIT':
+    return state.map(devit => {
+      if (devit.id === action.payload.id) {
+        return {
+          ...devit,
+          quote_revits: [
+            ...devit.quote_revits,
+            action.payload.quote_revit
+          ]
+        };
+      }
+      return devit;
+    });
+
+  case 'DELETE QUOTE REVIT':
+    return state.map(devit => {
+      if (devit.id === action.payload.id) {
+        return {
+          ...devit,
+          quote_revits: devit.quote_revits.filter(quote_revit => {
+            if (quote_revit.id !== action.payload.quote_revit_id) {
+              return quote_revit;
             }
           })
         };

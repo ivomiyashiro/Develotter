@@ -23,6 +23,7 @@ export interface IDevit {
   favs: IFav[]
   comments: IComment[]
   revits: IRevit[]
+  quote_revits: IQuoteRevit[]
   created_at: Date
   updatedAt : Date
 }
@@ -41,6 +42,12 @@ export interface IComment {
 }
 
 export interface IRevit {
+  id: string
+  devitId: string
+  uid: string
+}
+
+export interface IQuoteRevit {
   id: string
   devitId: string
   uid: string

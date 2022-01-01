@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import { getDevitComments, getFavs } from 'actions/devit';
+import { useContext, useEffect } from 'react';
+import { getDevitComments, getFavs, getDevitRevits, getQuoteRevits } from 'actions/devit';
 import { AppContext } from 'context/AppContext';
-import { getDevitRevits } from 'actions/devit';
 
 export const useDevitInfo = (id: string) => {
 
   const { devitDispatch, userState } = useContext(AppContext);
-  const [revitsLength, setRevitsLength] = useState(0);
 
   useEffect(() => {
     getFavs(id, devitDispatch)
@@ -24,11 +22,13 @@ export const useDevitInfo = (id: string) => {
     getDevitRevits(id, devitDispatch)
       .then(resp => {
         if (resp.length === 0) return;
-        setRevitsLength(resp.length);
+      });
+
+    getQuoteRevits(id, devitDispatch)
+      .then(resp => {
+        if (resp.length === 0) return;
       });
   }, [userState.id, devitDispatch, id]);
 
-  return { 
-    revitsLength
-  };
+  return {};
 }; 

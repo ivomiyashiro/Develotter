@@ -1,25 +1,33 @@
 import { Dispatch } from 'react';
-import { delDevit, delRevit, getComment, getDevitFavs, getRevits, postComment, postCommentFav, postDevit, postDevitFav, postRevit } from 'services/devit';
-
+import { delDevit, delQuoteRevit, delRevit, getComment, getDevitFavs, getQuoteRevit, getRevits, postComment, postCommentFav, postDevit, postDevitFav, postQuoteRevit, postRevit } from 'services/devit';
+import { fileUpload } from 'helpers/fileUpload';
 
 interface ICreateDevit {
   content: string,
-  img: string
+  img: File
 }
 
 interface ICreateComment {
   id: string
   uid: string
   content: string
-  img: string
+  img: File
 }
 
 export const createDevit = async (
   data: ICreateDevit,
   dispatch: Dispatch<any>
 ) => {
+  const { content, img } = data;
+  console.log(img);
   try {
-    const response: any = await postDevit(data);
+    let newFile = '';
+
+    !!img
+      ? newFile = await fileUpload(img)
+      : newFile = '';
+
+    const response: any = await postDevit({content, newFile});
 
     if (!response.ok) return;
 
@@ -119,7 +127,13 @@ export const createComment = async (
   const {id, content, img} = data;
 
   try {
-    const response: any = await postComment({id, content, img});
+    let newFile = '';
+
+    !!img
+      ? newFile = await fileUpload(img)
+      : newFile = '';
+
+    const response: any = await postComment({id, content, img: newFile});
     if (!response.ok) return;
 
     dispatch({
@@ -210,8 +224,9 @@ export const createRevit = async (
   id: string,
   dispatch: Dispatch<any>
 ) => {
+
   try {
-    const response: any = await postRevit(id, {content: '', img: ''});
+    const response: any = await postRevit(id);
     if (!response.ok) return;
 
     dispatch({
@@ -241,6 +256,78 @@ export const deleteRevit = async (
       payload: {
         id,
         revit_id,
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getQuoteRevits = async (
+  id: string,
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const response: any = await getQuoteRevit(id);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'LOAD QUOTE REVITS',
+      payload: {
+        id,
+        quote_revits: response.quote_revits
+      }
+    });
+
+    return response.quote_revits;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createQuoteRevit = async (
+  data: {id: string, content :string, img: File},
+  dispatch: Dispatch<any>
+) => {
+  const { id, content, img } = data;
+
+  try {
+    let newFile = '';
+
+    !!img
+      ? newFile = await fileUpload(img)
+      : newFile = '';
+
+    const response: any = await postQuoteRevit(id, {content, img: newFile});
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'CREATE QUOTE REVIT',
+      payload: {
+        id,
+        quote_revit: response.quote_revit
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteQuoteRevit = async (
+  data: {id: string, quote_revit_id: string},
+  dispatch: Dispatch<any>
+) => {
+  try {
+    const { id, quote_revit_id } = data;
+
+    const response: any = await delQuoteRevit(id, quote_revit_id);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'DELETE QUOTE REVIT',
+      payload: {
+        id,
+        quote_revit_id,
       }
     });
   } catch (error) {

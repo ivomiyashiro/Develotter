@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { AppContext } from 'context/AppContext';
-import { IComment, IFav } from 'interfaces';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
 import { useDevitInfo } from 'hooks/useDevitInfo';
 
@@ -37,12 +36,12 @@ export const FooterSection = ({
       if (devit.id === id) return devit;
     });
     
-    if (!!devit[0].comments && !!devit[0].favs && !!devit[0].revits) {
+    if (!!devit[0].comments && !!devit[0].favs && !!devit[0].revits && !!devit[0].quote_revits) {
       devit[0].favs.filter(fav => {
         if (fav.devit_id === id) setDevitFaved(true);
       });
       setCommentsCounter(devit[0].comments.length);
-      setRevitsCounter(devit[0].revits.length);
+      setRevitsCounter(devit[0].revits.length + devit[0].quote_revits.length);
       setFavsCounter(devit[0].favs.length);
     }
 

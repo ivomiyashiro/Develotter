@@ -1,47 +1,57 @@
 import { useState, FormEvent, useContext } from 'react';
 
+import { AppContext } from '../../../context/AppContext';
 import { useValidDevit } from 'hooks/useValidDevit';
-import { createDevit } from 'actions/devit';
-import { handleCloseCreateDevitForm } from 'actions/ui';
+import { createQuoteRevit } from 'actions/devit';
 
-import { AppContext } from 'context/AppContext';
-
-import { FormHeader } from './HeaderSection';
+import { FormHeader } from '../CreateDevitForm/HeaderSection';
 import { MainSection } from './MainSection';
+import { Div } from './styles';
+import { Form } from '../CommentForm/styles';
 
-import { Div, Form } from './styles';
+interface IProp {
+  id: string
+  content: string
+  created_at: Date
+  img: string
+  handleOpenModal: (value: boolean) => void
+}
 
-export const CreateDevitForm = () => {
+export const CreateQuoteDevitForm = ({ 
+  id,
+  content,
+  created_at,
+  img,
+  handleOpenModal,
+}: IProp) => {
 
-  const { devitDispatch, uiDispatch } = useContext(AppContext);
+  const { devitDispatch } = useContext(AppContext);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
   const [imageUrl, setImageUrl] = useState<any>({
     file: '',
     fileUrl: ''
   });
-  const { isDevitValid } = useValidDevit(textAreaValue, imageUrl.fileUrl); 
+  const {isDevitValid} = useValidDevit(textAreaValue, imageUrl.file);
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const data = {
-      content: textAreaValue,
-      img: imageUrl.file
-    };
-    
-    setLoading(true);
-    await createDevit(data, devitDispatch);
-    setLoading(false);
+    const data = {id, content: textAreaValue, img: imageUrl.file};
 
-    setTextAreaValue('');
-    handleCloseCreateDevitForm(uiDispatch);
+    setLoading(true);
+
+    await createQuoteRevit(data, devitDispatch);
+
+    setLoading(false);
+    handleOpenModal(false);
   };
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
         <FormHeader
+          handleOpenModal={handleOpenModal}
           isSubmitButtonDisabled={isDevitValid}
           isLoading={isLoading}
           buttonChild="Devit"
@@ -53,8 +63,12 @@ export const CreateDevitForm = () => {
             isSubmitButtonDisabled={isDevitValid}
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
-            textAreaPlaceholder="What's happening?"
+            textAreaPlaceholder="Add a comment"
             isLoading={isLoading}
+            id={id}
+            content={content}
+            created_at={created_at}
+            img={img}
           />
         </Div>
       </Form>

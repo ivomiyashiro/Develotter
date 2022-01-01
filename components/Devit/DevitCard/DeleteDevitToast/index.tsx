@@ -36,8 +36,8 @@ export const DeleteDevitToast = ({
             <H2>Delete Tweet?</H2>
             <P>This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from Twitter search results.</P>
           </Section>
-          <ButtonsContainer className="buttons-container">
-            <ButtonWrapper className="button-container">
+          <ButtonsContainer>
+            <ButtonWrapper>
               <ButtonPrimary
                 onClick={handleDeleteDevit}
                 type="button"
@@ -51,7 +51,7 @@ export const DeleteDevitToast = ({
                 }
               </ButtonPrimary>
             </ButtonWrapper>
-            <ButtonWrapper className="button-container">
+            <ButtonWrapper>
               <ButtonPrimary
                 type="button"
                 onClick={() => handleDeleteModalOpen(false)}
