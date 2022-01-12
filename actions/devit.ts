@@ -19,7 +19,7 @@ export const createDevit = async (
   dispatch: Dispatch<any>
 ) => {
   const { content, img } = data;
-  console.log(img);
+
   try {
     let newFile = '';
 

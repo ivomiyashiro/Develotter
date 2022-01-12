@@ -47,7 +47,7 @@ export const RevitCard = ({
           <HeaderUserInfo>
             <ProfileImgContainer>
               <Image 
-                src={!!user ? user.profile_picture : '/assets/profile_picture.png'} 
+                src={!!user ? user.profile_picture : '/assets/images/profile_picture.png'} 
                 alt={!!user ? user.name : ''} 
                 layout="fill" 
                 objectFit="cover"

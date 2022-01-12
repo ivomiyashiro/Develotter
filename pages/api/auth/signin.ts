@@ -6,11 +6,11 @@ import { conn } from 'utils/database';
 
 const signin = async (req: NextApiRequest, res: NextApiResponse) => {
   
-  const { email, password: reqPassword } = req.body;
+  const { email: reqEmail, password: reqPassword } = req.body;
   
   try {
     const query = 'SELECT * FROM dev WHERE email = $1';
-    const values = [email];
+    const values = [reqEmail];
     const resp = await conn.query(query, values);
     
     if (resp.rows.length === 0) {
@@ -20,7 +20,7 @@ const signin = async (req: NextApiRequest, res: NextApiResponse) => {
       });
     }
 
-    const {id, username, name, password, bio, profile_picture, cover_picture, birth_date, created_at} = resp.rows[0];
+    const {id, username, email, name, password, bio, profile_picture, cover_picture, birth_date, created_at, first_edit} = resp.rows[0];
 
     const validPassword = verifyPassword(password, reqPassword);
     if (!validPassword) {
@@ -37,12 +37,14 @@ const signin = async (req: NextApiRequest, res: NextApiResponse) => {
       user: {
         id,
         username,
+        email,
         name,
         bio,
         profile_picture,
         cover_picture,
         birth_date,
         created_at,
+        first_edit
       },
       token,
     });

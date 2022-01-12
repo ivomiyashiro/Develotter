@@ -13,6 +13,7 @@ export interface IUser {
   cover_picture: string
   birth_date: Date
   created_at: Date
+  first_edit: boolean
 }
 
 export interface IDevit {

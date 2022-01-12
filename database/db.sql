@@ -11,12 +11,9 @@ CREATE TABLE IF NOT EXISTS dev (
   profile_picture VARCHAR(2048) DEFAULT 'https://res.cloudinary.com/dzvweeche/image/upload/v1638828344/profileImage_oilntm.png',
   cover_picture VARCHAR(2048),
   birth_date DATE NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  first_edit boolean NOT NULL DEFAULT false
 );
-
-INSERT INTO dev (name, username, email, password, birth_date) VALUES ($1, $2, $3, $4, $5);
-
-SELECT * FROM dev WHERE id = ($1);
 
 /* DEVITS */
 
@@ -31,8 +28,6 @@ CREATE TABLE IF NOT EXISTS devit (
   REFERENCES dev(id)
   ON DELETE CASCADE
 );
-
-INSERT INTO devit (uid, content, img) VALUES ($1, $2, $3);
 
 -- SELECT 
 -- devit.id, dev.id, devit.content, devit.img, devit.created_at, fav.id AS fav_id, comment.content as comment_content, dev.name, dev.username, dev.profile_picture 
@@ -55,8 +50,6 @@ CREATE TABLE IF NOT EXISTS fav(
 );
 
 ALTER TABLE fav ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id) ON DELETE CASCADE;
-
-INSERT INTO fav (uid, devit_id) VALUES ($1, $2);
 
 /* COMMENTS */
 
@@ -106,10 +99,6 @@ CREATE TABLE IF NOT EXISTS revit (
 
 ALTER TABLE revit ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id) ON DELETE CASCADE;
 
-INSERT INTO revit (uid, devit_id) VALUES ($1, $2) RETURNING *;
-
-SELECT * FROM revit WHERE uid = $1 AND devit_id = $id;
-
 /* QUOTE REVIT */
 
 CREATE TABLE IF NOT EXISTS quote_revit (
@@ -125,5 +114,3 @@ CREATE TABLE IF NOT EXISTS quote_revit (
 );
 
 ALTER TABLE quote_revit ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id) ON DELETE CASCADE;
-
-INSERT INTO revit (uid, devit_id, content, img) VALUES ($1, $2, $3, $4) RETURNING *;

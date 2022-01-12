@@ -1,7 +1,7 @@
 import { ReactNode, useReducer } from 'react';
 import { devitReducer } from 'reducers/devitReducer';
 import { uiReducer } from 'reducers/uiReducer';
-import { AppContext, DEVIT_INIT_STATE, UI_INIT_STATE } from '../context/AppContext';
+import { AppContext, DEVIT_INIT_STATE, UI_INIT_STATE, USER_INIT_STATE } from '../context/AppContext';
 import { userReducer } from '../reducers/userReducer';
 
 type IProps = {
@@ -10,7 +10,7 @@ type IProps = {
 
 export const AppProvider = ({ children }: IProps) => {
 
-  const [userState, userDispatch] = useReducer(userReducer, {});
+  const [userState, userDispatch] = useReducer(userReducer, USER_INIT_STATE);
   const [devitState, devitDispatch] = useReducer(devitReducer, DEVIT_INIT_STATE);
   const [uiState, uiDispatch] = useReducer(uiReducer, UI_INIT_STATE);
   

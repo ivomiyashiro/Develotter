@@ -18,10 +18,11 @@ export const USER_INIT_STATE = {
   name: '',
   email: '',
   bio: '',
-  profile_picture: '/defaultProfileImg.png',
+  profile_picture: '/assets/images/profile_picture.png',
   cover_picture: '',
   birth_date: new Date(),
   created_at: new Date(),
+  first_edit: true
 };
 
 export const DEVIT_INIT_STATE: IDevit[] = [];

@@ -4,6 +4,7 @@ import { IUser } from './../interfaces/index';
 export type ActionType = 
   | {type: 'SIGN IN', payload: IUser}
   | {type: 'SIGN OUT'}
+  | {type: 'FIRST EDIT PROFILE', payload: IUser}
 
 export const userReducer = (state = USER_INIT_STATE, action: any) => {
   switch (action.type) {
@@ -15,6 +16,11 @@ export const userReducer = (state = USER_INIT_STATE, action: any) => {
 
   case 'SIGN OUT':
     return USER_INIT_STATE;
+
+  case 'FIRST EDIT PROFILE':
+    return {
+      ...action.payload,
+    };
 
   default:
     return state;

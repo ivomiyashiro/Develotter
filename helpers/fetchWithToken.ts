@@ -1,11 +1,5 @@
 const baseURL = process.env.NEXT_APP_API_URL;
 
-interface IData {
-  uid: String,
-  content?: String,
-  img?: String,
-}
-
 export const fetchWithToken = (endpoint: string, data?: any, method = 'GET') => {
 
   const url = `${baseURL}/${endpoint}`;

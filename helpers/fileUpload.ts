@@ -1,5 +1,4 @@
 export const fileUpload = async(file: File) => {
-  console.log(file);
   const cloudUrl = 'https://api.cloudinary.com/v1_1/dzvweeche/upload';
 
   const formData = new FormData();
