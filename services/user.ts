@@ -14,11 +14,6 @@ export const getUser = async (id: string) => {
   return await resp.json();
 };
 
-export const getUserByUsername = async (username: string) => {
-  const resp = await fetchWithoutToken(`user/username/${username}`);
-  return await resp.json();
-};
-
 export const firstEdit = async (data: IFirstEdit) => {
   const { newProfilePicture, newCoverPicture, username, bio, uid } = data;
   const resp = await fetchWithToken(`user/${uid}`, {

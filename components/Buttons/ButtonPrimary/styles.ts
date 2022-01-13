@@ -20,6 +20,13 @@ export const Button = styled.button<IButton>`
   border: 1px solid ${(props: IButton) => !props.outline ? 'transparent' : props.color};
   color: ${(props: IButton) => props.textColor};
 
+  ${props => props.hover && `
+    :hover {
+      background: ${(props: IButton) => props.color + '33'};
+      transition: background .2s ease-in-out;
+    }
+  `}
+
   :disabled {
     opacity: 0.6;
   }

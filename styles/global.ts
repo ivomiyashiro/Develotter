@@ -18,6 +18,7 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
     padding: 0;
+    border: none;
   }
 
   a {
