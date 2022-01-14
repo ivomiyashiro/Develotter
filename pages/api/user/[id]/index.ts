@@ -7,26 +7,26 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
   case 'GET':
-    const { id } = req.query;
+    const { id: reqId }: any = req.query;
     try {
-      if (typeof(id) === 'number') {
-        const query = 'SELECT * FROM dev WHERE id = ($1)';
-        const values = [id];
-        const resp = await conn.query(query, values);
-
-        return res.status(200).json({
-          ok: true,
-          user: resp.rows[0]
-        });
-      }
-
-      const query = 'SELECT * FROM dev WHERE username = ($1)';
-      const values = [id];
+      const query = 'SELECT * FROM dev WHERE id = ($1)';
+      const values = [reqId];
       const resp = await conn.query(query, values);
+      const {id, username, name, bio, profile_picture, cover_picture, birth_date, created_at, first_edit} = resp.rows[0];
 
       return res.status(200).json({
         ok: true,
-        user: resp.rows[0]
+        user: {
+          id,
+          username,
+          name,
+          bio,
+          profile_picture,
+          cover_picture,
+          birth_date,
+          created_at,
+          first_edit
+        },
       });
 
     } catch (error) {

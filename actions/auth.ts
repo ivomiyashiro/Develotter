@@ -74,6 +74,13 @@ export const signin = async (
   });
 };
 
+export const logout = (dispatch: Dispatch<any>) => {
+  window.localStorage.removeItem('token');
+  dispatch({
+    type: 'LOG OUT',
+  });
+};
+
 export const firstEditProfile = async(
   data: any,
   dispatch: Dispatch<any>,

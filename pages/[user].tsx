@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { getUser } from 'services/user';
-import { IUser } from 'interfaces';
+import { getUserByUsername, getUserDevits } from 'services/user';
+import { IDevit, IUser } from 'interfaces';
 
 import { PrivateRoute } from 'components/PrivateRoute';
 import { DevelotterLayout } from 'components/DevelotterLayout';
@@ -12,10 +12,10 @@ import { DevInfo } from 'components/DevInfo';
 
 interface IProps {
   user: IUser
+  devits: IDevit[]
 }
 
-const UserPage = ({ user }: IProps) => {
-
+const UserPage = ({ user, devits }: IProps) => {
   return (
     <>
       <Head>
@@ -25,7 +25,7 @@ const UserPage = ({ user }: IProps) => {
       <PrivateRoute>
         <DevelotterLayout>
           <AsideLeftMenu />
-          <DevInfo user={user} />
+          <DevInfo user={user} devits={devits}/>
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>
@@ -37,11 +37,13 @@ export default UserPage;
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
 
-  const devInfo = await getUser(params.query.user as string);
+  const devInfo = await getUserByUsername(params.query.user as string);
+  const devDevits = await getUserDevits(params.query.user as string);
 
   return {
     props: {
-      user: devInfo.user
+      user: devInfo.user,
+      devits: devDevits.devits
     }
   };
 };

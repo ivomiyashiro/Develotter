@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 
-import { getUser } from 'services/user';
+import { getUserByUsername } from 'services/user';
 import { AppContext } from 'context/AppContext';
 
 import { Spinner } from 'components/Spinner';
@@ -37,7 +37,7 @@ export const UsernameInput = ({
       return handleInputErrorValue('Your username must be longer than 4 characters.');
     }
     setLoading(true);
-    const body = await getUser(value);
+    const body = await getUserByUsername(value);
     setLoading(false);
     if (body.user?.username === userState.username) {
       return handleInputErrorValue('Username is already taken.');

@@ -1,41 +1,27 @@
-import { useContext } from 'react';
-
-import { IUser } from 'interfaces';
+import { IDevit, IUser } from 'interfaces';
 
 import { UserLayout } from 'components/DevInfoLayout';
+import { DevitCard } from 'components/Devit/DevitCard';
+import { Div, P } from './styles';
 
 interface IProps {
-  user: IUser
+  user: IUser,
+  devits: IDevit[]
 }
 
-export const DevInfo = ({ user }: IProps) => {
-
-  // const { userState } = useContext(AppContext);
+export const DevInfo = ({ user, devits }: IProps) => {
 
   return (
     <>
       <UserLayout user={user} >
-        {/* {
-          userState.devits.length !== 0
-            ? userState.devits.map(devit => {
+        {
+          devits.length !== 0
+            ? devits.map(devit => {
               return <DevitCard key={devit.id} devit={devit} userComments={[]}/>;
             })
-            : <div><p>We could&apos;t find any devits yet.</p></div>
-        } */}
+            : <Div><P>We could&apos;t find any devits yet.</P></Div>
+        }
       </UserLayout>
-
-      {/* <style jsx>{`
-        div {
-          display: flex;
-          flex-aling: center;
-          justify-content: center;
-          margin-top: 5em;
-        }
-
-        p {
-          color: ${colors.text};
-        }
-      `}</style> */}
     </>
   );
 };

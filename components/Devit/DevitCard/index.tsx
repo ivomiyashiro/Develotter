@@ -33,6 +33,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
     cover_picture: '',
     birth_date: new Date(),
     created_at: new Date(),
+    first_edit: false
   });
 
   useEffect(() => {

@@ -36,7 +36,7 @@ export const FooterSection = ({
       if (devit.id === id) return devit;
     });
     
-    if (!!devit[0].comments && !!devit[0].favs && !!devit[0].revits && !!devit[0].quote_revits) {
+    if (!!devit[0]?.comments && !!devit[0]?.favs && !!devit[0]?.revits && !!devit[0]?.quote_revits) {
       devit[0].favs.filter(fav => {
         if (fav.devit_id === id) setDevitFaved(true);
       });
