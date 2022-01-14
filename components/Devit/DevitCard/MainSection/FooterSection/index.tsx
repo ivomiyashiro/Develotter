@@ -38,14 +38,14 @@ export const FooterSection = ({
     
     if (!!devit[0]?.comments && !!devit[0]?.favs && !!devit[0]?.revits && !!devit[0]?.quote_revits) {
       devit[0].favs.filter(fav => {
-        if (fav.devit_id === id) setDevitFaved(true);
+        if (fav.devit_id === id && fav.uid === userState.id) setDevitFaved(true);
       });
       setCommentsCounter(devit[0].comments.length);
       setRevitsCounter(devit[0].revits.length + devit[0].quote_revits.length);
       setFavsCounter(devit[0].favs.length);
     }
 
-  }, [id, devitState]);
+  }, [id, devitState, userState.id]);
 
   const handleFavDevit = async() => {
     
