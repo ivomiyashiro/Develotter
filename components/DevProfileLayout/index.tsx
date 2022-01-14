@@ -11,14 +11,14 @@ import { NavSection } from './NavSection';
 interface IProps {
   children: ReactNode
   user: IUser
-  // devits: IDevit[]
+  devitsLength: number
 }
 
-export const DevProfileLayout = ({user, children}: IProps) => {
+export const DevProfileLayout = ({user, devitsLength, children}: IProps) => {
   return (
     <>
       <Div>
-        <Topbar devitsLength={3} user={user} />
+        <Topbar devitsLength={devitsLength} user={user} />
         <Section>
           <PicturesSection user={user} />
           <UserInfoSection user={user} />

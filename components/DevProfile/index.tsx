@@ -13,7 +13,7 @@ export const DevProfile = ({ user, devits }: IProps) => {
 
   return (
     <>
-      <DevProfileLayout user={user} >
+      <DevProfileLayout user={user} devitsLength={devits.length}>
         {
           devits.length !== 0
             ? devits.map(devit => {

@@ -60,15 +60,6 @@ export const Timeline = () => {
                 : <NoDevitsMessage />
           }
         </Section>
-        {
-          isCreateDevitFormOpen
-          &&
-          <Modal
-            isOpen={isCreateDevitFormOpen}
-          >
-            <CreateDevitForm />
-          </Modal>
-        } 
       </Div>
     </>
   );

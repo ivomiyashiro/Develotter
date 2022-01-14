@@ -16,6 +16,7 @@ export const PicturesSection = ({ user }: IProps) => {
             alt="cover-picture"
             layout="fill"
             objectFit="cover"
+            priority
           />
         </CoverPictureWrapper>
         <ProfilePictureWrapper>

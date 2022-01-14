@@ -9,6 +9,10 @@ import { DevelotterLayout } from 'components/DevelotterLayout';
 import { AsideLeftMenu } from 'components/AsideMenuLeft';
 import { AsideRightMenu } from 'components/AsideMenuRight';
 import { DevProfile } from 'components/DevProfile';
+import { Modal } from 'components/Modal';
+import { CreateDevitForm } from 'components/Forms/CreateDevitForm';
+import { useContext } from 'react';
+import { AppContext } from 'context/AppContext';
 
 interface IProps {
   user: IUser
@@ -16,6 +20,9 @@ interface IProps {
 }
 
 const UserPage = ({ user, devits }: IProps) => {
+
+  const { uiState } = useContext(AppContext);
+
   return (
     <>
       <Head>
@@ -29,6 +36,16 @@ const UserPage = ({ user, devits }: IProps) => {
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>
+
+      {
+        uiState.isCreateDevitFormOpen
+          &&
+          <Modal
+            isOpen={uiState.isCreateDevitFormOpen}
+          >
+            <CreateDevitForm />
+          </Modal>
+      } 
     </>
   );
 };
