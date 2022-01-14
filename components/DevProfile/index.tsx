@@ -1,6 +1,6 @@
 import { IDevit, IUser } from 'interfaces';
 
-import { UserLayout } from 'components/DevInfoLayout';
+import { DevProfileLayout } from 'components/DevProfileLayout';
 import { DevitCard } from 'components/Devit/DevitCard';
 import { Div, P } from './styles';
 
@@ -9,11 +9,11 @@ interface IProps {
   devits: IDevit[]
 }
 
-export const DevInfo = ({ user, devits }: IProps) => {
+export const DevProfile = ({ user, devits }: IProps) => {
 
   return (
     <>
-      <UserLayout user={user} >
+      <DevProfileLayout user={user} >
         {
           devits.length !== 0
             ? devits.map(devit => {
@@ -21,7 +21,7 @@ export const DevInfo = ({ user, devits }: IProps) => {
             })
             : <Div><P>We could&apos;t find any devits yet.</P></Div>
         }
-      </UserLayout>
+      </DevProfileLayout>
     </>
   );
 };

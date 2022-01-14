@@ -14,7 +14,7 @@ interface IProps {
   // devits: IDevit[]
 }
 
-export const UserLayout = ({user, children}: IProps) => {
+export const DevProfileLayout = ({user, children}: IProps) => {
   return (
     <>
       <Div>

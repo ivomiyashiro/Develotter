@@ -8,7 +8,7 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { DevelotterLayout } from 'components/DevelotterLayout';
 import { AsideLeftMenu } from 'components/AsideMenuLeft';
 import { AsideRightMenu } from 'components/AsideMenuRight';
-import { DevInfo } from 'components/DevInfo';
+import { DevProfile } from 'components/DevProfile';
 
 interface IProps {
   user: IUser
@@ -25,7 +25,7 @@ const UserPage = ({ user, devits }: IProps) => {
       <PrivateRoute>
         <DevelotterLayout>
           <AsideLeftMenu />
-          <DevInfo user={user} devits={devits}/>
+          <DevProfile user={user} devits={devits}/>
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>
