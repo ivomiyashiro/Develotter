@@ -5,16 +5,6 @@ export const Section = styled.section`
   padding: 0.75em 1em;
 `;
 
-export const ButtonContainer = styled.div`
-  width: 150px;
-  height: 36px;
-  margin-left: auto;
-`;
-
-export const Span = styled.span`
-  font-size: 0.9rem;
-`;
-
 export const UserInfoContainer = styled.div`
   margin-top: 1em;
 `;

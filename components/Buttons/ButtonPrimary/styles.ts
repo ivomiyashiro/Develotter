@@ -4,7 +4,7 @@ interface IButton {
   outline: boolean
   color: string
   textColor: string
-  hover: boolean
+  hover: string
 }
 
 export const Button = styled.button<IButton>`
@@ -19,13 +19,12 @@ export const Button = styled.button<IButton>`
   background: ${(props: IButton) => !props.outline ? props.color : 'transparent'};
   border: 1px solid ${(props: IButton) => !props.outline ? 'transparent' : props.color};
   color: ${(props: IButton) => props.textColor};
+  transition: background .2s ease-in-out;
 
-  ${props => props.hover && `
-    :hover {
-      background: ${(props: IButton) => props.color + '33'};
-      transition: background .2s ease-in-out;
-    }
-  `}
+  :hover {
+    background: ${props => !!props.hover ? props.hover : props.color};
+    transition: background .2s ease-in-out;
+  }
 
   :disabled {
     opacity: 0.6;
@@ -49,11 +48,9 @@ export const Anchor = styled.div<IButton>`
   color: ${(props: IButton) => props.textColor};
   transition: background .2s ease-in-out;
   
-  ${props => props.hover && `
-    :hover {
-      background: ${(props: IButton) => props.color + '33'};
-      transition: background .2s ease-in-out;
-    }
-  `}
+  :hover {
+    background: ${props => !!props.hover ? props.hover : props.color};
+    transition: background .2s ease-in-out;
+  }
 
 `;

@@ -9,7 +9,6 @@ const search = async (req: NextApiRequest, res: NextApiResponse) => {
     const value = [`%${user}%`];
 
     const resp = await conn.query(query, value);
-    console.log(resp.rows);
     return res.status(200).json({
       ok: true,
       user: resp.rows

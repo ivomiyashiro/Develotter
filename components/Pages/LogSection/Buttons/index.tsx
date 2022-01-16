@@ -11,6 +11,7 @@ export const Buttons = () => {
           color={theme.hack}
           textColor={theme.hack}
           outline={true}
+          hover={theme.hack + '1A'}
           type="link"
           href="/signin"
         >
@@ -32,6 +33,7 @@ export const Buttons = () => {
             color={theme.hack}
             textColor={theme.hack}
             outline={true}
+            hover={theme.hack + '1A'}
             type="link"
             href="/signup"
           >

@@ -1,10 +1,9 @@
 import { IUser } from 'interfaces';
 
-import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
-
 import CalendarIcon from 'components/Icons/Calendar';
 import { theme } from 'styles/theme';
-import { ButtonContainer, Section, Span, UserInfoContainer, H1, P, UserJoinedContainer, FollowsCounter, Counter, H3 } from './styles';
+import { Section, UserInfoContainer, H1, P, UserJoinedContainer, FollowsCounter, Counter, H3 } from './styles';
+import { ButtonsSection } from './ButtonsSection';
 
 interface IProps {
   user: IUser
@@ -18,16 +17,7 @@ export const UserInfoSection = ({user}: IProps) => {
   return (
     <>
       <Section>
-        <ButtonContainer>
-          <ButtonPrimary
-            outline={true}
-            color={theme.darker_white}
-            textColor={theme.white}
-            hover={true}
-          >
-            <Span>Edit profile</Span>
-          </ButtonPrimary>
-        </ButtonContainer>
+        <ButtonsSection user={user} />
         <UserInfoContainer>
           <H1>{user.name}</H1>
           <P>@{user.username}</P>

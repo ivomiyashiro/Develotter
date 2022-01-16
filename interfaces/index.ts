@@ -57,7 +57,16 @@ export interface IQuoteRevit {
 }
 
 export interface IFav {
-  id: string,
-  uid: string,
+  id: string
+  uid: string
   devit_id: string
+}
+
+export interface ISocial {
+  followers: {
+    dev_follower_id: string
+  }[]
+  followins: {
+    dev_following_id: string
+  }[]
 }

@@ -114,3 +114,15 @@ CREATE TABLE IF NOT EXISTS quote_revit (
 );
 
 ALTER TABLE quote_revit ADD CONSTRAINT fk_devit_id FOREIGN KEY(devit_id) REFERENCES devit(id) ON DELETE CASCADE;
+
+/* FOLLOWERS */
+
+CREATE TABLE IF NOT EXISTS followers (
+  uid INT,
+  dev_id INT,
+  FOREIGN KEY(uid)
+  REFERENCES dev(id)
+  ON DELETE CASCADE
+);
+
+ALTER TABLE follower add CONSTRAINT fk_dev_id FOREIGN KEY(dev_id) REFERENCES dev(id) ON DELETE CASCADE;
