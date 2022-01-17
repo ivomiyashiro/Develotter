@@ -4,19 +4,25 @@ import { theme } from 'styles/theme';
 
 const commun = `
   color: ${theme.darker_white};
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   overflow: hidden;
-  text-oveflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 225px;
 `;
 
 export const Li = styled.li`
   padding: 0.5em 1em;
+
+  :hover {
+    background-color: ${theme.white + '0D'}
+  }
 `;
 
 export const A = styled.a`
   display: flex;
   gap: .75em;
-  color: ${theme.white}
+  color: ${theme.white};
 `;
 
 export const Section = styled.section`
@@ -25,18 +31,18 @@ export const Section = styled.section`
   object-fit: cover;
   overflow: hidden;
   position: relative;
-  width: 56px;
+  min-width: 56px;
 `;
 
 export const H3 = styled.h3`
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 `;
 
 export const P = styled.p`
   ${commun};
 `;
 
-export const Span = styled.span`
+export const Span = styled.p`
   ${commun};
 `;
 

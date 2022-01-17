@@ -5,19 +5,19 @@ import { conn } from 'utils/database';
 const followers = async (req: NextApiRequest, res: NextApiResponse) => {
   const method = req.method;
   const { id }: any = req.query;
+
   switch (method) {
     
   case 'GET':
     try {
-      const { uid }: any = await validateJWT(req, res);
       const query_1 = 'SELECT dev_id AS dev_following_id FROM followers WHERE uid = ($1)';
       const values_1 = [id];
       const resp_1 = await conn.query(query_1, values_1);
 
       const query_2 = 'SELECT uid AS dev_follower_id FROM followers WHERE dev_id = ($1)';
-      const values_2 = [uid];
+      const values_2 = [id];
       const resp_2 = await conn.query(query_2, values_2);
-      console.log(resp_1.rows, resp_2.rows);
+
       return res.status(200).json({
         ok: true,
         followins: resp_1.rows,

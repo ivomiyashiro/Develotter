@@ -35,7 +35,7 @@ export const NavSection = ({user}: IProps) => {
                   ? true
                   : false
               }>
-                  Redevits
+                  Revits
               </A>
             </Link>
           </Li>

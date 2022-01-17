@@ -13,9 +13,11 @@ export const PicturesSection = ({ user }: IProps) => {
         <CoverPictureWrapper>
           <Image
             src={user.cover_picture}
+            blurDataURL={user.cover_picture}
             alt="cover-picture"
             layout="fill"
             objectFit="cover"
+            placeholder="blur"
             priority
           />
         </CoverPictureWrapper>
@@ -26,6 +28,8 @@ export const PicturesSection = ({ user }: IProps) => {
               alt={user.name}
               layout="fill"
               objectFit="cover"
+              blurDataURL={user.profile_picture}
+              placeholder="blur"
             />
           </ProfilePicture>
         </ProfilePictureWrapper>

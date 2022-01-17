@@ -12,24 +12,23 @@ import { ButtonContainer, ButtonWrapper, Span } from './styles';
 
 interface IProps {
   user: IUser
+  followers: any
 }
 
-export const ButtonsSection = ({ user }: IProps) => {
+export const ButtonsSection = ({ user, followers }: IProps) => {
 
-  const { userState, socialState, socialDispatch } = useContext(AppContext);
+  const { userState, socialDispatch } = useContext(AppContext);
   const [isFollower, setFollower] = useState<null | boolean>(false);
   const [onMouseOver, setMouseOver] = useState(false);
 
   useEffect(() => {
-    if (socialState.followins === undefined) return;
-
-    const followinsFilter = socialState.followins.filter(follower => {
-      if (follower !== undefined && follower.dev_following_id === user.id) return follower.dev_following_id; 
+    setFollower(false);
+    followers.map((follower: any) => {
+      if (follower.dev_follower_id === userState.id) {
+        setFollower(true);
+      }
     });
-    if (followinsFilter?.length !== 0) {
-      setFollower(true);
-    };
-  }, [socialState.followins, user]);
+  }, [followers, userState.id]);
 
   const handleFollow = () => {
     followDev(user.id, socialDispatch);
