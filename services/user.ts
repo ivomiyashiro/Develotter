@@ -35,3 +35,18 @@ export const getUserDevits = async (id: string) => {
   const resp = await fetchWithoutToken(`user/${id}/devits`);
   return await resp.json();
 };
+
+export const getUserRevits = async (id: string) => {
+  const resp = await fetchWithoutToken(`user/${id}/revits`);
+  return await resp.json();
+};
+
+export const getUserQuoteRevits = async (id: string) => {
+  const resp = await fetchWithoutToken(`user/${id}/quote_revits`);
+  return await resp.json();
+};
+
+export const getUserFavs = async (id: string) => {
+  const resp = await fetchWithoutToken(`user/${id}/favs`);
+  return await resp.json();
+};

@@ -19,12 +19,12 @@ export const DeleteDevitToast = ({
   handleDeleteModalOpen,
 }: IProps) => {
 
-  const { devitDispatch } = useContext(AppContext);
+  const { devitDispatch, userInteractionsDispatch } = useContext(AppContext);
   const [isLoading, setLoading] = useState(false);
 
   const handleDeleteDevit = async () => {
     setLoading(true);
-    await deleteDevit(id, devitDispatch);
+    await deleteDevit(id, devitDispatch, userInteractionsDispatch);
     setLoading(false);
   };
 

@@ -13,7 +13,7 @@ import { Div, Form } from './styles';
 
 export const CreateDevitForm = () => {
 
-  const { devitDispatch, uiDispatch } = useContext(AppContext);
+  const { devitDispatch, uiDispatch, userInteractionsDispatch } = useContext(AppContext);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
   const [imageUrl, setImageUrl] = useState<any>({
@@ -31,7 +31,7 @@ export const CreateDevitForm = () => {
     };
     
     setLoading(true);
-    await createDevit(data, devitDispatch);
+    await createDevit(data, devitDispatch, userInteractionsDispatch);
     setLoading(false);
 
     setTextAreaValue('');

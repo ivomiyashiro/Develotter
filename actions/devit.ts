@@ -16,7 +16,8 @@ interface ICreateComment {
 
 export const createDevit = async (
   data: ICreateDevit,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  intDispatch: Dispatch<any>
 ) => {
   const { content, img } = data;
 
@@ -35,6 +36,11 @@ export const createDevit = async (
       type: 'CREATE DEVIT',
       payload: response.devit
     });
+
+    intDispatch({
+      type: 'CREATE DEVIT',
+      payload: response.devit
+    });
   } catch (error) {
     console.log(error);
   }
@@ -42,13 +48,19 @@ export const createDevit = async (
 
 export const deleteDevit = async (
   id: string,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  intDispatch: Dispatch<any>
 ) => {
   try{
     const response: any = await delDevit(id);
     if (!response.ok) return;
 
     dispatch({
+      type: 'DELETE DEVIT',
+      payload: id
+    });
+
+    intDispatch({
       type: 'DELETE DEVIT',
       payload: id
     });

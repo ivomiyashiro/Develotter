@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { IDevit, ISocial, IUser } from './../interfaces';
+import { IDevit, IFav, IRevit, ISocial, IUser } from './../interfaces';
 
 interface IContext {
   userState: IUser
@@ -12,6 +12,8 @@ interface IContext {
     isCreateDevitFormOpen: boolean,
   }
   uiDispatch: Dispatch<any>
+  userInteractions: any
+  userInteractionsDispatch: Dispatch<any>
 }
 
 export const USER_INIT_STATE = {
@@ -33,9 +35,15 @@ export const UI_INIT_STATE = {
   isCreateDevitFormOpen: false,
 };
 
-export const SOCIAL_INIT_STATE = {
+export const SOCIAL_INIT_STATE: any = {
   followins: [],
   followers: []
+};
+
+export const USER_INTERACTIONS_INIT_STATE: any  = {
+  devits: [],
+  revits: [],
+  favs: []
 };
 
 export const AppContext = createContext<IContext>({ 
@@ -47,4 +55,6 @@ export const AppContext = createContext<IContext>({
   devitDispatch: () => null,
   uiState: UI_INIT_STATE,
   uiDispatch: () => null,
+  userInteractions: USER_INTERACTIONS_INIT_STATE,
+  userInteractionsDispatch: () => null,
 });

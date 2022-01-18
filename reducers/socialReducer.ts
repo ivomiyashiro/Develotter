@@ -1,9 +1,9 @@
 import { SOCIAL_INIT_STATE } from '../context/AppContext';
 
 type ActionType = 
-  | {type: 'GET FOLLOWERS AND FOLLOWINS', payload: {followins: {dev_followings_id: string}[], followers: {dev_followings_id: string}[]}}
-  | {type: 'FOLLOW', payload: string}
-  | {type: 'UNFOLLOW', payload: string}
+  | {type: 'GET FOLLOWERS AND FOLLOWINS', payload: {followins: {dev_following_id: string}[], followers: {dev_follower_id: string}[]}}
+  | {type: 'FOLLOW', payload: {dev_following_id: string}}
+  | {type: 'UNFOLLOW', payload: {dev_follower_id: string}}
 
 export const socialReducer = (state = SOCIAL_INIT_STATE, action: ActionType) => {
   switch (action.type) {
@@ -14,6 +14,7 @@ export const socialReducer = (state = SOCIAL_INIT_STATE, action: ActionType) => 
     };
   
   case 'FOLLOW':
+    console.log(action.payload);
     return {
       ...state,
       followins: [

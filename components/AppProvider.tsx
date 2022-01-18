@@ -3,7 +3,8 @@ import { devitReducer } from 'reducers/devitReducer';
 import { uiReducer } from 'reducers/uiReducer';
 import { socialReducer } from 'reducers/socialReducer';
 import { userReducer } from '../reducers/userReducer';
-import { AppContext, DEVIT_INIT_STATE, SOCIAL_INIT_STATE, UI_INIT_STATE, USER_INIT_STATE } from '../context/AppContext';
+import { userInteractionsReducer } from 'reducers/userInteractionsReducer';
+import { AppContext, DEVIT_INIT_STATE, SOCIAL_INIT_STATE, UI_INIT_STATE, USER_INIT_STATE, USER_INTERACTIONS_INIT_STATE } from '../context/AppContext';
 
 type IProps = {
   children: ReactNode
@@ -15,11 +16,14 @@ export const AppProvider = ({ children }: IProps) => {
   const [devitState, devitDispatch] = useReducer(devitReducer, DEVIT_INIT_STATE);
   const [uiState, uiDispatch] = useReducer(uiReducer, UI_INIT_STATE);
   const [socialState, socialDispatch] = useReducer(socialReducer, SOCIAL_INIT_STATE);
+  const [userInteractions, userInteractionsDispatch] = useReducer(userInteractionsReducer, USER_INTERACTIONS_INIT_STATE);
   
   return (
     <AppContext.Provider value={{
       userState,
       userDispatch,
+      userInteractions,
+      userInteractionsDispatch,
       socialState,
       socialDispatch,
       devitState,

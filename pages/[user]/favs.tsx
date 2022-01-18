@@ -1,8 +1,10 @@
+import { useContext, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { getUserByUsername, getUserDevits } from 'services/user';
-import { IDevit, IUser } from 'interfaces';
+import { IUser } from 'interfaces';
+import { AppContext } from 'context/AppContext';
+import { getUserByUsername, getUserFavs } from 'services/user';
 
 import { PrivateRoute } from 'components/PrivateRoute';
 import { DevelotterLayout } from 'components/DevelotterLayout';
@@ -11,17 +13,22 @@ import { AsideRightMenu } from 'components/AsideMenuRight';
 import { DevProfile } from 'components/DevProfile';
 import { Modal } from 'components/Modal';
 import { CreateDevitForm } from 'components/Forms/CreateDevitForm';
-import { useContext } from 'react';
-import { AppContext } from 'context/AppContext';
 
 interface IProps {
   user: IUser
-  devits: IDevit[]
+  favs: any
 }
 
-const UserPage = ({ user, devits }: IProps) => {
+const UserPage = ({ user, favs }: IProps) => {
 
-  const { uiState } = useContext(AppContext);
+  const { uiState, userInteractionsDispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    userInteractionsDispatch({
+      type: 'LOAD USER FAVS',
+      payload: favs
+    });
+  },[favs, userInteractionsDispatch]);
 
   return (
     <>
@@ -32,7 +39,7 @@ const UserPage = ({ user, devits }: IProps) => {
       <PrivateRoute>
         <DevelotterLayout>
           <AsideLeftMenu />
-          <DevProfile user={user} devits={devits}/>
+          <DevProfile user={user} />
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>
@@ -55,13 +62,12 @@ export default UserPage;
 export const getServerSideProps: GetServerSideProps = async (params) => {
 
   const devInfo = await getUserByUsername(params.query.user as string);
-  const devDevits = await getUserDevits(params.query.user as string);
+  const devFavs = await getUserFavs(params.query.user as string);
 
   return {
     props: {
       user: devInfo.user,
-      devits: devDevits.devits
+      favs: devFavs.favs
     }
   };
 };
-
