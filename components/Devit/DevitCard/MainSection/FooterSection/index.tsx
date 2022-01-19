@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { AppContext } from 'context/AppContext';
-import { HoverableButton } from 'components/Buttons/HoverableButton';
+import { favDevit, unFavDevit } from 'actions/devit';
+import { IComment, IDevitFavs, IRevit } from 'interfaces';
 import { useDevitInfo } from 'hooks/useDevitInfo';
+import { AppContext } from 'context/AppContext';
+import { getDevitFavs, getComment, getRevits } from 'services/devit';
+
+import { HoverableButton } from 'components/Buttons/HoverableButton';
 
 import RedevitIcon from 'components/Icons/Redevit';
 import FavIcon from 'components/Icons/Fav';
 import FavFill from 'components/Icons/FavFill';
 import CommentIcon from 'components/Icons/Comment';
 import { theme } from 'styles/theme';
-import { Footer, ListItemComments, ListItemFav, ListItemRevits, Span, Ul } from './styles';
-import { favDevit, unFavDevit } from 'actions/devit';
+import { ButtonComment, ButtonFav, ButtonRevit, CommentsCounter, FavsCounter, Footer, ListItemComments, ListItemFav, ListItemRevits, RevitsCounter, Ul } from './styles';
 
 interface IProps {
   id: string
@@ -25,27 +28,52 @@ export const FooterSection = ({
 }: IProps) => {
 
   useDevitInfo(id);
-  const {userState, devitDispatch, devitState} = useContext(AppContext);
-  const [favsCouter, setFavsCounter] = useState(0);
+  const {userState, devitDispatch} = useContext(AppContext);
   const [isDevitFaved, setDevitFaved] = useState(false);
+  const [isDevitCommented, setDevitCommented] = useState(false);
+  const [isDevitRevitted, setDevitRevitted] = useState(false);
+  const [favsCouter, setFavsCounter] = useState(0);
   const [commentsCounter, setCommentsCounter] = useState(0);
   const [revitsCounter, setRevitsCounter] = useState(0);
+  const [hoverComments, setHoverComments] = useState(false);
+  const [hoverRevits, setHoverRevits] = useState(false);
+  const [hoverFavs, setHoverFavs] = useState(false);
 
   useEffect(() => {
-    const devit = devitState.filter(devit => {
-      if (devit.id === id) return devit;
-    });
-    
-    if (!!devit[0]?.comments && !!devit[0]?.favs && !!devit[0]?.revits && !!devit[0]?.quote_revits) {
-      devit[0].favs.filter(fav => {
-        if (fav.devit_id === id && fav.uid === userState.id) setDevitFaved(true);
-      });
-      setCommentsCounter(devit[0].comments.length);
-      setRevitsCounter(devit[0].revits.length + devit[0].quote_revits.length);
-      setFavsCounter(devit[0].favs.length);
-    }
+    getDevitFavs(id)
+      .then(resp => {
+        if (!resp.ok) return;        
+        if (resp.favs.some((e: IDevitFavs) => e.uid === userState.id)) {
+          setDevitFaved(true);
+        }
+        setFavsCounter(resp.favs.length);
+      })
+      .catch(error => console.log(error));
+  }, [id, userState.id]);
 
-  }, [id, devitState, userState.id]);
+  useEffect(() => {
+    getComment(id)
+      .then(resp => {
+        if (!resp.ok) return;
+        if (resp.comments.some((e: IComment) => e.uid === userState.id)) {
+          setDevitCommented(true);
+        }
+        setCommentsCounter(resp.comments.length);
+      })
+      .catch(error => console.log(error));
+  });
+
+  useEffect(() => {
+    getRevits(id)
+      .then(resp => {
+        if (!resp.ok) return;
+        if (resp.revits.some((e: IRevit) => e.uid === userState.id)) {
+          setDevitRevitted(true);
+        }
+        setRevitsCounter(resp.revits.length);
+      })
+      .catch(error => console.log(error));
+  });
 
   const handleFavDevit = async() => {
     
@@ -59,45 +87,59 @@ export const FooterSection = ({
     setDevitFaved(true);
     setFavsCounter(prev => (prev + 1));
   };
-
+  
+  const commentsColor = isDevitCommented ? theme.comments : theme.darker_white;
+  const iconCommentsColor = hoverComments ? theme.comments : (isDevitCommented ? (theme.comments) : (theme.darker_white));
+  const revitsColor = isDevitRevitted ? theme.revits : theme.darker_white;
+  const iconRevittedColor = hoverRevits ? theme.revits : (isDevitRevitted ? (theme.revits) : (theme.darker_white));
+  
   return (
     <>
       <Footer>
         <Ul>
           <ListItemComments
             onClick={() => handleCommentOpen(true)}
+            onMouseOver={() => setHoverComments(true)}
+            onMouseLeave={() => setHoverComments(false)}
           >
-            <HoverableButton
-              icon={CommentIcon}
-              width="16px"
-              height="16px"
-              color={theme.comments}
-            />
-            <Span>{commentsCounter}</Span>
+            <ButtonComment color={commentsColor}>
+              <CommentIcon 
+                width="16px"
+                height="16px"
+                color={iconCommentsColor}
+              />
+            </ButtonComment>
+            <CommentsCounter commented={isDevitCommented}>{commentsCounter}</CommentsCounter>
           </ListItemComments>
           <ListItemRevits
             onClick={() => handleRevitMenuOpen(true)}
+            onMouseOver={() => setHoverRevits(true)}
+            onMouseLeave={() => setHoverRevits(false)}
           >
-            <HoverableButton
-              icon={RedevitIcon}
-              width="16px"
-              height="16px"
-              color={theme.revits}
-            />
-            <Span>{revitsCounter}</Span>
+            <ButtonRevit color={revitsColor}>
+              <RedevitIcon 
+                width="16px"
+                height="16px"
+                color={iconRevittedColor}
+              />
+            </ButtonRevit>
+            <RevitsCounter revitted={isDevitRevitted}>{revitsCounter}</RevitsCounter>
           </ListItemRevits>
           <ListItemFav
             onClick={handleFavDevit}
+            onMouseOver={() => setHoverFavs(true)}
+            onMouseLeave={() => setHoverFavs(false)}
           >
             {
               !isDevitFaved
                 ? (
-                  <HoverableButton
-                    icon={FavIcon}
-                    width="16px"
-                    height="16px"
-                    color={theme.fav}
-                  />
+                  <ButtonFav color={theme.fav}>
+                    <FavIcon 
+                      width="16px"
+                      height="16px"
+                      color={hoverFavs ? theme.fav : theme.darker_white}
+                    />
+                  </ButtonFav>
                 )
                 : (
                   <HoverableButton
@@ -108,7 +150,7 @@ export const FooterSection = ({
                   />
                 )
             } 
-            <Span>{favsCouter}</Span>
+            <FavsCounter faved={isDevitFaved}>{favsCouter}</FavsCounter>
           </ListItemFav>
         </Ul>
       </Footer>

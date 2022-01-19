@@ -14,7 +14,6 @@ export const socialReducer = (state = SOCIAL_INIT_STATE, action: ActionType) => 
     };
   
   case 'FOLLOW':
-    console.log(action.payload);
     return {
       ...state,
       followins: [

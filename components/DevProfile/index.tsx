@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { IDevit, IRevit, IUser } from 'interfaces';
+import { IDevit, IUser } from 'interfaces';
 import { AppContext } from 'context/AppContext';
 
 import { DevProfileLayout } from 'components/DevProfileLayout';
@@ -18,7 +18,6 @@ export const DevProfile = ({ user }: IProps) => {
   const { userInteractions } = useContext(AppContext);
   const router = useRouter();
   const path = router.pathname;
-  console.log(path === '/[user]');
 
   return (
     <>

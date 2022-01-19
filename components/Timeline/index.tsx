@@ -1,26 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
 
-// import { useFetchDevits } from '../hooks/useFetchDevits';
-
 import { AppContext } from 'context/AppContext';
+import { getDevits } from 'services/devit';
 
-// import { Devit } from './Devit';
-// import { CreateDevitHome } from './Forms/CreateDevitHome';
 import { TopBar } from './Topbar';
 import { NoDevitsMessage } from './NoDevitsMessage';
 import { Spinner } from 'components/Spinner';
-import { CreateDevitForm } from 'components/Forms/CreateDevitForm';
-import { Modal } from 'components/Modal';
+import { Devit } from 'components/Devit';
+import { CreateDevitTimeline } from 'components/Forms/CreateDevitTimeline';
 
 import { Div, Section, SpinnerWrapper } from './styles';
-import { CreateDevitTimeline } from 'components/Forms/CreateDevitTimeline';
-import { getDevits } from 'services/devit';
-import { Devit } from 'components/Devit';
 
 export const Timeline = () => {
 
-  const {uiState, devitDispatch, devitState} = useContext(AppContext);
-  const {isCreateDevitFormOpen} = uiState;
+  const { devitDispatch, devitState} = useContext(AppContext);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {

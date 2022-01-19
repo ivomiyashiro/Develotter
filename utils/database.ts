@@ -5,11 +5,11 @@ let conn: any;
 if (!conn) {
   conn = new Pool ({
     user: 'postgres',
-    password: 'asddsa123',
+    password: 'S8[nBsY%dARyA7fY',
     host: 'localhost',
     port: 5432,
     database: 'develotter'
   });
 }
-// S8[nBsY%dARyA7fY
+// asddsa123
 export { conn };

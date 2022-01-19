@@ -42,6 +42,7 @@ export const HeaderSection = ({
               height="20px"
               width="20px"
               color={theme.hack}
+              hoverColor={theme.darker_white}
               onClick={handleHeaderActionsMenu && (() => handleHeaderActionsMenu(true))}
             />
           </Section>

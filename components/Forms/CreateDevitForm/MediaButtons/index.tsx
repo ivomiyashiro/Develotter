@@ -55,7 +55,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading }: IProps) 
           >
             {
               isLoading
-                ? <Spinner size="18px" color={theme.white} />
+                ? <Spinner size="18px" color={theme.blue} />
                 : 'Devit'
             }
           </ButtonPrimary>
