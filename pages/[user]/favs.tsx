@@ -62,7 +62,7 @@ export default UserPage;
 export const getServerSideProps: GetServerSideProps = async (params) => {
 
   const devInfo = await getUserByUsername(params.query.user as string);
-  const devFavs = await getUserFavs(params.query.user as string);
+  const devFavs = await getUserFavs(devInfo.user.id);
 
   return {
     props: {

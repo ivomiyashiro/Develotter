@@ -80,3 +80,38 @@ export const Small = styled.small`
   top: 65px;
   padding: 0 12px;
 `;
+
+export const TextArea = styled.textarea`
+  background: ${theme.blue};
+  border-radius: 4px;
+  border: none;
+  color: ${theme.white};
+  font-size: 1rem;
+  height: 70px;
+  margin-top: .5em;
+  padding-top: 1.5em;
+  padding-left: .75em;
+  resize: none;
+  outline: ${(props: IError) => 
+    props.error 
+      ? '2px solid ' + theme.red 
+      : '1px solid ' + theme.darker_white};
+
+  :focus {
+    outline: ${(props: IError) => 
+    props.error 
+      ? '2px solid ' + theme.red 
+      : '1px solid ' + theme.hack};
+  }
+
+  :focus + ${Label} {
+    top: 1em;
+    font-size: 0.8rem;
+    transition: top .2s ease;
+    color: ${(props: IError) => props.error ? theme.red : theme.hack};
+  }
+
+  :focus + ${Label} + ${Counter} {
+      display: block;
+    }
+`;

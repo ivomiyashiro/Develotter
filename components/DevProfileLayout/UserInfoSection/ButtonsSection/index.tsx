@@ -13,9 +13,10 @@ import { ButtonContainer, ButtonWrapper, Span } from './styles';
 interface IProps {
   user: IUser
   followers: any
+  setEditProfileFormOpen: any
 }
 
-export const ButtonsSection = ({ user, followers }: IProps) => {
+export const ButtonsSection = ({ user, followers, setEditProfileFormOpen }: IProps) => {
 
   const { userState, socialDispatch } = useContext(AppContext);
   const [isFollower, setFollower] = useState<null | boolean>(false);
@@ -51,6 +52,7 @@ export const ButtonsSection = ({ user, followers }: IProps) => {
                 color={theme.darker_white}
                 textColor={theme.white}
                 hover={theme.white + '26'}
+                onClick={() => setEditProfileFormOpen((prev: boolean) => !prev)}
               >
                 <Span>Edit profile</Span>
               </ButtonPrimary>

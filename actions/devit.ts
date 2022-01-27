@@ -255,8 +255,9 @@ export const createRevit = async (
 
 export const deleteRevit = async (
   data: {id: string, revit_id: string},
-  dispatch: Dispatch<any>
-) => {
+  dispatch: Dispatch<any>,
+  intDispatch: Dispatch<any>
+) => {  
   try {
     const { id, revit_id } = data;
 
@@ -268,6 +269,14 @@ export const deleteRevit = async (
       payload: {
         id,
         revit_id,
+      }
+    });
+
+    intDispatch({
+      type: 'DELETE REVIT',
+      payload: {
+        id,
+        revit_id
       }
     });
   } catch (error) {

@@ -58,7 +58,7 @@ export const SignupForm = () => {
           <InputControl
             type="text"
             placeholder="Name"
-            counter={true}
+            counter="50"
             error={nameInputState.error}
             regEx={regEx.name}
             value={nameInputState.value}

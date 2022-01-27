@@ -6,6 +6,7 @@ type ActionType =
   | {type: 'CREATE DEVIT', payload: IDevit}
   | {type: 'DELETE DEVIT', payload: string}
   | {type: 'LOAD USER REVITS', payload: IRevit[]}
+  | {type: 'DELETE REVIT',   payload: {id: string, revit_id: string}}
   | {type: 'LOAD USER FAVS', payload: IFav[]}
   | {type: 'LOAD USER QUOTE REVITS', payload: IQuoteRevit[]}
 
@@ -45,18 +46,8 @@ export const userInteractionsReducer = (state = USER_INTERACTIONS_INIT_STATE, ac
   case 'DELETE REVIT':
     return {
       ...state,
-      revits: state.revits.map(devit => {
-        if (devit.id === action.payload.id) {
-          return {
-            ...devit,
-            revits: devit.revits.filter(revit => {
-              if (revit.id !== action.payload.revit_id) {
-                return revit;
-              }
-            })
-          };
-        }
-        return devit;
+      revits: state.revits.filter((revit: IRevit) => {
+        if (revit.id !== action.payload.id) return revit;
       })
     };
   

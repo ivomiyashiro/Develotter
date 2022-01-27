@@ -14,7 +14,7 @@ export const CoverPictureWrapper = styled.div`
 export const ProfilePictureWrapper = styled.div`
   position: absolute;
   bottom: -2.75em;
-  border: 4px solid ${theme.light_blue};
+  border: 4px solid ${theme.blue};
   border-radius: 50%;
   margin: 0 1em;
 `;

@@ -41,7 +41,18 @@ export const DevProfile = ({ user }: IProps) => {
               ? userInteractions.revits.map((revit: IDevit) => {
                 return <DevitCard key={revit.id} devit={revit} userComments={[]}/>;
               })
-              : <Div><P>We could&apos;t find any devits yet.</P></Div>
+              : <Div><P>We could&apos;t find any revits yet.</P></Div>
+          )
+        }
+        {
+          path === '/[user]/favs'
+          &&
+          (
+            userInteractions.favs.length !== 0
+              ? userInteractions.favs.map((revit: IDevit) => {
+                return <DevitCard key={revit.id} devit={revit} userComments={[]}/>;
+              })
+              : <Div><P>We could&apos;t find any favs yet.</P></Div>
           )
         }
       </DevProfileLayout>

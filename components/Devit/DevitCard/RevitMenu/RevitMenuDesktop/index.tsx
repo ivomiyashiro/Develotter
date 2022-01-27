@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { createRevit, deleteRevit } from 'actions/devit';
-import { useRevitted } from 'hooks/useRevitted';
-
+import { getRevits } from 'services/devit';
+import { IRevit } from 'interfaces';
 import { AppContext } from 'context/AppContext';
 
 import EditIcon from 'components/Icons/Edit';
@@ -22,9 +22,22 @@ export const RevitMenuDesktop = ({
   handleQuoteDevitFormOpen
 }: IProps) => {
 
-  const { devitDispatch } = useContext(AppContext);
-  const { revitInfo } = useRevitted(id);
-  const { revit_id, isRevitted } = revitInfo;
+  const { devitDispatch, userInteractionsDispatch, userState } = useContext(AppContext);
+  const [isRevitted, setRevitted] = useState(false);
+  const [revit_id, setRevit_id] = useState('');
+
+  useEffect(() => {
+    getRevits(id)
+      .then(resp => {
+        if (resp.revits.some((e: IRevit) => {
+          setRevit_id(e.id);
+          return e.uid === userState.id;
+        })) {
+          setRevitted(true);
+        }
+      })
+      .catch(error => console.log(error));
+  });
 
   const handleRevitDevit = () => {
 
@@ -41,6 +54,7 @@ export const RevitMenuDesktop = ({
     deleteRevit(
       data,
       devitDispatch,
+      userInteractionsDispatch
     );
   };
 

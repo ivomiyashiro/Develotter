@@ -39,10 +39,10 @@ export const NavSection = ({user}: IProps) => {
               </A>
             </Link>
           </Li>
-          <Li onClick={() => router.push(`/${user.username}/likes`)}>
-            <Link href={`/${user.username}/likes`} passHref>
+          <Li onClick={() => router.push(`/${user.username}/favs`)}>
+            <Link href={`/${user.username}/favs`} passHref>
               <A isActive={
-                path === '/[user]/likes'
+                path === '/[user]/favs'
                   ? true
                   : false
               }>

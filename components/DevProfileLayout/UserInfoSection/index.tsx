@@ -11,9 +11,10 @@ import { Section, UserInfoContainer, H1, P, UserJoinedContainer, FollowsCounter,
 
 interface IProps {
   user: IUser
+  setEditProfileFormOpen: (value: boolean) => void 
 }
 
-export const UserInfoSection = ({user}: IProps) => {
+export const UserInfoSection = ({user, setEditProfileFormOpen}: IProps) => {
 
   const options: any = { year: 'numeric', month: 'long' };
   const createdAt = new Date(user.created_at).toLocaleDateString('en-US', options);
@@ -35,7 +36,7 @@ export const UserInfoSection = ({user}: IProps) => {
   return (
     <>
       <Section>
-        <ButtonsSection user={user} followers={followers} />
+        <ButtonsSection user={user} followers={followers} setEditProfileFormOpen={setEditProfileFormOpen}/>
         <UserInfoContainer>
           <H1>{user.name}</H1>
           <P>@{user.username}</P>

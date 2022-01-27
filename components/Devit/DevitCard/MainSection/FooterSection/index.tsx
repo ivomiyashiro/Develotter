@@ -28,7 +28,7 @@ export const FooterSection = ({
 }: IProps) => {
 
   useDevitInfo(id);
-  const {userState, devitDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, userInteractionsDispatch} = useContext(AppContext);
   const [isDevitFaved, setDevitFaved] = useState(false);
   const [isDevitCommented, setDevitCommented] = useState(false);
   const [isDevitRevitted, setDevitRevitted] = useState(false);
@@ -57,6 +57,8 @@ export const FooterSection = ({
         if (!resp.ok) return;
         if (resp.comments.some((e: IComment) => e.uid === userState.id)) {
           setDevitCommented(true);
+        } else {
+          setDevitCommented(false);
         }
         setCommentsCounter(resp.comments.length);
       })
@@ -69,6 +71,8 @@ export const FooterSection = ({
         if (!resp.ok) return;
         if (resp.revits.some((e: IRevit) => e.uid === userState.id)) {
           setDevitRevitted(true);
+        }else {
+          setDevitRevitted(false);
         }
         setRevitsCounter(resp.revits.length);
       })

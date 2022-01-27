@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Counter, Input, InputWrapper, Label, Small } from './styles';
+import { Counter, Input, InputWrapper, Label, Small, TextArea } from './styles';
 
 interface IState {
   value: string; 
@@ -13,7 +13,8 @@ interface IInput {
   regEx?: RegExp,
   error: string,
   value: string,
-  counter?: boolean,
+  counter?: string,
+  inputType?: string
   setValue: (value: IState | ((prev: IState) => IState)) => void
 }
 
@@ -23,13 +24,14 @@ export const InputControl = ({
   regEx,
   error,
   value,
-  counter = false,
-  setValue
+  counter,
+  setValue,
+  inputType = 'input',
 }: IInput) => {
 
-  const [lengthCounter, setlengthCounter] = useState(0);
+  const [lengthCounter, setlengthCounter] = useState(value.length);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>):void => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>):void => {
     setValue((prev: IState) => ({...prev, 
       value: e.target.value
     }));
@@ -66,16 +68,64 @@ export const InputControl = ({
   return (
     <>
       <InputWrapper>
-        <Input
-          type={type}
-          name="name" 
-          onChange={handleInputChange}
-          onBlur={handleInputError}
-          onKeyUp={handleInputError}
-          value={value}
-          autoComplete="off"
-          error={error.length > 0 ? true : false}
-        />
+        {
+          !!counter
+            ? (
+              inputType === 'input'
+                ? (
+                  <Input
+                    type={type}
+                    name="name" 
+                    onChange={handleInputChange}
+                    onBlur={handleInputError}
+                    onKeyUp={handleInputError}
+                    value={value}
+                    autoComplete="off"
+                    error={error.length > 0 ? true : false}
+                    maxLength={Number(counter)}
+                  />
+                )
+                : (
+                  <TextArea
+                    name="name" 
+                    onChange={handleInputChange}
+                    onBlur={handleInputError}
+                    onKeyUp={handleInputError}
+                    value={value}
+                    autoComplete="off"
+                    error={error.length > 0 ? true : false}
+                    maxLength={Number(counter)}
+                  />
+                )
+            )
+            : (
+              inputType === 'input'
+                ? (
+                  <Input
+                    type={type}
+                    name="name" 
+                    onChange={handleInputChange}
+                    onBlur={handleInputError}
+                    onKeyUp={handleInputError}
+                    value={value}
+                    autoComplete="off"
+                    error={error.length > 0 ? true : false}
+                  />
+                )
+                : (
+                  <TextArea 
+                    name="name" 
+                    onChange={handleInputChange}
+                    onBlur={handleInputError}
+                    onKeyUp={handleInputError}
+                    value={value}
+                    autoComplete="off"
+                    error={error.length > 0 ? true : false}
+                    maxLength={Number(counter)}
+                  />
+                )
+            )
+        }
         <Label 
           htmlFor="name"
           error={error.length > 0 ? true : false}
@@ -84,7 +134,7 @@ export const InputControl = ({
           {placeholder}
         </Label>
         {
-          counter && <Counter>{lengthCounter}/50</Counter>
+          !!counter && <Counter>{lengthCounter}/{counter}</Counter>
         }
         <Small>{error}</Small>
       </InputWrapper>
