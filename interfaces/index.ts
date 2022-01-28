@@ -12,6 +12,8 @@ export interface IUser {
   profile_picture: string
   cover_picture: string
   birth_date: Date
+  location: string
+  website: string
   created_at: Date
   first_edit: boolean
 }

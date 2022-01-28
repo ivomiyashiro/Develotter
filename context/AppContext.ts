@@ -24,6 +24,8 @@ export const USER_INIT_STATE = {
   bio: '',
   profile_picture: '/assets/images/profile_picture.png',
   cover_picture: '',
+  location: '',
+  website : '',
   birth_date: new Date(),
   created_at: new Date(),
   first_edit: true

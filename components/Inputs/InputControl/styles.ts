@@ -24,15 +24,16 @@ export const Label = styled.label<ILabel>`
       ? theme.red 
       : theme.darker_white};
   font-size: ${(props: ILabel) => props.active ? '0.8' : '1'}rem;
-  position: absolute;
-  top: ${(props: ILabel) => props.active ? '16px' : '24px'};
   left: 13px;
+  position: absolute;
+  pointer-events: none;
+  top: ${(props: ILabel) => props.active ? '16px' : '24px'};
   transition: top .2s ease;
 `;
 
 export const Counter = styled.span`
-  display: none;
   color: ${theme.darker_white};
+  display: none;
   font-size: 0.8rem;
   position: absolute;
   right: 0.5em;

@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { ChangeEvent, useContext, useRef } from 'react';
 import Image from 'next/image';
 
 import { AppContext } from 'context/AppContext';
@@ -6,9 +6,25 @@ import { AppContext } from 'context/AppContext';
 import Photo from 'components/Icons/Photo';
 import { Div, ImageWrapper, Section, ProfilePicture, ProfilePictureWrapper, Input, ButtonWrapper } from './styles';
 
-export const PicturesSection = () => {
+interface FormValues {
+  profilePicture: {
+    file: string | File,
+    fileUrl: string
+  }
+  coverPicture: {
+    file: string | File,
+    fileUrl: string
+  }
+}
 
-  const {userState} = useContext(AppContext);
+export const PicturesSection = ({
+  coverPicture,
+  handleCoverPicture,
+  profilePicture,
+  handleProfilePicture,
+}: any) => {
+
+  const { userState } = useContext(AppContext);
   const coverPictureInputRef = useRef<HTMLInputElement>(null);
   const profilePictureInputRef = useRef<HTMLInputElement>(null);
 
@@ -24,6 +40,36 @@ export const PicturesSection = () => {
     }
   };
 
+  const handleCoverPictureInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleCoverPicture((prev: FormValues) => {
+        if (e.target.files) {
+          return {
+            ...prev,
+            file: e.target.files[0],
+            fileUrl: URL.createObjectURL(e.target.files[0]),
+            changed: true,
+          };
+        }
+      });
+    }
+  };
+
+  const handleProfilePictureInputchangle = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleProfilePicture((prev: FormValues) => {
+        if (e.target.files) {
+          return {
+            ...prev,
+            file: e.target.files[0],
+            fileUrl: URL.createObjectURL(e.target.files[0]),
+            changed: true,
+          };
+        }
+      });
+    }
+  };
+
   return (
     <>
       <Section>
@@ -32,7 +78,7 @@ export const PicturesSection = () => {
             ? (
               <ImageWrapper>
                 <Image 
-                  src={userState.cover_picture}
+                  src={coverPicture.fileUrl}
                   blurDataURL={userState.cover_picture}
                   alt="cover-picture" 
                   layout='fill'
@@ -45,7 +91,11 @@ export const PicturesSection = () => {
                     width={'22px'}
                   />
                 </ButtonWrapper>
-                <Input type="file" ref={coverPictureInputRef} />
+                <Input 
+                  type="file" 
+                  ref={coverPictureInputRef} 
+                  onChange={handleCoverPictureInputChange}
+                />
               </ImageWrapper>
             )
             : <Div></Div>
@@ -53,7 +103,7 @@ export const PicturesSection = () => {
         <ProfilePictureWrapper>
           <ProfilePicture>
             <Image
-              src={userState.profile_picture}
+              src={profilePicture.fileUrl}
               alt={userState.name}
               layout="fill"
               objectFit="cover"
@@ -66,7 +116,11 @@ export const PicturesSection = () => {
                 width={'22px'}
               />
             </ButtonWrapper>
-            <Input type="file" ref={profilePictureInputRef}/>
+            <Input 
+              type="file" 
+              ref={profilePictureInputRef}
+              onChange={handleProfilePictureInputchangle}
+            />
           </ProfilePicture>
         </ProfilePictureWrapper>
       </Section>

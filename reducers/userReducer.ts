@@ -5,6 +5,7 @@ export type ActionType =
   | {type: 'SIGN IN', payload: IUser}
   | {type: 'LOG OUT'}
   | {type: 'FIRST EDIT PROFILE', payload: IUser}
+  | {type: 'UPDATE USER', payload: IUser}
 
 export const userReducer = (state = USER_INIT_STATE, action: any) => {
   switch (action.type) {
@@ -20,6 +21,11 @@ export const userReducer = (state = USER_INIT_STATE, action: any) => {
   case 'FIRST EDIT PROFILE':
     return {
       ...action.payload,
+    };
+  
+  case 'UPDATE USER':
+    return {
+      ...action.payload
     };
 
   default:

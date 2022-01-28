@@ -17,7 +17,7 @@ export const CoverPictureStep = ({
 
   return (
     <>
-      <CoverPictureStepWrapper className="coverPictureStep">
+      <CoverPictureStepWrapper>
         <Header
           title="Pick a header"
           content="People who visit your profile will see it. Show your style."

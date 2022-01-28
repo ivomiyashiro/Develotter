@@ -50,3 +50,8 @@ export const getUserFavs = async (id: string) => {
   const resp = await fetchWithoutToken(`user/${id}/favs`);
   return await resp.json();
 };
+
+export const updateUserProfile = async (data: any) => {
+  const resp = await fetchWithoutToken(`user/${data.id}`, data, 'PUT');
+  return await resp.json();
+};

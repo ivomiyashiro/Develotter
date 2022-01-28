@@ -1,4 +1,3 @@
-import { validateJWT } from 'helpers/validateJWT';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { conn } from 'utils/database';
 
@@ -12,7 +11,7 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
       const query = 'SELECT * FROM dev WHERE id = ($1)';
       const values = [reqId];
       const resp = await conn.query(query, values);
-      const {id, username, name, bio, profile_picture, cover_picture, birth_date, created_at, first_edit} = resp.rows[0];
+      const {id, username, name, bio, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
 
       return res.status(200).json({
         ok: true,
@@ -24,6 +23,8 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
           profile_picture,
           cover_picture,
           birth_date,
+          website,
+          location,
           created_at,
           first_edit
         },
@@ -39,15 +40,13 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     
   case 'PUT':
-    const { profilePicture, coverPicture, username: reqUsername, bio: reqBio, first_edit: reqFirstEdit } = req.body;
-    const { uid }: any = await validateJWT(req, res);
+    const { id, profile_picture, cover_picture, username, bio, website, location, first_edit } = req.body;
+
+    const query = 'UPDATE dev SET profile_picture = ($1), cover_picture = ($2), username = ($3), bio = ($4), website = ($5), location = ($6), first_edit = ($7) WHERE id = ($8) RETURNING *';
+    const values = [profile_picture, cover_picture, username, bio, website, location, first_edit, id];
     try {
-      const query = 'UPDATE dev SET profile_picture = ($1), cover_picture = ($2), username = ($3), bio = ($4), first_edit = ($5) WHERE id = ($6) RETURNING *';
-      const values = [profilePicture, coverPicture, reqUsername, reqBio, reqFirstEdit, uid];
-
       const resp = await conn.query(query, values);
-
-      const {id, username, name, bio, profile_picture, cover_picture, birth_date, created_at, first_edit} = resp.rows[0];
+      const {id, username, name, bio, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
 
       return res.status(200).json({
         ok: true,
@@ -59,6 +58,8 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
           profile_picture,
           cover_picture,
           birth_date,
+          website,
+          location,
           created_at,
           first_edit
         },

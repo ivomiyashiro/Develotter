@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 
-import { firstEditProfile } from 'actions/auth';
+import { firstEditProfile } from 'actions/user';
 
 import { AppContext } from 'context/AppContext';
 import { BioStep } from './Steps/BioStep';

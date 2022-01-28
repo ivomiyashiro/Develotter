@@ -1,4 +1,3 @@
-import { fetchWithoutToken } from 'helpers/fetchWithoutToken';
 import { fileUpload } from 'helpers/fileUpload';
 import { Dispatch } from 'react';
 import { userSignin, userSignup } from 'services/auth';
@@ -79,42 +78,4 @@ export const logout = (dispatch: Dispatch<any>) => {
   dispatch({
     type: 'LOG OUT',
   });
-};
-
-export const firstEditProfile = async(
-  data: any,
-  dispatch: Dispatch<any>,
-) => {
-
-  const {
-    profilePicture,
-    coverPicture,
-  } = data;
-
-  try {
-    let newProfilePicture = '';
-    !!profilePicture.file
-      ? newProfilePicture = await fileUpload(profilePicture.file)
-      : newProfilePicture = 'https://res.cloudinary.com/dzvweeche/image/upload/v1638828344/profileImage_oilntm.png';
-
-    let newCoverPicture = '';
-    !!coverPicture.file
-      ? newCoverPicture = await fileUpload(coverPicture.file)
-      : newCoverPicture = '';
-    
-    const newData = {
-      ...data,
-      newProfilePicture,
-      newCoverPicture
-    };
-
-    const body = await firstEdit(newData);
-
-    dispatch({
-      type: 'FIRST EDIT PROFILE',
-      payload: body.user
-    });
-  } catch (error) {
-    console.log(error);
-  }
 };
