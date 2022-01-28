@@ -4,7 +4,7 @@ import { conn } from 'utils/database';
 const revits = async (req: NextApiRequest, res: NextApiResponse) => {
   const method = req.method;
   const { id }: any = req.query;
-  console.log(id);
+  
   switch (method) {
     
   case 'GET':

@@ -21,9 +21,8 @@ export const editProfile = async(
       !!cover_picture.file
         ? newCoverPicture = await fileUpload(cover_picture.file)
         : newCoverPicture = 'https://res.cloudinary.com/dzvweeche/image/upload/v1638828344/profileImage_oilntm.png';
-
       newData = {
-        ...data, 
+        ...newData, 
         cover_picture: newCoverPicture
 
       };
@@ -33,13 +32,11 @@ export const editProfile = async(
       !!profile_picture.file
         ? newProfilePicture = await fileUpload(profile_picture.file)
         : newProfilePicture = 'https://res.cloudinary.com/dzvweeche/image/upload/v1638828344/profileImage_oilntm.png';
-
       newData = {
-        ...data,
+        ...newData,
         profile_picture: newProfilePicture
       };
     }
-    console.log(newData);
     await updateUserProfile(newData);
 
     dispatch({

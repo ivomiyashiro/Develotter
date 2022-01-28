@@ -15,13 +15,14 @@ interface IProps {
 
 export const DevProfile = ({ user }: IProps) => {
 
-  const { userInteractions } = useContext(AppContext);
+  const { userState, userInteractions } = useContext(AppContext);
   const router = useRouter();
   const path = router.pathname;
+  const u = router.query.user === userState.username ? userState : user;
 
   return (
     <>
-      <DevProfileLayout user={user} devitsLength={userInteractions.devits.length}>
+      <DevProfileLayout user={u} devitsLength={userInteractions.devits.length}>
         {
           path === '/[user]'
           &&

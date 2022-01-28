@@ -65,7 +65,10 @@ export const EditProfileForm = ({setEditProfileFormOpen}: IProps) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <TopBar setEditProfileFormOpen={setEditProfileFormOpen}/>
+        <TopBar 
+          setEditProfileFormOpen={setEditProfileFormOpen}
+          validForm={!name.ok && !bio.ok && !location.ok && !website.ok}
+        />
         <InfoSection 
           coverPicture={cover_picture}
           handleCoverPicture={setCoverPicture}

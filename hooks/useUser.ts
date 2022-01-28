@@ -16,7 +16,6 @@ export const useUser = async (uid: string) => {
       })
       .catch(error => console.log(error));
   }, [uid]);
-  console.log(user);
   return {
     user
   };

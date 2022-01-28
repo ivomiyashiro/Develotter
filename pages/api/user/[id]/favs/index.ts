@@ -12,7 +12,6 @@ const favs = async (req: NextApiRequest, res: NextApiResponse) => {
       const query = 'SELECT devit.id, devit.uid, devit.content, devit.img, devit.created_at FROM fav JOIN devit ON devit.id = fav.devit_id WHERE devit.uid = $1 ORDER BY devit.created_at DESC;';
       const value = [id];
       const resp = await conn.query(query, value);
-      console.log(resp);
       return res.status(200).json({
         ok: true,
         favs: resp.rows

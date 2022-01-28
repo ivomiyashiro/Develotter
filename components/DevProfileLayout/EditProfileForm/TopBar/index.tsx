@@ -6,9 +6,10 @@ import { Section, Div, Title, ButtonWrapper } from './styles';
 
 interface IProps {
   setEditProfileFormOpen: any
+  validForm: boolean
 }
 
-export const TopBar = ({setEditProfileFormOpen}: IProps) => {
+export const TopBar = ({setEditProfileFormOpen, validForm}: IProps) => {
   return (
     <>
       <Section>
@@ -29,6 +30,7 @@ export const TopBar = ({setEditProfileFormOpen}: IProps) => {
             color={theme.white}
             textColor={theme.blue}
             hover={theme.white + 'B3'}
+            isDisabled={validForm}
           >
             Save
           </ButtonPrimary>

@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { IDevit, IFav, IRevit, ISocial, IUser } from './../interfaces';
+import { IDevit, ISocial, IUser } from './../interfaces';
 
 interface IContext {
   userState: IUser
