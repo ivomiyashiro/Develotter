@@ -13,19 +13,21 @@ const renewUser = async (req: NextApiRequest, res: NextApiResponse) => {
     const values = [uid];
 
     const resp = await conn.query(query, values);
-    const {id, username, email, name, bio, profile_picture, cover_picture, birth_date, created_at, first_edit} = resp.rows[0];
+    const {id, username, name, bio, email, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
 
-    return res.json({
+    return res.status(200).json({
       ok: true,
       user: {
         id,
         username,
-        email,
         name,
+        email,
         bio,
         profile_picture,
         cover_picture,
         birth_date,
+        website,
+        location,
         created_at,
         first_edit
       },

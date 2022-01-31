@@ -15,7 +15,7 @@ interface IProps {
 
 export const PrivateRoute = ({children}: IProps) => {
 
-  const {userDispatch, userState, socialDispatch, userInteractionsDispatch} = useContext(AppContext);
+  const {userDispatch, userState, socialDispatch} = useContext(AppContext);
   const router = useRouter();
   const [isLoading, setLoading] = useState(true);
   

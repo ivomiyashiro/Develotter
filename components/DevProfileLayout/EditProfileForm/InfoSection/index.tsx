@@ -34,19 +34,19 @@ export const InfoSection = ({
           type="text"
           value={name.value}
           error={name.error}
-          regEx={/^(\w{1,50})$/}
           setValue={handleName}
           counter="50"
+          regEx={/^[a-zA-Z ]{1,50}$/}
         />
         <InputControl 
           placeholder="Bio"
           type="text"
           value={!!bio.value ? bio.value : ''}
           error={bio.error}
-          regEx={/^[a-zA-Z0-9_ ]{0,160}$/}
           setValue={handleBio}
           counter="160"
           inputType='textarea'
+          regEx={/^[A-Za-z 1-9,;]{0,160}$/}
         />
         <InputControl 
           placeholder="Location"
@@ -55,6 +55,7 @@ export const InfoSection = ({
           error={location.error}
           setValue={handleLocation}
           counter="30"
+          regEx={/^[a-zA-Z 1-9,;]{0,30}$/}
         />
         <InputControl 
           placeholder="Website"
@@ -63,6 +64,7 @@ export const InfoSection = ({
           error={website.error}
           setValue={handleWebsite}
           counter="100"
+          regEx={/^[-a-zA-Z0-9@:%._\+~#=]{0,100}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/}
         />
       </Section>
     </>

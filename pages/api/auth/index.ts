@@ -18,7 +18,7 @@ const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
     const values = [reqName, newUsername, reqEmail, newPassword, reqBirth_date];
     
     const resp = await conn.query(query, values);
-    const {id, username, email, name, bio, profile_picture, cover_picture, birth_date, created_at, first_edit} = resp.rows[0];
+    const {id, username, name, bio, email, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
     
     const token = await generateJWT(id, name);
 
@@ -27,12 +27,14 @@ const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
       user: {
         id,
         username,
-        email,
         name,
+        email,
         bio,
         profile_picture,
         cover_picture,
         birth_date,
+        website,
+        location,
         created_at,
         first_edit
       },

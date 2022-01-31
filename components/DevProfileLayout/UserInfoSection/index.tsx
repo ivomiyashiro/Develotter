@@ -6,8 +6,10 @@ import { IUser } from 'interfaces';
 import { ButtonsSection } from './ButtonsSection';
 
 import CalendarIcon from 'components/Icons/Calendar';
+import LocationIcon from 'components/Icons/Location';
+import SiteIcon from 'components/Icons/Site';
 import { theme } from 'styles/theme';
-import { Section, UserInfoContainer, H1, P, UserJoinedContainer, FollowsCounter, Counter, H3 } from './styles';
+import { Section, UserInfoContainer, H1, P, UserJoinedContainer, FollowsCounter, Counter, H3, Bio, Span, Info, InfoWrapper, Website } from './styles';
 
 interface IProps {
   user: IUser
@@ -42,12 +44,35 @@ export const UserInfoSection = ({user, setEditProfileFormOpen}: IProps) => {
           <P>@{user.username}</P>
         </UserInfoContainer>
         <UserJoinedContainer>
-          <CalendarIcon
-            color={theme.darker_white}
-            width="18px"
-            height="18px"
-          />
-          <P>Joined {createdAt}</P>
+          <Bio>
+            <Span>{!!user.bio && user.bio}</Span>
+          </Bio>
+          <InfoWrapper>
+            <Info>
+              <LocationIcon
+                color={theme.darker_white}
+                width="18px"
+                height="18px"
+              />
+              <P>{user.location}</P>
+            </Info>
+            <Info>
+              <CalendarIcon
+                color={theme.darker_white}
+                width="18px"
+                height="18px"
+              />
+              <P>Joined {createdAt}</P>
+            </Info>
+            <Info>
+              <SiteIcon
+                color={theme.darker_white}
+                width="18px"
+                height="18px"
+              />
+              <Website href={user.website}>{user.website}</Website>
+            </Info>
+          </InfoWrapper>
         </UserJoinedContainer>
         <FollowsCounter>
           <Counter>

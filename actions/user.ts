@@ -37,6 +37,7 @@ export const editProfile = async(
         profile_picture: newProfilePicture
       };
     }
+    
     await updateUserProfile(newData);
 
     dispatch({

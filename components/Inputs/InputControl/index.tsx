@@ -14,7 +14,8 @@ interface IInput {
   error: string,
   value: string,
   counter?: string,
-  inputType?: string
+  inputType?: string,
+  minLength?: string,
   setValue: (value: IState | ((prev: IState) => IState)) => void
 }
 
@@ -64,7 +65,7 @@ export const InputControl = ({
       ok: false
     }));
   };
-
+  console.log(error);
   return (
     <>
       <InputWrapper>
