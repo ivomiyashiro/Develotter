@@ -50,8 +50,8 @@ export const FirstEditProfileForm = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
+      ...userState,
       ...formValues,
-      uid: userState.id
     };
     setLoading(true);
     await firstEditProfile(

@@ -6,7 +6,7 @@ interface IFirstEdit {
   newCoverPicture: string
   username: string
   bio: string
-  uid: string
+  id: string
 }
 
 export const getUser = async (id: string) => {
@@ -20,12 +20,11 @@ export const getUserByUsername = async (id: string) => {
 };
 
 export const firstEdit = async (data: IFirstEdit) => {
-  const { newProfilePicture, newCoverPicture, username, bio, uid } = data;
-  const resp = await fetchWithToken(`user/${uid}`, {
-    profilePicture: newProfilePicture,
-    coverPicture: newCoverPicture,
-    username,
-    bio,
+  const { newProfilePicture, newCoverPicture, id } = data;
+  const resp = await fetchWithToken(`user/${id}`, {
+    ...data,
+    profile_picture: newProfilePicture,
+    cover_picture: newCoverPicture,
     first_edit: true
   }, 'PUT');
   return await resp.json();

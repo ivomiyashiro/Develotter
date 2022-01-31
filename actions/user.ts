@@ -77,6 +77,8 @@ export const firstEditProfile = async(
       newCoverPicture
     };
 
+    console.log(newData);
+
     const body = await firstEdit(newData);
 
     dispatch({
