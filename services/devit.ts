@@ -24,7 +24,7 @@ export const postDevit = async (data: ICreateDevit) => {
 };
 
 export const getDevits = async () => {
-  const resp = await fetchWithToken('devit');
+  const resp = await fetchWithToken('feed');
   return await resp.json();
 };
 

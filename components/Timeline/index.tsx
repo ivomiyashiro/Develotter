@@ -22,9 +22,10 @@ export const Timeline = () => {
     getDevits()
       .then(resp => {
         if (!resp.ok) return;
+        console.log(resp.feed);
         devitDispatch({
           type: 'LOAD DEVITS',
-          payload: resp.devits
+          payload: resp.feed
         });
       })
       .catch(error => console.log(error))

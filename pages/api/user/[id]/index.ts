@@ -48,7 +48,6 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
     const values = [name, profile_picture, cover_picture, username, bio, website, location, first_edit, id];
     try {
       const resp = await conn.query(query, values);
-      console.log(resp);
       const {id, username, name, bio, email, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
 
       return res.status(200).json({
