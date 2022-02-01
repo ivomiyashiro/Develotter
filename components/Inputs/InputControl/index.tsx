@@ -30,7 +30,7 @@ export const InputControl = ({
   inputType = 'input',
 }: IInput) => {
 
-  const [lengthCounter, setlengthCounter] = useState(value.length);
+  const [lengthCounter, setlengthCounter] = useState(!!value ? value.length : '');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>):void => {
     setValue((prev: IState) => ({...prev, 
@@ -65,7 +65,7 @@ export const InputControl = ({
       ok: false
     }));
   };
-  console.log(error);
+
   return (
     <>
       <InputWrapper>
@@ -130,7 +130,7 @@ export const InputControl = ({
         <Label 
           htmlFor="name"
           error={error.length > 0 ? true : false}
-          active={value.length > 0 ? true : false}
+          active={value?.length > 0 ? true : false}
         >
           {placeholder}
         </Label>

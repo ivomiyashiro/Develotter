@@ -23,6 +23,11 @@ export const postDevit = async (data: ICreateDevit) => {
   return await resp.json();
 };
 
+export const getDevit = async (id: string) => {
+  const resp = await fetchWithoutToken(`devit/${id}`);
+  return await resp.json();
+};
+
 export const getDevits = async () => {
   const resp = await fetchWithToken('feed');
   return await resp.json();

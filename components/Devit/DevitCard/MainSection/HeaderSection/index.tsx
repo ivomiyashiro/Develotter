@@ -7,7 +7,8 @@ import { IUser } from 'interfaces';
 import DotsIcon from 'components/Icons/Dots';
 import { theme } from 'styles/theme';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
-import { H2, Header, P, Section } from './styles';
+import { A, Header, P, Section, Paragraph } from './styles';
+import Link from 'next/link';
 
 interface IProps {
   user: IUser
@@ -28,11 +29,15 @@ export const HeaderSection = ({
   return (
     <>
       <Header>
-        <Section>
-          <H2>{user.name}</H2>
+        <Paragraph>
+          <Link href={`/${user.username}`} passHref>
+            <A>
+              {user.name}
+            </A>
+          </Link>
           <P>@{user.username}</P>
           <P>· <ReactTimeAgo date={new Date(created_at)} locale="en-US" timeStyle="twitter" /></P>
-        </Section>
+        </Paragraph>
         {
           !isComment
           &&

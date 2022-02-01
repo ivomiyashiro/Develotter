@@ -29,6 +29,8 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
     name: '',
     email: '',
     bio: '',
+    location: '',
+    website: '',
     profile_picture: '',
     cover_picture: '',
     birth_date: new Date(),

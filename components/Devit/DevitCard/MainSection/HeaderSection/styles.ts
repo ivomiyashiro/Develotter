@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { breakpoints } from 'styles/breakpoints';
 import { theme } from 'styles/theme';
 
 export const Header = styled.header`
@@ -9,21 +10,35 @@ export const Header = styled.header`
   width: 100%;
 `;
 
-export const Section = styled.section`
-  align-items: center;
+export const Paragraph = styled.p`
   display: flex;
+  align-items: flex-end;
   gap: .5em;
   max-width: 225px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    max-width: 450px;
+  }
 `;
 
-export const H2 = styled.h2`
+export const Section = styled.section`
+  align-items: center;
+  display: flex;
+  gap: .5em;
+`;
+
+export const A = styled.a`
   color: ${theme.white};
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const P = styled.p`
