@@ -46,3 +46,21 @@ export const P = styled.p`
   font-size: .85rem;
   margin: 0;
 `;
+
+export const Anchor = styled.a`
+  color: ${theme.white};
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+
+  :hover {
+    text-decoration: underline;
+    text-decoration-color: ${theme.gray};
+  }
+`;
+
+export const Time = styled.time`
+  color: ${theme.gray};
+  font-size: .85rem;
+  margin: 0;
+`;

@@ -59,7 +59,7 @@ export const postComment = async (data: ICreateComment) => {
 };
 
 export const getComment = async (id: string) => {
-  const resp = await fetchWithToken(`devit/${id}/comment`);
+  const resp = await fetchWithoutToken(`devit/${id}/comment`);
   return await resp.json();
 };
 

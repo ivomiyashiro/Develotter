@@ -7,10 +7,11 @@ import { IUser } from 'interfaces';
 import DotsIcon from 'components/Icons/Dots';
 import { theme } from 'styles/theme';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
-import { A, Header, P, Section, Paragraph } from './styles';
+import { A, Anchor, Header, P, Section, Paragraph, Time } from './styles';
 import Link from 'next/link';
 
 interface IProps {
+  id: string
   user: IUser
   created_at: Date
   isComment: boolean
@@ -18,6 +19,7 @@ interface IProps {
 }
 
 export const HeaderSection = ({
+  id,
   user,
   created_at,
   isComment,
@@ -35,8 +37,10 @@ export const HeaderSection = ({
               {user.name}
             </A>
           </Link>
-          <P>@{user.username}</P>
-          <P>· <ReactTimeAgo date={new Date(created_at)} locale="en-US" timeStyle="twitter" /></P>
+          <P>@{user.username} ·</P>
+          <Anchor href={`/${user.username}/status/${id}`}>
+            <Time> <ReactTimeAgo date={new Date(created_at)} locale="en-US" timeStyle="twitter" /></Time>
+          </Anchor>
         </Paragraph>
         {
           !isComment

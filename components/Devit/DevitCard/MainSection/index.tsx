@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { IComment, IFav, IUser } from 'interfaces';
-import { AppContext } from 'context/AppContext';
+import { IUser } from 'interfaces';
 
 import { HeaderSection } from './HeaderSection';
 import { BodySection } from './BodySection';
@@ -30,7 +29,6 @@ export const MainSection = ({
   img,
 }: IProps) => {
 
-  // const {userState} = useContext(AppContext);
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
   const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
@@ -41,6 +39,7 @@ export const MainSection = ({
     <>
       <>
         <HeaderSection
+          id={id}
           user={user}
           created_at={created_at}
           isComment={false}
@@ -71,22 +70,6 @@ export const MainSection = ({
               img={img}
               handleOpenModal={setCommentFormOpen}
             />
-          </Modal>
-        }
-        {
-          isRevitMenuOpen
-          &&
-          <Modal 
-            handleOpenModal={setRevitMenuOpen}
-            isOpen={isRevitMenuOpen}
-            isVisible={false}
-          >
-            {/* <RevitMenu
-              id={id}
-              user={user}
-              handleOpenModal={setRevitMenuOpen}
-              handleQuoteDevitFormOpen={setQuoteDevitFormOpen}
-            /> */}
           </Modal>
         }
         {

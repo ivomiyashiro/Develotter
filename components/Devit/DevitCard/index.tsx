@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { IDevit, IUser } from 'interfaces';
 import { getUser } from 'services/user';
@@ -38,6 +39,8 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
     first_edit: false
   });
 
+  const router = useRouter();
+
   useEffect(() => {
     getUser(uid)
       .then(resp => {
@@ -47,8 +50,12 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
       .catch(error => console.log(error));
   }, [uid]);
 
+  const handleDevitRoute = () => {
+    router.push(`/${user.username}/status/${id}`);
+  };
+
   return (
-    <Div userComments={userComments}>
+    <Div userComments={userComments} onClick={handleDevitRoute}>
       <ProfileImageContainer>
         <ProfileImage
           profileImage={user && user.profile_picture}

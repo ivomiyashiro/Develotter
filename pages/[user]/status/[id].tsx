@@ -1,10 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
 import { AppContext } from 'context/AppContext';
 import { getComment, getDevit } from 'services/devit';
-import { IDevit, IUser } from 'interfaces';
+import { getUserByUsername } from 'services/user';
+import { IComment, IDevit, IUser } from 'interfaces';
 
 import { PrivateRoute } from 'components/PrivateRoute';
 import { DevelotterLayout } from 'components/DevelotterLayout';
@@ -12,24 +13,18 @@ import { AsideLeftMenu } from 'components/AsideMenuLeft';
 import { AsideRightMenu } from 'components/AsideMenuRight';
 import { Modal } from 'components/Modal';
 import { CreateDevitForm } from 'components/Forms/CreateDevitForm';
-import { getUserByUsername } from 'services/user';
+import { DevitLine } from 'components/DevitLine';
 
 interface IProps {
   user: IUser
-  devits: IDevit[]
+  devit: IDevit
+  comments: IComment[]
 }
 
-const DevitPage = ({ user, devits }: IProps) => {
+const DevitPage = ({ user, devit, comments }: IProps) => {
 
-  const { uiState, userInteractionsDispatch } = useContext(AppContext);
-
-  useEffect(() => {
-    userInteractionsDispatch({
-      type: 'LOAD USER DEVITS',
-      payload: devits
-    });
-  },[devits, userInteractionsDispatch]);
-
+  const { uiState } = useContext(AppContext);
+  
   return (
     <>
       <Head>
@@ -39,7 +34,7 @@ const DevitPage = ({ user, devits }: IProps) => {
       <PrivateRoute>
         <DevelotterLayout>
           <AsideLeftMenu />
-          <DevitInfo user={user} />
+          <DevitLine user={user} devit={devit} comments={comments} />
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>
@@ -52,7 +47,7 @@ const DevitPage = ({ user, devits }: IProps) => {
           >
             <CreateDevitForm />
           </Modal>
-      } 
+      }
     </>
   );
 };
