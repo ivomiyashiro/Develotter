@@ -7,7 +7,8 @@ import { DevitSection } from './DevitSection';
 
 import ArrowLeft from 'components/Icons/ArrowLeft';
 import { theme } from 'styles/theme';
-import { Header, H1, DevitLineWrapper } from './styles';
+import { Div, Header, H1, DevitLineWrapper } from './styles';
+import { InteractionsCounters } from './InteractionsCounters';
 
 interface IProps {
   user: IUser,
@@ -15,13 +16,13 @@ interface IProps {
   comments: IComment[]
 }
 
-export const DevitLine = ({user, devit, comments}: IProps) => {
+export const DevitTimeline = ({user, devit, comments}: IProps) => {
 
   const router = useRouter();
 
   return (
     <>
-      <DevitLineWrapper>
+      <Div>
         <Header>
           <HoverableButton
             icon={ArrowLeft}
@@ -32,8 +33,11 @@ export const DevitLine = ({user, devit, comments}: IProps) => {
           />
           <H1>Tweet</H1>
         </Header>
-        <DevitSection user={user} devit={devit} />
-      </DevitLineWrapper>
+        <DevitLineWrapper>
+          <DevitSection user={user} devit={devit} />
+          <InteractionsCounters devit={devit} />
+        </DevitLineWrapper>
+      </Div>
     </>
   );
 };

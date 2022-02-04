@@ -28,7 +28,7 @@ export const FooterSection = ({
 }: IProps) => {
 
   useDevitInfo(id);
-  const {userState, devitDispatch, userInteractionsDispatch} = useContext(AppContext);
+  const {userState, devitDispatch} = useContext(AppContext);
   const [isDevitFaved, setDevitFaved] = useState(false);
   const [isDevitCommented, setDevitCommented] = useState(false);
   const [isDevitRevitted, setDevitRevitted] = useState(false);

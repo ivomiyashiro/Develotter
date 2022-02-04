@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const DevitLineWrapper = styled.div`
-  border-left: 1px solid ${theme.gray};
-  border-right: 1px solid ${theme.gray};
+  
+  padding: 0 1em;
 `;
 
 export const Header = styled.header`
@@ -19,4 +19,9 @@ export const Header = styled.header`
 
 export const H1 = styled.h1`
   font-size: 1.35rem;
+`;
+
+export const Div = styled.div`
+  border-left: 1px solid ${theme.gray};
+  border-right: 1px solid ${theme.gray};
 `;

@@ -13,7 +13,7 @@ import { AsideLeftMenu } from 'components/AsideMenuLeft';
 import { AsideRightMenu } from 'components/AsideMenuRight';
 import { Modal } from 'components/Modal';
 import { CreateDevitForm } from 'components/Forms/CreateDevitForm';
-import { DevitLine } from 'components/DevitLine';
+import { DevitTimeline } from 'components/DevitLine';
 
 interface IProps {
   user: IUser
@@ -34,7 +34,7 @@ const DevitPage = ({ user, devit, comments }: IProps) => {
       <PrivateRoute>
         <DevelotterLayout>
           <AsideLeftMenu />
-          <DevitLine user={user} devit={devit} comments={comments} />
+          <DevitTimeline user={user} devit={devit} comments={comments} />
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>

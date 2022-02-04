@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const Div = styled.div`
-  padding: 0 1em;
   padding-top: 0.5em;
 `;
 
@@ -28,6 +27,7 @@ export const Section = styled.section`
 
 export const A = styled.a`
   font-size: 1rem;
+  font-weight: bold;
   color: ${theme.white};
 `;
 
