@@ -9,6 +9,7 @@ import ArrowLeft from 'components/Icons/ArrowLeft';
 import { theme } from 'styles/theme';
 import { Div, Header, H1, DevitLineWrapper } from './styles';
 import { InteractionsCounters } from './InteractionsCounters';
+import { CommentInput } from './CommentInput';
 
 interface IProps {
   user: IUser,
@@ -36,6 +37,7 @@ export const DevitTimeline = ({user, devit, comments}: IProps) => {
         <DevitLineWrapper>
           <DevitSection user={user} devit={devit} />
           <InteractionsCounters user={user} devit={devit} />
+          <CommentInput user={user} />
         </DevitLineWrapper>
       </Div>
     </>

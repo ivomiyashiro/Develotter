@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
 export const DevitLineWrapper = styled.div`
-  
+  border-bottom: 1px solid ${theme.gray};
   padding: 0 1em;
 `;
 
