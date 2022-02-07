@@ -9,6 +9,7 @@ import EditIcon from 'components/Icons/Edit';
 import RedevitIcon from 'components/Icons/Redevit';
 import { theme } from 'styles/theme';
 import { Div, Li, Span, Ul } from './styles';
+import TimesIcon from 'components/Icons/Times';
 
 interface IProps {
   id: string,
@@ -73,6 +74,10 @@ export const RevitMenuDesktop = ({
           <Li onClick={() => {handleQuoteDevitFormOpen(true); handleOpenModal(false);}}>
             <EditIcon width="18px" height="18px" color={theme.darker_white} />
             <Span>Quote Devit</Span>
+          </Li>
+          <Li onClick={() => {handleOpenModal(false);}}>
+            <TimesIcon width="18px" height="18px" color={theme.darker_white} />
+            <Span>Cancel</Span>
           </Li>
         </Ul>
       </Div>

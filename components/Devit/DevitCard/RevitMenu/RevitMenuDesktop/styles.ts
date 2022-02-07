@@ -34,6 +34,7 @@ export const Li = styled.li`
   display: flex;
   gap: 1em;
   padding: 1em 0.75em;
+  cursor: pointer;
 
   :hover {
     background-color: ${theme.white + '1A'};

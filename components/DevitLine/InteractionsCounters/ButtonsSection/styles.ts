@@ -1,6 +1,10 @@
 import { theme } from 'styles/theme';
 import styled from 'styled-components';
 
+interface IProps {
+  isOpen: boolean
+}
+
 export const Div = styled.div`
   padding: 0.5em 0;
   border-bottom: 1px solid ${theme.gray};
@@ -17,5 +21,14 @@ export const Ul = styled.ul`
 `;
 
 export const Li = styled.li`
+  position: relative;
   color: ${theme.darker_white};
+`;
+
+export const ModalWrapper = styled.div<IProps>`
+  display: ${props => props.isOpen ? 'block' : 'none'};
+  position: absolute;
+  top: -87px;
+  left: -170px;
+  width: 500px;
 `;

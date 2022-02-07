@@ -79,6 +79,7 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
         </ProfileImgSection>
         <Div>
           <HeaderSection
+            id={id}
             user={userState}
             created_at={created_at}
             isComment={true}

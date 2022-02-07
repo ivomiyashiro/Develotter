@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { IDevit, IDevitFavs, IRevit } from 'interfaces';
+import { IDevit, IDevitFavs, IRevit, IUser } from 'interfaces';
 import { getDevitFavs, getQuoteRevit, getRevits } from 'services/devit';
 
 import { ButtonsSection } from './ButtonsSection';
@@ -10,9 +10,10 @@ import { AppContext } from 'context/AppContext';
 
 interface IProps {
   devit: IDevit
+  user: IUser
 }
 
-export const InteractionsCounters = ({ devit }: IProps) => {
+export const InteractionsCounters = ({ devit, user }: IProps) => {
 
   const { id } = devit;
   const {userState} = useContext(AppContext);
@@ -96,6 +97,8 @@ export const InteractionsCounters = ({ devit }: IProps) => {
       }
       <ButtonsSection
         id={id}
+        user={user}
+        devit={devit}
         isDevitFaved={isDevitFaved}
         handleDevitFav={setDevitFaved}
         handleFavsCounter={setFavsCounter}
