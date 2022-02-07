@@ -1,4 +1,4 @@
-import { ChangeEvent, TextareaHTMLAttributes, useContext, useRef, useState } from 'react';
+import { ChangeEvent, DragEvent, TextareaHTMLAttributes, useContext, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { AppContext } from 'context/AppContext';
@@ -8,8 +8,9 @@ import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 
 import PictureIcon from 'components/Icons/Picture';
 import { theme } from 'styles/theme';
-import { Div, Section, P, Span, ImageWrapper, Textarea, ButtonWrapper, Header, Footer, MainButtonWrapper, Input } from './styles';
+import { Div, Section, P, Span, ImageWrapper, Textarea, ButtonWrapper, Header, Footer, MainButtonWrapper, Input, Wrapper } from './styles';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
+import { ImageSection } from 'components/Forms/CreateDevitForm/ImageSection';
 
 interface IProps {
   user: IUser
@@ -25,6 +26,11 @@ export const CommentInput = ({ user }: IProps) => {
   const [textAreaFocus, setTextAreaFocus] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
   const [isValidForm, setValidForm] = useState(false);
+  const [imageUrl, setImageUrl] = useState<any>({
+    file: '',
+    fileUrl: ''
+  });
+  const [dragState, setDragState] = useState(false);
 
   const handleTextarea = () => {
     if (textareaRef.current !== null) {
@@ -41,6 +47,39 @@ export const CommentInput = ({ user }: IProps) => {
 
   const handleTextareaValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextAreaValue(e.target.value);
+  };
+
+  const handleDrop = (e: DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setImageUrl({
+        file: e.dataTransfer.files[0],
+        fileUrl: URL.createObjectURL(e.dataTransfer.files[0])
+      });
+    }
+    setValidForm(true);
+    setTextAreaFocus(true);
+    setDragState(false);
+  };
+
+  const handleDragEnter = (e: DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setDragState(true);
+  };
+
+  const handleDragLeave = (e: DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setDragState(false);
+  };
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageUrl({
+        file: e.target.files[0],
+        fileUrl: URL.createObjectURL(e.target.files[0])
+      });
+      setValidForm(true);
+    }
   };
 
   return (
@@ -71,6 +110,14 @@ export const CommentInput = ({ user }: IProps) => {
             onKeyUp={handleTextarea}
             onFocus={() => setTextAreaFocus(true)}
             onChange={handleTextareaValue}
+            onDrop={handleDrop}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            style={ 
+              dragState 
+                ? { border: `2px dashed ${theme.hack}`}
+                : { border: '2px solid transparent'}
+            }
           ></Textarea>
           {
             !textAreaFocus
@@ -87,6 +134,18 @@ export const CommentInput = ({ user }: IProps) => {
           }
         </Section>
         {
+          !!imageUrl.fileUrl
+              &&
+              <Wrapper>
+                <ImageSection
+                  src={imageUrl.fileUrl}
+                  alt={'develotter'}
+                  handleImageUrl={setImageUrl}
+                  handleValidForm={setValidForm}
+                />
+              </Wrapper>
+        }
+        {
           textAreaFocus
           &&
           <Footer>
@@ -97,7 +156,7 @@ export const CommentInput = ({ user }: IProps) => {
               color={theme.hack}
               onClick={() => inputRef.current.click()}
             />
-            <Input type="file" ref={inputRef} />
+            <Input type="file" ref={inputRef} onChange={handleImageChange}/>
             <MainButtonWrapper>
               <ButtonPrimary
                 color={theme.hack}

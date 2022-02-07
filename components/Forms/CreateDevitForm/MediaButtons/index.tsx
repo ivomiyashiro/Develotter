@@ -3,7 +3,6 @@ import { ChangeEvent, useRef } from 'react';
 import { Spinner } from 'components/Spinner';
 import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 
-import GifIcon from 'components/Icons/Gif';
 import PictureIcon from 'components/Icons/Picture';
 import { theme } from 'styles/theme';
 import { Button, ButtonWrapper, Div, Input, Section } from './styles';

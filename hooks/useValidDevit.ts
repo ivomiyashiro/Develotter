@@ -7,13 +7,23 @@ export const useValidDevit = (value: string, img: any) => {
   useEffect(() => {
     const valueLength = value.length;
     const fileUrl = img.fileUrl;
-    if (valueLength === 0 && fileUrl !== '') {
+
+    if (fileUrl === '') {
+      console.log('hola');
+      return setDevitValid(false);
+    }
+
+    if (valueLength === 0) {
+      console.log('holaa');
       return setDevitValid(false);
     }
 
     if (valueLength > 0 && valueLength < 280) {
       return setDevitValid(true);
     }
+
+    return setDevitValid(true);
+
   },[value.length, img.fileUrl]);
 
   return {

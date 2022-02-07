@@ -79,3 +79,7 @@ export const MainButtonWrapper = styled.div`
 export const Input = styled.input`
   display: none;
 `;
+
+export const Wrapper = styled.div`
+  padding-left: 3.65em;
+`;
