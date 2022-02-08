@@ -2,7 +2,7 @@ import { ChangeEvent, DragEvent, FormEvent, useContext, useRef, useState } from 
 import Image from 'next/image';
 
 import { AppContext } from 'context/AppContext';
-import { IUser } from 'interfaces';
+import { IComment, IUser } from 'interfaces';
 
 import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
@@ -17,9 +17,10 @@ import { Spinner } from 'components/Spinner';
 interface IProps {
   user: IUser
   devit_id: string
+  handleCommentsState: (value: IComment[] | ((prev: IComment[]) => IComment[])) => void
 }
 
-export const CommentInput = ({ user, devit_id }: IProps) => {
+export const CommentInput = ({ user, devit_id, handleCommentsState }: IProps) => {
 
   const { userState, devitDispatch } = useContext(AppContext);
 
@@ -95,7 +96,11 @@ export const CommentInput = ({ user, devit_id }: IProps) => {
       img: imageUrl.file
     };
     setLoading(true);
-    await createComment(data, devitDispatch);
+    const comment = await createComment(data, devitDispatch);
+    handleCommentsState(prev => [
+      ...prev,
+      comment
+    ]);
     setLoading(false);
     setTextAreaValue('');
     setValidForm(false);

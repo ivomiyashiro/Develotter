@@ -155,6 +155,8 @@ export const createComment = async (
         comment: response.comment
       }
     });
+
+    return response.comment;
   } catch (error) {
     console.log(error);
   }

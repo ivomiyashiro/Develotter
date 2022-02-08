@@ -9,7 +9,9 @@ import { InteractionsCounters } from './InteractionsCounters';
 
 import ArrowLeft from 'components/Icons/ArrowLeft';
 import { theme } from 'styles/theme';
-import { Div, Header, H1, DevitLineWrapper } from './styles';
+import { Div, Header, H1, DevitLineWrapper, CommentsWrapper } from './styles';
+import { CommentCard } from 'components/Devit/CommentCard';
+import { useEffect, useState } from 'react';
 
 interface IProps {
   user: IUser,
@@ -17,9 +19,15 @@ interface IProps {
   comments: IComment[]
 }
 
-export const DevitTimeline = ({user, devit}: IProps) => {
+export const DevitTimeline = ({ user, devit, comments }: IProps) => {
 
   const router = useRouter();
+
+  const [commentsState, setCommentsState] = useState<IComment[]>([]);
+
+  useEffect(() => {
+    setCommentsState(comments);
+  },[comments]);
 
   return (
     <>
@@ -37,8 +45,23 @@ export const DevitTimeline = ({user, devit}: IProps) => {
         <DevitLineWrapper>
           <DevitSection user={user} devit={devit} />
           <InteractionsCounters user={user} devit={devit} />
-          <CommentInput user={user} devit_id={devit.id}/>
+          <CommentInput handleCommentsState={setCommentsState} user={user} devit_id={devit.id}/>
         </DevitLineWrapper>
+        <CommentsWrapper>
+          {
+            commentsState.slice(0).reverse().map((comment: IComment) => {
+              return (
+                <CommentCard 
+                  key={comment.id} 
+                  comment={comment} 
+                  devitId={devit.id} 
+                  isLastComment={false} 
+                  fromDevitTimeline={true}
+                />
+              );
+            })
+          }
+        </CommentsWrapper>
       </Div>
     </>
   );

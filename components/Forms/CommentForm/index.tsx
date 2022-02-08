@@ -30,7 +30,6 @@ export const CommentForm = ({
   img,
   handleOpenModal
 }: IProps) => {
-  console.log(id);
   const { userState, devitDispatch } = useContext(AppContext);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');

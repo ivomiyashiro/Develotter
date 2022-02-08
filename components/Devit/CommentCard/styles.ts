@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
-export const Section = styled.section`
+interface IProps {
+  fromDevitTimeline: boolean
+}
+
+export const Section = styled.section<IProps>`
   background: ${theme.blue};
   cursor: pointer;
   display: flex;
   gap: .75em;
   transition: background .2s ease-in-out;
   width: 100%;
-  padding: 0.35em 0;
+  padding: ${props => !props.fromDevitTimeline && '0.35em 0'};
+  padding: ${props => props.fromDevitTimeline && '1em 0'};
+  border-bottom: ${props => props.fromDevitTimeline && `1px solid ${theme.gray}`};
 
   :last-child {
     border-bottom: 1px solid ${theme.gray};

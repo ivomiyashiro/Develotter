@@ -20,9 +20,10 @@ interface IProps {
   comment: IComment
   isLastComment: boolean
   devitId: string
+  fromDevitTimeline?: boolean
 }
 
-export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
+export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline = false }: IProps) => {
 
   const {
     id,
@@ -65,14 +66,14 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
 
   return (
     <>
-      <Section>
+      <Section fromDevitTimeline={fromDevitTimeline}>
         <ProfileImgSection>
           <ProfileImage
             profileImage={userState.profile_picture} 
             alt={userState.name}
           />
           {
-            !isLastComment
+            !isLastComment && !fromDevitTimeline
             &&
             <Line></Line>
           }
@@ -85,6 +86,8 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
             isComment={true}
           />
           <BodySection
+            id={id}
+            user={userState}
             content={content}
             img={img}
           />
