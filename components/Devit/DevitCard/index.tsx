@@ -38,9 +38,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
     created_at: new Date(),
     first_edit: false
   });
-
-  const router = useRouter();
-
+  
   useEffect(() => {
     getUser(uid)
       .then(resp => {
@@ -50,12 +48,8 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
       .catch(error => console.log(error));
   }, [uid]);
 
-  const handleDevitRoute = () => {
-    router.push(`/${user.username}/status/${id}`);
-  };
-
   return (
-    <Div userComments={userComments} onClick={handleDevitRoute}>
+    <Div userComments={userComments}>
       <ProfileImageContainer>
         <ProfileImage
           profileImage={user && user.profile_picture}

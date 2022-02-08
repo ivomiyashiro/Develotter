@@ -31,6 +31,9 @@ export const InteractionsCounters = ({ devit, user }: IProps) => {
         if (resp.favs.some((e: IDevitFavs) => e.uid === userState.id)) {
           setDevitFaved(true);
         }
+        if (resp.favs.length === undefined) {
+          return;
+        }
         setFavsCounter(resp.favs.length);
       })
       .catch(error => console.log(error));
@@ -45,7 +48,10 @@ export const InteractionsCounters = ({ devit, user }: IProps) => {
         } else {
           setDevitQuoteRevitted(false);
         }
-        setQuoteRevitsCounter(resp.comments.length);
+        if (resp.quote_revits.length === undefined) {
+          return;
+        }
+        setQuoteRevitsCounter(resp.quote_revits.length);
       })
       .catch(error => console.log(error));
   }, [id, userState.id]);
@@ -59,7 +65,12 @@ export const InteractionsCounters = ({ devit, user }: IProps) => {
         }else {
           setDevitRevitted(false);
         }
+
+        if (resp.revits.length === undefined) {
+          return;
+        }
         setRevitsCounter(resp.revits.length);
+
       })
       .catch(error => console.log(error));
   }, [id, userState.id]);
@@ -67,7 +78,7 @@ export const InteractionsCounters = ({ devit, user }: IProps) => {
   return (
     <>
       {
-        revitsCounter !== 0 || quoteRevitsCounter !== 0 || favsCounter !== 0
+        (revitsCounter !== 0 || quoteRevitsCounter !== 0 || favsCounter !== 0)
         &&
         <Div>
           <Ul>
@@ -103,7 +114,7 @@ export const InteractionsCounters = ({ devit, user }: IProps) => {
         handleDevitFav={setDevitFaved}
         handleFavsCounter={setFavsCounter}
         handleQuoteRevitCounter={setQuoteRevitsCounter}
-        handleRevtisCounter={setRevitsCounter}
+        handleRevitsCounter={setRevitsCounter}
       />
     </>
   );

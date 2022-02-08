@@ -8,8 +8,10 @@ import { FormHeader } from '../CreateDevitForm/HeaderSection';
 import { MainSection } from './MainSection';
 import { Div } from './styles';
 import { Form } from '../CommentForm/styles';
+import { IUser } from 'interfaces';
 
 interface IProp {
+  user: IUser
   id: string
   content: string
   created_at: Date
@@ -17,7 +19,8 @@ interface IProp {
   handleOpenModal: (value: boolean) => void
 }
 
-export const CreateQuoteDevitForm = ({ 
+export const CreateQuoteDevitForm = ({
+  user,
   id,
   content,
   created_at,
@@ -58,17 +61,18 @@ export const CreateQuoteDevitForm = ({
         />
         <Div>
           <MainSection
-            handleTextAreaValue={setTextAreaValue}
-            handleImageUrl={setImageUrl}
-            isSubmitButtonDisabled={isDevitValid}
-            textAreaValue={textAreaValue}
-            imageUrl={imageUrl.fileUrl}
-            textAreaPlaceholder="Add a comment"
-            isLoading={isLoading}
-            id={id}
+            user={user}
             content={content}
             created_at={created_at}
+            handleImageUrl={setImageUrl}
+            handleTextAreaValue={setTextAreaValue}
+            id={id}
+            imageUrl={imageUrl.fileUrl}
             img={img}
+            isLoading={isLoading}
+            isSubmitButtonDisabled={isDevitValid}
+            textAreaPlaceholder="Add a comment"
+            textAreaValue={textAreaValue}
           />
         </Div>
       </Form>

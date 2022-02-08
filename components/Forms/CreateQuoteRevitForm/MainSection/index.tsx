@@ -1,15 +1,19 @@
 import { useState, DragEvent, ChangeEvent, Dispatch, SetStateAction, useContext } from 'react';
 
 import { AppContext } from 'context/AppContext';
+import { IUser } from 'interfaces';
+
+import { RevitCard } from 'components/RevitCard';
 import { ProfileImage } from 'components/ProfileImage';
-import { theme } from 'styles/theme';
 import { ImageSection } from 'components/Forms/CreateDevitForm/ImageSection';
 import { MediaButtons } from 'components/Forms/CreateDevitForm/MediaButtons';
+
+import { theme } from 'styles/theme';
 import { Div, ProfileImgWrapper, Section, Textarea } from './styles';
-import { RevitCard } from 'components/RevitCard';
 
 
 interface IProps {
+  user: IUser
   handleTextAreaValue: Dispatch<SetStateAction<string>>
   handleImageUrl: any
   isSubmitButtonDisabled: boolean
@@ -24,6 +28,7 @@ interface IProps {
 }
 
 export const MainSection = ({
+  user,
   handleImageUrl,
   isSubmitButtonDisabled,
   textAreaValue,
@@ -39,6 +44,7 @@ export const MainSection = ({
 
   const { userState } = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
+  const [isValid, setValid] = useState(false);
 
   const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     handleTextAreaValue(e.target.value);
@@ -95,11 +101,13 @@ export const MainSection = ({
             <ImageSection
               src={imageUrl}
               alt={'develotter'}
+              handleValidForm={setValid}
               handleImageUrl={handleImageUrl}
             />
           }
 
           <RevitCard
+            user={user}
             id={id}
             content={content}
             created_at={created_at}

@@ -9,6 +9,7 @@ import { IUser } from 'interfaces';
 import { Div, H3, Header, HeaderContentSection, HeaderUserInfo, P, ProfileImgContainer } from './styles';
 
 interface IProps {
+  user: IUser
   id: string
   content: string
   created_at: Date
@@ -16,6 +17,7 @@ interface IProps {
 }
 
 export const RevitCard = ({
+  user: userProps,
   id,
   content,
   created_at,
@@ -27,7 +29,7 @@ export const RevitCard = ({
   useEffect(() => {
     let cancelAsyncTask = false;
     
-    getUser(id)
+    getUser(userProps.id)
       .then(resp => {
         if (cancelAsyncTask) return;
         if (!resp.ok) return;
@@ -38,7 +40,7 @@ export const RevitCard = ({
     return () => {
       cancelAsyncTask = true;
     };
-  }, [id, user]);
+  }, [id, user, userProps]);
 
   return (
     <>
@@ -54,7 +56,7 @@ export const RevitCard = ({
               />
             </ProfileImgContainer>
             <H3>{!!user ? user.name : ''}</H3>
-            <P>@username</P>
+            <P>@{userProps.username}</P>
             <P>· <ReactTimeAgo date={new Date(created_at)} locale="en-US" timeStyle="twitter"/></P>
           </HeaderUserInfo>
           <HeaderContentSection>

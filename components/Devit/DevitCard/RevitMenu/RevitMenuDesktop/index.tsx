@@ -15,12 +15,16 @@ interface IProps {
   id: string,
   handleOpenModal: (value: boolean) => void
   handleQuoteDevitFormOpen: (value: boolean) => void
+  handleQuoteRevitCounter?: any
+  handleRevitsCounter?: any
 }
 
 export const RevitMenuDesktop = ({
   id,
   handleOpenModal,
-  handleQuoteDevitFormOpen
+  handleQuoteDevitFormOpen,
+  handleQuoteRevitCounter,
+  handleRevitsCounter,
 }: IProps) => {
 
   const { devitDispatch, userInteractionsDispatch, userState } = useContext(AppContext);
@@ -59,11 +63,20 @@ export const RevitMenuDesktop = ({
     );
   };
 
+  const handleRevit = () => {
+    if (isRevitted) {
+      setRevitted(false);
+      return handleRevitsCounter((prev: number) => prev - 1);
+    }
+    setRevitted(true);
+    return handleRevitsCounter((prev: number) => prev + 1);
+  };
+
   return (
     <>
       <Div>
         <Ul>
-          <Li onClick={() => {handleOpenModal(false); handleRevitDevit();}}>
+          <Li onClick={() => {handleOpenModal(false); handleRevitDevit(); handleRevitsCounter && handleRevit();}}>
             <RedevitIcon
               width="18px"
               height="18px"

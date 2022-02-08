@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { IUser } from 'interfaces';
 
@@ -46,6 +47,8 @@ export const MainSection = ({
           handleHeaderActionsMenu={setHeaderActionsMenuOpen}
         />
         <BodySection
+          id={id}
+          user={user}
           content={content}
           img={img}
         />

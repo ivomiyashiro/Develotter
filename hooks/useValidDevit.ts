@@ -9,12 +9,10 @@ export const useValidDevit = (value: string, img: any) => {
     const fileUrl = img.fileUrl;
 
     if (fileUrl === '') {
-      console.log('hola');
       return setDevitValid(false);
     }
 
     if (valueLength === 0) {
-      console.log('holaa');
       return setDevitValid(false);
     }
 

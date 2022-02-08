@@ -1,24 +1,27 @@
-import { ChangeEvent, DragEvent, TextareaHTMLAttributes, useContext, useRef, useState } from 'react';
+import { ChangeEvent, DragEvent, FormEvent, useContext, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { AppContext } from 'context/AppContext';
 import { IUser } from 'interfaces';
 
 import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
-
-import PictureIcon from 'components/Icons/Picture';
-import { theme } from 'styles/theme';
-import { Div, Section, P, Span, ImageWrapper, Textarea, ButtonWrapper, Header, Footer, MainButtonWrapper, Input, Wrapper } from './styles';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
 import { ImageSection } from 'components/Forms/CreateDevitForm/ImageSection';
 
+import PictureIcon from 'components/Icons/Picture';
+import { theme } from 'styles/theme';
+import { Form, Section, P, Span, ImageWrapper, Textarea, ButtonWrapper, Header, Footer, MainButtonWrapper, Input, Wrapper } from './styles';
+import { createComment } from 'actions/devit';
+import { Spinner } from 'components/Spinner';
+
 interface IProps {
   user: IUser
+  devit_id: string
 }
 
-export const CommentInput = ({ user }: IProps) => {
+export const CommentInput = ({ user, devit_id }: IProps) => {
 
-  const { userState } = useContext(AppContext);
+  const { userState, devitDispatch } = useContext(AppContext);
 
   const textareaRef = useRef<any>(null);
   const inputRef = useRef<any>(null);
@@ -31,6 +34,7 @@ export const CommentInput = ({ user }: IProps) => {
     fileUrl: ''
   });
   const [dragState, setDragState] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const handleTextarea = () => {
     if (textareaRef.current !== null) {
@@ -82,9 +86,24 @@ export const CommentInput = ({ user }: IProps) => {
     }
   };
 
+  const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      id: devit_id,
+      uid: userState.id,
+      content: textAreaValue,
+      img: imageUrl.file
+    };
+    setLoading(true);
+    await createComment(data, devitDispatch);
+    setLoading(false);
+    setTextAreaValue('');
+    setValidForm(false);
+  };
+
   return (
     <>
-      <Div>
+      <Form onSubmit={handleSubmit}>
         {
           textAreaFocus
           &&
@@ -163,12 +182,16 @@ export const CommentInput = ({ user }: IProps) => {
                 textColor={theme.blue}
                 isDisabled={!isValidForm}
               >
-              Reply
+                {
+                  isLoading
+                    ? <Spinner size="20px" color={theme.blue} />
+                    : <p> Reply </p>
+                }
               </ButtonPrimary>
             </MainButtonWrapper>
           </Footer>
         }
-      </Div>
+      </Form>
     </>
   );
 };

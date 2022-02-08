@@ -10,7 +10,7 @@ export const Header = styled.header`
   width: 100%;
 `;
 
-export const Paragraph = styled.p`
+export const Paragraph = styled.span`
   display: flex;
   align-items: flex-end;
   gap: .5em;

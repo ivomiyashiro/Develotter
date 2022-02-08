@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 
-export const Div = styled.div`
+export const Form = styled.form`
   padding: 0.9em 0;
 `;
 

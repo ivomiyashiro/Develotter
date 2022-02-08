@@ -12,7 +12,6 @@ const user = async (req: NextApiRequest, res: NextApiResponse) => {
       const values = [reqId];
       const resp = await conn.query(query, values);
       const {id, username, name, bio, email, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
-
       return res.status(200).json({
         ok: true,
         user: {

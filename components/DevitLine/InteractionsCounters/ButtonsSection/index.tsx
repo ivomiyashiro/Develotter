@@ -26,7 +26,7 @@ export const ButtonsSection = ({
   handleDevitFav,
   handleFavsCounter,
   handleQuoteRevitCounter,
-  handleRevtisCounter,
+  handleRevitsCounter,
 }: any) => {
 
   const {userState, devitDispatch} = useContext(AppContext);
@@ -91,6 +91,8 @@ export const ButtonsSection = ({
                 id={id}
                 handleOpenModal={setRevitMenuOpen}
                 handleQuoteDevitFormOpen={setQuoteRevitFormOpen}
+                handleQuoteRevitCounter={handleQuoteRevitCounter}
+                handleRevitsCounter={handleRevitsCounter}
               />
             </ModalWrapper>
           </Li>
@@ -141,6 +143,7 @@ export const ButtonsSection = ({
       >
         <CreateQuoteDevitForm 
           id={id}
+          user={user}
           content={devit.content}
           created_at={devit.created_at}
           img={devit.img}
