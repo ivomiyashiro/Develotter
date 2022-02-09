@@ -7,5 +7,4 @@ export const Div = styled.div`
   margin-bottom: .75em;
   margin-top: .25em;
   width: 100%;
-  padding-right: 1em;
 `;
