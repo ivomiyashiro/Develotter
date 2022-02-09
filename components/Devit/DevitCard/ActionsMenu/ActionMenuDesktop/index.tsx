@@ -9,6 +9,7 @@ import UnFollowIcon from 'components/Icons/Unfollow';
 import TimesIcon from 'components/Icons/Times';
 import { theme } from 'styles/theme';
 import { Div, Ul, Li, Span } from './styles';
+import { unfollowDev } from 'actions/social';
 
 interface IProps {
   devitUser: IUser
@@ -22,7 +23,12 @@ export const ActionMenuDesktop = ({
   handleDeleteModalOpen
 }: IProps) => {
 
-  const {userState} = useContext(AppContext);
+  const { userState, socialDispatch } = useContext(AppContext);
+
+  const handleUnfollow = () => {
+    unfollowDev(devitUser.id, socialDispatch);
+    handleMenuOpen(false);
+  };
 
   return (
     <>
@@ -41,13 +47,13 @@ export const ActionMenuDesktop = ({
                 </Li>
               )
               : (
-                <Li>
+                <Li onClick={handleUnfollow}>
                   <UnFollowIcon 
                     width="22px"
                     height="22px"
                     color={theme.white}
                   />
-                  <Span>Unfollow {devitUser.username}</Span>
+                  <Span>Unfollow @{devitUser.username}</Span>
                 </Li>
               )
           }

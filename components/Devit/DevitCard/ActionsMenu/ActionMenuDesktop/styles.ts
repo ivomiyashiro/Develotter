@@ -41,7 +41,11 @@ export const Li = styled.li`
   }
 `;
 
-export const Span = styled.span`
+export const Span = styled.p`
   color: ${theme.white};
   font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
 `;
