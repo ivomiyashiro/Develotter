@@ -90,6 +90,7 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
             user={userState}
             content={content}
             img={img}
+            isComment={true}
           />
           <Footer>
             <Ul>

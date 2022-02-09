@@ -47,15 +47,32 @@ export const UserInfoSection = ({user, setEditProfileFormOpen}: IProps) => {
           <Bio>
             <Span>{!!user.bio && user.bio}</Span>
           </Bio>
+
           <InfoWrapper>
-            <Info>
-              <LocationIcon
-                color={theme.darker_white}
-                width="18px"
-                height="18px"
-              />
-              <P>{user.location}</P>
-            </Info>
+            {
+              user.location !== ''
+              &&
+              <Info>
+                <LocationIcon
+                  color={theme.darker_white}
+                  width="18px"
+                  height="18px"
+                />
+                <P>{user.location}</P>
+              </Info>
+            }
+            {
+              user.website !== ''
+              &&
+              <Info>
+                <SiteIcon
+                  color={theme.darker_white}
+                  width="18px"
+                  height="18px"
+                />
+                <Website href={user.website}>{user.website}</Website>
+              </Info>
+            }
             <Info>
               <CalendarIcon
                 color={theme.darker_white}
@@ -63,14 +80,6 @@ export const UserInfoSection = ({user, setEditProfileFormOpen}: IProps) => {
                 height="18px"
               />
               <P>Joined {createdAt}</P>
-            </Info>
-            <Info>
-              <SiteIcon
-                color={theme.darker_white}
-                width="18px"
-                height="18px"
-              />
-              <Website href={user.website}>{user.website}</Website>
             </Info>
           </InfoWrapper>
         </UserJoinedContainer>

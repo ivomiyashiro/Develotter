@@ -6,7 +6,7 @@ import { IComment, IUser } from 'interfaces';
 
 import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
-import { ImageSection } from 'components/Forms/CreateDevitForm/ImageSection';
+import { ImageSection } from './ImageSection';
 
 import PictureIcon from 'components/Icons/Picture';
 import { theme } from 'styles/theme';
@@ -103,6 +103,10 @@ export const CommentInput = ({ user, devit_id, handleCommentsState }: IProps) =>
     ]);
     setLoading(false);
     setTextAreaValue('');
+    setImageUrl({
+      file: '',
+      fileUrl: ''
+    });
     setValidForm(false);
   };
 

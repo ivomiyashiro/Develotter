@@ -29,6 +29,7 @@ export const Section = styled.section<IProps>`
 
 export const Div = styled.div`
   width: 100%;
+  padding-right: 1em;
 `;
 
 export const ProfileImgSection = styled.section`

@@ -5,6 +5,7 @@ export const Div = styled.div`
   height: 100%;
   width: 100%;
   margin-top: .5em;
+  padding-right: 1em;
 `;
 
 export const Img = styled.img`

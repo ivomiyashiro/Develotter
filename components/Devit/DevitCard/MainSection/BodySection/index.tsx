@@ -9,9 +9,10 @@ interface IProps {
   img: string
   user: IUser
   id: string
+  isComment?: boolean
 }
 
-export const BodySection = ({id, user, content, img}: IProps) => {
+export const BodySection = ({id, user, content, img, isComment = false}: IProps) => {
 
   const router = useRouter();
 
@@ -21,7 +22,7 @@ export const BodySection = ({id, user, content, img}: IProps) => {
 
   return (
     <>
-      <Div onClick={handleDevitRoute}>
+      <Div onClick={() => !isComment && handleDevitRoute}>
         {content}
         {
           !!img && <ImageSection imgUrl={img}/>
