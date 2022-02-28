@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ListIconItem } from './ListIconItem';
 
 import HomeIcon from '../Icons/Home';
+import HomeFill from '../Icons/HomeFill';
 import SearchIcon from '../Icons/Search';
 import NotificationIcon from '../Icons/Notifications';
 import MessagesIcon from '../Icons/Messages';
@@ -13,35 +14,35 @@ import { Nav, Ul } from './styles';
 export const Navbar = () => {
 
   const router = useRouter();
-  const currentRoute = router.pathname;
-
+  const path = router.pathname;
+  console.log(path);
   return (
     <>
       <Nav>
         <Ul>
           <ListIconItem 
-            icon={HomeIcon}
+            icon={path === '/home' ? HomeIcon : HomeFill}
             route="/home"
-            fill={currentRoute === '/home' ? theme.white : 'transparent'}
             strokeWidth="0"
+            disabled={false}
           />
           <ListIconItem
             icon={SearchIcon}
             route="/explore"
             fill={theme.white}
-            strokeWidth={currentRoute === '/explore' ? 1 : 0}
+            disabled={true}
           />
           <ListIconItem
             icon={NotificationIcon}
             route="/notifications"
             fill={theme.white}
-            strokeWidth={currentRoute === '/notifications' ? 1 : 0}
+            disabled={true}
           />
           <ListIconItem
             icon={MessagesIcon}
             route="/messages"
             fill={theme.white}
-            strokeWidth={currentRoute === '/messages' ? 1 : 0}
+            disabled={true}
           />
         </Ul>
       </Nav>
