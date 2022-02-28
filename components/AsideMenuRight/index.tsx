@@ -13,7 +13,6 @@ export const AsideRightMenu = () => {
         <Section>
           <Searchbar />
         </Section>
-        <Trendings />
         <ToFollow />
       </Aside>
     </>

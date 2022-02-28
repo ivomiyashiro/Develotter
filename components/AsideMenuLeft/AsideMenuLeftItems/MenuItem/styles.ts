@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { breakpoints } from 'styles/breakpoints';
 import { theme } from 'styles/theme';
 
+interface IProps {
+  disabled: boolean
+}
+
 export const Li = styled.li`
   display: flex;
   align-items: center;
@@ -30,10 +34,21 @@ export const A = styled.a`
   transition: .2s ease;
 `;
 
-export const H4 = styled.h4`
+export const Span = styled.span`
+  align-items: center;
+  color: ${theme.white};
+  cursor: pointer;
+  display: flex;
+  font-size: 1.4rem;
+  padding: 0 12px;
+  transition: .2s ease;
+`;
+
+export const H4 = styled.h4<IProps>`
   font-size: 1.15rem;
   margin-left: 20px;
   margin-right: 16px;
+  color: ${props => props.disabled ? theme.darker_white : theme.white};
 
   @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
     display: none;
