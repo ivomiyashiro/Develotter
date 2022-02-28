@@ -1,6 +1,4 @@
-import { IIcon } from './interface';
-
-const HomeIcon = (props: IIcon) => (
+const Home = (props: any) => (
   <svg
     strokeWidth={0}
     stroke="currentColor"
@@ -13,4 +11,4 @@ const HomeIcon = (props: IIcon) => (
   </svg>
 );
 
-export default HomeIcon;
+export default Home;
