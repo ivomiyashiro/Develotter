@@ -10,7 +10,6 @@ export const Div = styled.div``;
 export const ImageContainer = styled.section`
   border-radius: 50%;
   height: 40px;
-  margin-top: 0em;
   overflow: hidden;
   position: relative;
   width: 40px;
@@ -34,6 +33,7 @@ export const P = styled.p`
 export const FollowsContainer = styled.section`
   display: flex;
   gap: 1em;
+  margin-top: 0.25em;
 `;
 
 export const FollowsCounter = styled.div`
