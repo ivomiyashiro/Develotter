@@ -3,6 +3,7 @@ import { breakpoints } from 'styles/breakpoints';
 
 export const LandingWrapper = styled.div`
   display: grid;
+  justify-items: center;
   grid-template-columns: 1fr;
   height: 100vh;
 
