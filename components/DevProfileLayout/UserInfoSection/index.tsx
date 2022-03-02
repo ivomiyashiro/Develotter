@@ -50,7 +50,7 @@ export const UserInfoSection = ({user, setEditProfileFormOpen}: IProps) => {
 
           <InfoWrapper>
             {
-              user.location !== ''
+              (user.location !== null || '')
               &&
               <Info>
                 <LocationIcon
@@ -62,7 +62,7 @@ export const UserInfoSection = ({user, setEditProfileFormOpen}: IProps) => {
               </Info>
             }
             {
-              user.website !== ''
+              (user.website !== null || '')
               &&
               <Info>
                 <SiteIcon

@@ -25,4 +25,5 @@ export const ProfilePicture = styled.div`
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  background: ${theme.light_blue}
 `;

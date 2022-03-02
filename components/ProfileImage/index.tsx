@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Div, Section } from './styles';
 
 interface IProps {
-  profileImage: string,
+  profileImage: string | null,
   alt: string
 }
 

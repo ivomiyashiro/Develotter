@@ -18,7 +18,7 @@ import { DeleteDevitToast } from '../../DeleteDevitToast';
 interface IProps {
   id: string
   devitId?: string
-  user: IUser
+  user: any
   created_at: Date
   isComment: boolean
   handleHeaderActionsMenu?: (value: boolean) => void
@@ -41,13 +41,13 @@ export const HeaderSection = ({
     <>
       <Header>
         <Paragraph>
-          <Link href={`/${user.username}`} passHref>
+          <Link href={`/${user?.username}`} passHref>
             <A>
-              {user.name}
+              {user?.name}
             </A>
           </Link>
-          <P>@{user.username} ·</P>
-          <Anchor href={`/${user.username}/status/${id}`}>
+          <P>@{user?.username} ·</P>
+          <Anchor href={`/${user?.username}/status/${id}`}>
             <Time> <ReactTimeAgo date={new Date(created_at)} locale="en-US" timeStyle="twitter" /></Time>
           </Anchor>
         </Paragraph>

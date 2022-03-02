@@ -12,10 +12,10 @@ export const useUser = async (uid: string) => {
         if (!resp.ok) return;
         setUser(resp.user);
 
-        return { user };
+        return;
       })
       .catch(error => console.log(error));
-  }, [uid]);
+  }, [uid, user]);
   return {
     user
   };

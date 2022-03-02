@@ -8,6 +8,7 @@ export const ImageWrapper = styled.div`
   justify-content: center;
   position: relative;
   width: 100%;
+  background-color: ${theme.light_blue};
 `;
 
 export const Div = styled.div`
@@ -26,6 +27,7 @@ export const ProfilePictureWrapper = styled.div`
   bottom: -4.75em;
   margin: 0 1em;
   position: absolute;
+  background-color: ${theme.blue};
 `;
 
 export const ProfilePicture = styled.div`
@@ -38,6 +40,7 @@ export const ProfilePicture = styled.div`
   overflow: hidden;
   position: relative;
   width: 112px;
+  background-color: ${theme.blue};
 `;
 
 export const Input = styled.input`

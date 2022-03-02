@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { IComment } from 'interfaces';
+import { IComment, IUser } from 'interfaces';
 
 import { favComment, unFavComment } from 'actions/devit';
 import { getCommentFavs } from 'services/devit';
@@ -15,6 +15,10 @@ import FavIcon from 'components/Icons/Fav';
 import FavFill from 'components/Icons/FavFill';
 import { theme } from 'styles/theme';
 import { Section, Div, ProfileImgSection, Line, Ul, Li, Button, Span, Footer } from './styles';
+import { useDevInfo } from 'hooks/useDevInfo';
+import { useUser } from 'hooks/useUser';
+import { getUser } from 'services/user';
+import { userSignup } from 'services/auth';
 
 interface IProps {
   comment: IComment
@@ -27,12 +31,14 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
 
   const {
     id,
+    uid,
     content,
     img,
     created_at,
   } = comment;
 
   const {userState} = useContext(AppContext);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isDevitFaved, setDevitFaved]: any = useState(false);
   const [currentFavs, setCurrentFavs] = useState(0);
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
@@ -48,6 +54,15 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
       })
       .catch(error => console.log(error));
   }, [devitId, id]);
+
+  useEffect(() => {
+    getUser(uid)
+      .then(resp => {
+        if (!resp.ok) return;
+        setUser(resp.user);
+      })
+      .catch(error => console.log(error));
+  }, [uid]);
 
   const handleFavComment = async() => {
 
@@ -69,8 +84,8 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
       <Section fromDevitTimeline={fromDevitTimeline}>
         <ProfileImgSection>
           <ProfileImage
-            profileImage={userState.profile_picture} 
-            alt={userState.name}
+            profileImage={user && user.profile_picture} 
+            alt={userSignup.name}
           />
           {
             !isLastComment && !fromDevitTimeline
@@ -82,13 +97,13 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
           <HeaderSection
             devitId={devitId}
             id={id}
-            user={userState}
+            user={user}
             created_at={created_at}
             isComment={true}
           />
           <BodySection
             id={id}
-            user={userState}
+            user={user}
             content={content}
             img={img}
             isComment={true}

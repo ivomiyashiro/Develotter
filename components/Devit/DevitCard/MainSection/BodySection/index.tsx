@@ -7,7 +7,7 @@ import { Div } from './styles';
 interface IProps {
   content: string
   img: string
-  user: IUser
+  user: any
   id: string
   isComment?: boolean
 }
