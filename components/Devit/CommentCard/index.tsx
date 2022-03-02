@@ -37,7 +37,6 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
     created_at,
   } = comment;
 
-  const {userState} = useContext(AppContext);
   const [user, setUser] = useState<IUser | null>(null);
   const [isDevitFaved, setDevitFaved]: any = useState(false);
   const [currentFavs, setCurrentFavs] = useState(0);

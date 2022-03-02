@@ -54,3 +54,8 @@ export const updateUserProfile = async (data: any) => {
   const resp = await fetchWithoutToken(`user/${data.id}`, data, 'PUT');
   return await resp.json();
 };
+
+export const getRandomUsers = async() => {
+  const resp = await fetchWithoutToken('user');
+  return await resp.json();
+};

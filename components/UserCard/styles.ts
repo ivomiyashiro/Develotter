@@ -6,7 +6,7 @@ export const Div = styled.div`
   cursor: pointer;
   display: flex;
   height: 64px;
-  padding: 1em;
+  padding: 0.5em 1em;
 
   :hover {
     background-color: ${theme.white + '1A'};
@@ -28,12 +28,15 @@ export const UserContainer = styled.section`
 export const ButtonContainer = styled.section`
   height: 32px;
   margin-left: auto;
-  width: 77px;
 `;
 
 export const H3 = styled.h3`
   color: ${theme.white};
-    font-size: 0.9rem;
+  font-size: 0.9rem;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const P = styled.p`
@@ -43,4 +46,5 @@ export const P = styled.p`
 
 export const Span = styled.span`
   font-size: 0.85rem;
+  padding: 0 0.75em;
 `;

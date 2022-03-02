@@ -5,7 +5,6 @@ export const Div = styled.div`
   background-color: ${theme.light_blue};
   border-radius: 16px;
   margin-top: 1em;
-  height: 175px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
