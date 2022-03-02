@@ -8,7 +8,6 @@ export const MenuItem = ({
   href = '',
   disabled
 }: any) => {
-  console.log(href);
   return (
     <>
       {

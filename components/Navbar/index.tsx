@@ -15,7 +15,6 @@ export const Navbar = () => {
 
   const router = useRouter();
   const path = router.pathname;
-  console.log(path);
   return (
     <>
       <Nav>
