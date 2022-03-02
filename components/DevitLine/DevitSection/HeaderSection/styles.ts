@@ -3,6 +3,7 @@ import { theme } from 'styles/theme';
 
 export const Div = styled.div`
   padding-top: 0.5em;
+  position: relative;
 `;
 
 export const Header = styled.header`
@@ -33,5 +34,11 @@ export const A = styled.a`
 
 export const P = styled.p`
   font-size: 0.9rem;
-  color: ${theme.darker_white}
+  color: ${theme.darker_white};
+`;
+
+export const ActionsMenuWrapper = styled.div`
+  position: absolute;
+  right: -10px;
+  top: 0;
 `;

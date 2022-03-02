@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 
-import { deleteDevit } from 'actions/devit';
+import { deleteComment, deleteDevit } from 'actions/devit';
 
 import { AppContext } from 'context/AppContext';
 
@@ -10,12 +10,16 @@ import { theme } from 'styles/theme';
 import { Div, Wrapper, Section, H2, P, ButtonsContainer, ButtonWrapper } from './styles';
 
 interface IProps {
-  id: string
+  devitId?: string
+  commentId?: string
+  isComment?: boolean
   handleDeleteModalOpen: (value: boolean) => void
 }
 
 export const DeleteDevitToast = ({
-  id,
+  commentId,
+  devitId,
+  isComment = false,
   handleDeleteModalOpen,
 }: IProps) => {
 
@@ -24,8 +28,16 @@ export const DeleteDevitToast = ({
 
   const handleDeleteDevit = async () => {
     setLoading(true);
-    await deleteDevit(id, devitDispatch, userInteractionsDispatch);
+    devitId && await deleteDevit(devitId, devitDispatch, userInteractionsDispatch);
     setLoading(false);
+    handleDeleteModalOpen(false);
+  };
+
+  const handleDeleteComment = async () => {
+    setLoading(true);
+    (commentId && devitId) && await deleteComment(devitId, commentId, devitDispatch);
+    setLoading(false);
+    handleDeleteModalOpen(false);
   };
 
   return (
@@ -39,7 +51,7 @@ export const DeleteDevitToast = ({
           <ButtonsContainer>
             <ButtonWrapper>
               <ButtonPrimary
-                onClick={handleDeleteDevit}
+                onClick={!isComment ? handleDeleteDevit : handleDeleteComment}
                 type="button"
                 textColor={theme.white}
                 color={theme.red}

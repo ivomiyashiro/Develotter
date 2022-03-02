@@ -1,3 +1,5 @@
+
+
 import { formatAMPM } from 'helpers/formatAMPM';
 import { IDevit, IUser } from 'interfaces';
 
@@ -20,7 +22,7 @@ export const DevitSection = ({user, devit}: IProps) => {
   return (
     <>
       <Wrapper>
-        <HeaderSection user={user} />
+        <HeaderSection user={user} devitId={devit.id} />
         <Section>
           <P>{devit.content}</P>
         </Section>

@@ -12,7 +12,7 @@ import { createDevit } from 'actions/devit';
 
 export const CreateDevitTimeline = () => {
 
-  const {userState, devitDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, userInteractionsDispatch} = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -31,7 +31,7 @@ export const CreateDevitTimeline = () => {
     };
 
     setLoading(true);
-    await createDevit(data, devitDispatch);
+    await createDevit(data, devitDispatch, userInteractionsDispatch);
     setLoading(false);
 
     setTextAreaValue('');

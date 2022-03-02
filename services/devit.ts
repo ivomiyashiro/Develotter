@@ -58,6 +58,11 @@ export const postComment = async (data: ICreateComment) => {
   return await resp.json();
 };
 
+export const delComment = async (devitId: string, commentId: string) => {
+  const resp = await fetchWithToken(`devit/${devitId}/comment/${commentId}`,{}, 'DELETE');
+  return await resp.json();
+};
+
 export const getComment = async (id: string) => {
   const resp = await fetchWithoutToken(`devit/${id}/comment`);
   return await resp.json();

@@ -8,18 +8,19 @@ export const Header = styled.header`
   height: 20px;
   justify-content: space-between;
   width: 100%;
+  position: relative;
 `;
 
 export const Paragraph = styled.span`
   display: flex;
   align-items: flex-end;
   gap: .5em;
-  max-width: 375px;
+  max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+  @media (min-width: ${breakpoints.tablet}) {
     max-width: 450px;
   }
 `;
@@ -63,4 +64,10 @@ export const Time = styled.time`
   color: ${theme.gray};
   font-size: .85rem;
   margin: 0;
+`;
+
+export const ActionsMenuWrapper = styled.div`
+  position: absolute;
+  right: -10px;
+  top: -14px;
 `;

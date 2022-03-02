@@ -7,11 +7,17 @@ import { IUser } from 'interfaces';
 import DotsIcon from 'components/Icons/Dots';
 import { theme } from 'styles/theme';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
-import { A, Anchor, Header, P, Section, Paragraph, Time } from './styles';
+import { A, Anchor, Header, P, Section, Paragraph, Time, ActionsMenuWrapper } from './styles';
 import Link from 'next/link';
+import { Modal } from 'components/Modal';
+import { ActionMenuMobile } from '../../ActionsMenu/ActionMenuMobile';
+import { ActionMenuDesktop } from '../../ActionsMenu/ActionMenuDesktop';
+import { useState } from 'react';
+import { DeleteDevitToast } from '../../DeleteDevitToast';
 
 interface IProps {
   id: string
+  devitId?: string
   user: IUser
   created_at: Date
   isComment: boolean
@@ -19,6 +25,7 @@ interface IProps {
 }
 
 export const HeaderSection = ({
+  devitId,
   id,
   user,
   created_at,
@@ -27,6 +34,8 @@ export const HeaderSection = ({
 }: IProps ) => {
 
   TimeAgo.addLocale(en);
+  const [isHeaderActionsMenuOpen, setHeaderActionsMenuOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   return (
     <>
@@ -42,21 +51,75 @@ export const HeaderSection = ({
             <Time> <ReactTimeAgo date={new Date(created_at)} locale="en-US" timeStyle="twitter" /></Time>
           </Anchor>
         </Paragraph>
+        <Section>
+          {
+            !isComment
+              ? (
+                <HoverableButton
+                  icon={DotsIcon}
+                  height="20px"
+                  width="20px"
+                  color={theme.hack}
+                  hoverColor={theme.darker_white}
+                  onClick={handleHeaderActionsMenu && (() => handleHeaderActionsMenu(true))}
+                />
+              )
+              : (
+                <HoverableButton
+                  icon={DotsIcon}
+                  height="20px"
+                  width="20px"
+                  color={theme.hack}
+                  hoverColor={theme.darker_white}
+                  onClick={() => setHeaderActionsMenuOpen(true)}
+                />
+              )
+          }
+
+        </Section>
+
         {
-          !isComment
+          isHeaderActionsMenuOpen
           &&
-          <Section>
-            <HoverableButton
-              icon={DotsIcon}
-              height="20px"
-              width="20px"
-              color={theme.hack}
-              hoverColor={theme.darker_white}
-              onClick={handleHeaderActionsMenu && (() => handleHeaderActionsMenu(true))}
+          <Modal
+            handleOpenModal={setHeaderActionsMenuOpen}
+            isOpen={isHeaderActionsMenuOpen}
+            isVisible={false}
+          >
+            <ActionMenuMobile
+              devitUser={user}
+              handleOpenModal={setHeaderActionsMenuOpen}
+              handleDeleteModalOpen={setDeleteModalOpen}
             />
-          </Section>
+          </Modal>
+        }
+        {
+          isHeaderActionsMenuOpen
+          &&
+          <ActionsMenuWrapper>
+            <ActionMenuDesktop
+              devitUser={user}
+              handleMenuOpen={setHeaderActionsMenuOpen}
+              handleDeleteModalOpen={setDeleteModalOpen}
+            />
+          </ActionsMenuWrapper>
         }
       </Header>
+      {
+        isDeleteModalOpen
+        &&
+        <Modal
+          handleOpenModal={setDeleteModalOpen}
+          isOpen={isDeleteModalOpen}
+        >
+          <DeleteDevitToast
+            commentId={id}
+            devitId={devitId}
+            handleDeleteModalOpen={setDeleteModalOpen}
+            isComment={true}
+          />
+        </Modal>
+      }
     </>
   );
 };

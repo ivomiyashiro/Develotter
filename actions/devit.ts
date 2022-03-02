@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { delDevit, delQuoteRevit, delRevit, getComment, getDevitFavs, getQuoteRevit, getRevits, postComment, postCommentFav, postDevit, postDevitFav, postQuoteRevit, postRevit } from 'services/devit';
+import { delComment, delDevit, delQuoteRevit, delRevit, getComment, getDevitFavs, getQuoteRevit, getRevits, postComment, postCommentFav, postDevit, postDevitFav, postQuoteRevit, postRevit } from 'services/devit';
 import { fileUpload } from 'helpers/fileUpload';
 
 interface ICreateDevit {
@@ -157,6 +157,28 @@ export const createComment = async (
     });
 
     return response.comment;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteComment = async (
+  devitId: string,
+  commentId: string,
+  dispatch: Dispatch<any>,
+) => {
+  try {
+    console.log(devitId, commentId);
+    const response: any = await delComment(devitId, commentId);
+    if (!response.ok) return;
+
+    dispatch({
+      type: 'DELETE COMMENT',
+      payload: {
+        devit_id: devitId,
+        commentId
+      }
+    });
   } catch (error) {
     console.log(error);
   }

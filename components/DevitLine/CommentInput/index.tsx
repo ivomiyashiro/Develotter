@@ -17,10 +17,9 @@ import { Spinner } from 'components/Spinner';
 interface IProps {
   user: IUser
   devit_id: string
-  handleCommentsState: (value: IComment[] | ((prev: IComment[]) => IComment[])) => void
 }
 
-export const CommentInput = ({ user, devit_id, handleCommentsState }: IProps) => {
+export const CommentInput = ({ user, devit_id }: IProps) => {
 
   const { userState, devitDispatch } = useContext(AppContext);
 
@@ -96,11 +95,7 @@ export const CommentInput = ({ user, devit_id, handleCommentsState }: IProps) =>
       img: imageUrl.file
     };
     setLoading(true);
-    const comment = await createComment(data, devitDispatch);
-    handleCommentsState(prev => [
-      ...prev,
-      comment
-    ]);
+    await createComment(data, devitDispatch);
     setLoading(false);
     setTextAreaValue('');
     setImageUrl({

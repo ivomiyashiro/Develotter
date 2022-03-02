@@ -23,16 +23,17 @@ export const Div = styled.div`
 `;
 
 export const Ul = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
   display: flex;
   flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 `;
 
 export const Li = styled.li`
-  display: flex;
   align-items: center;
+  cursor: pointer;
+  display: flex;
   gap: 1em;
   padding: 1em 0.75em;
 
@@ -44,8 +45,8 @@ export const Li = styled.li`
 export const Span = styled.p`
   color: ${theme.white};
   font-size: 0.95rem;
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
 `;

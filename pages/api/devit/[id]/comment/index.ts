@@ -14,7 +14,6 @@ const comment = async (req: NextApiRequest, res: NextApiResponse) => {
       const query = 'SELECT * FROM comment WHERE devit_id = $1';
       const values = [id];
       const resp = await conn.query(query, values);
-      (resp);
 
       return res.status(200).json({
         ok: true,

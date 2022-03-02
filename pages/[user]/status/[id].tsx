@@ -21,7 +21,7 @@ interface IProps {
   comments: IComment[]
 }
 
-const DevitPage = ({ user, devit, comments }: IProps) => {
+const DevitPage = ({ user, devit }: IProps) => {
 
   const { uiState } = useContext(AppContext);
   
@@ -34,7 +34,7 @@ const DevitPage = ({ user, devit, comments }: IProps) => {
       <PrivateRoute>
         <DevelotterLayout>
           <AsideLeftMenu />
-          <DevitTimeline user={user} devit={devit} comments={comments} />
+          <DevitTimeline user={user} devit={devit} />
           <AsideRightMenu />
         </DevelotterLayout>
       </PrivateRoute>

@@ -88,6 +88,21 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
       };
       return devit;
     });
+  
+  case 'DELETE COMMENT':
+    return state.map(devit => {
+      if (devit.id === action.payload.devit_id) {
+        return {
+          ...devit,
+          comments: devit.comments.filter(comment => {
+            if (comment.id !== action.payload.commentId) {
+              return comment;
+            }
+          })
+        };
+      }
+      return devit;
+    });
 
   case 'LOAD REVITS':
     return state.map(devit => {

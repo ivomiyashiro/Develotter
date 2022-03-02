@@ -9,6 +9,7 @@ export type ActionType =
   | {type: 'FAV DEVIT', payload: {devit_id: string, fav: IFav}}
   | {type: 'LOAD COMMENTS', payload: {devit_id: string, comments: IComment[]}}
   | {type: 'CREATE COMMENT', payload: {devit_id: string, comment: IComment}}
+  | {type: 'DELETE COMMENT', payload: {devit_id: string, commentId: string}}
   | {type: 'LOAD REVITS', payload: {id: string, revits: IRevit[]}}
   | {type: 'CREATE REVIT', payload: {id: string, revit: IRevit}}
   | {type: 'DELETE REVIT', payload: {id: string, revit_id: string}}

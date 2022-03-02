@@ -80,6 +80,7 @@ export const CommentCard = ({ comment, isLastComment, devitId, fromDevitTimeline
         </ProfileImgSection>
         <Div>
           <HeaderSection
+            devitId={devitId}
             id={id}
             user={userState}
             created_at={created_at}

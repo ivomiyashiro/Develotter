@@ -37,7 +37,7 @@ export const Span = styled.span`
 export const Textarea = styled.textarea`
   background-color: transparent;
   border: none;
-  color: ${theme.darker_white};
+  color: ${theme.white};
   font-size: 1.15rem;
   height: 25px;
   overflow: hidden;
