@@ -14,7 +14,7 @@ export const Paragraph = styled.span`
   display: flex;
   align-items: flex-end;
   gap: .5em;
-  max-width: 225px;
+  max-width: 375px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
