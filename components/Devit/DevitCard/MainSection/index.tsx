@@ -92,6 +92,7 @@ export const MainSection = ({
             isOpen={isQuoteDevitFormOpen}
           >
             <CreateQuoteDevitForm
+              user={user}
               id={id}
               created_at={created_at}
               content={content}

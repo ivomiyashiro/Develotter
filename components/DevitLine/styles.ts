@@ -15,6 +15,7 @@ export const Header = styled.header`
   backdrop-filter: blur(5px);
   padding: 0em 1em;
   height: 53px;
+  z-index: 9;
 `;
 
 export const H1 = styled.h1`

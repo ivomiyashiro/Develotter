@@ -19,7 +19,8 @@ interface IProps {
   created_at: Date
   content: string
   img: string
-  handleOpenModal: (value: boolean) => void,
+  handleOpenModal: (value: boolean) => void
+  handleCommentsState: any
 }
 
 export const CommentForm = ({
@@ -28,6 +29,7 @@ export const CommentForm = ({
   created_at,
   content,
   img,
+  handleCommentsState,
   handleOpenModal
 }: IProps) => {
   const { userState, devitDispatch } = useContext(AppContext);
@@ -49,7 +51,12 @@ export const CommentForm = ({
       img: imageUrl.file
     };
     setLoading(true);
-    await createComment(data, devitDispatch);
+    const comment = await createComment(data, devitDispatch);
+    setTextAreaValue('');
+    handleCommentsState((prev: any) => [
+      ...prev,
+      comment
+    ]);
     setLoading(false);
     handleOpenModal(false);
   };

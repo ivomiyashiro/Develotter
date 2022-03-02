@@ -11,9 +11,10 @@ import { AppContext } from 'context/AppContext';
 interface IProps {
   devit: IDevit
   user: IUser
+  handleCommentsState: any
 }
 
-export const InteractionsCounters = ({ devit, user }: IProps) => {
+export const InteractionsCounters = ({ devit, user, handleCommentsState }: IProps) => {
 
   const { id } = devit;
   const {userState} = useContext(AppContext);
@@ -115,6 +116,7 @@ export const InteractionsCounters = ({ devit, user }: IProps) => {
         handleFavsCounter={setFavsCounter}
         handleQuoteRevitCounter={setQuoteRevitsCounter}
         handleRevitsCounter={setRevitsCounter}
+        handleCommentsState={handleCommentsState}
       />
     </>
   );

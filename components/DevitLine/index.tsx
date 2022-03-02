@@ -44,7 +44,7 @@ export const DevitTimeline = ({ user, devit, comments }: IProps) => {
         </Header>
         <DevitLineWrapper>
           <DevitSection user={user} devit={devit} />
-          <InteractionsCounters user={user} devit={devit} />
+          <InteractionsCounters user={user} devit={devit} handleCommentsState={setCommentsState} />
           <CommentInput handleCommentsState={setCommentsState} user={user} devit_id={devit.id}/>
         </DevitLineWrapper>
         <CommentsWrapper>

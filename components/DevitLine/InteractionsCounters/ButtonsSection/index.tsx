@@ -27,6 +27,7 @@ export const ButtonsSection = ({
   handleFavsCounter,
   handleQuoteRevitCounter,
   handleRevitsCounter,
+  handleCommentsState
 }: any) => {
 
   const {userState, devitDispatch} = useContext(AppContext);
@@ -135,6 +136,7 @@ export const ButtonsSection = ({
           content={devit.content}
           img={devit.img}
           handleOpenModal={setCommentsFormOpen}
+          handleCommentsState={handleCommentsState}
         />
       </Modal>
       <Modal
