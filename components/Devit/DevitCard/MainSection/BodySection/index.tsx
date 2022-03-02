@@ -22,7 +22,7 @@ export const BodySection = ({id, user, content, img, isComment = false}: IProps)
 
   return (
     <>
-      <Div onClick={() => !isComment && handleDevitRoute}>
+      <Div onClick={() => !isComment && handleDevitRoute()}>
         {content}
         {
           !!img && <ImageSection imgUrl={img}/>
