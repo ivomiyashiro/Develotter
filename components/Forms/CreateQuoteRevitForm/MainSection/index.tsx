@@ -44,7 +44,6 @@ export const MainSection = ({
 
   const { userState } = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
-  const [isValid, setValid] = useState(false);
 
   const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     handleTextAreaValue(e.target.value);
@@ -101,7 +100,6 @@ export const MainSection = ({
             <ImageSection
               src={imageUrl}
               alt={'develotter'}
-              handleValidForm={setValid}
               handleImageUrl={handleImageUrl}
             />
           }
