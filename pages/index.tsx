@@ -1,10 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import { LogSection } from 'components/Pages/LogSection'; 
 import { PublicRoute } from 'components/PublicRoute';
-
-import { LandingWrapper, LoginWrapper, Video, VideoWrapper } from './styles';
+import { LandingComponent } from 'components/Landing';
 
 const Landing: NextPage = () => {
   return (
@@ -14,16 +12,7 @@ const Landing: NextPage = () => {
       </Head>
 
       <PublicRoute>
-        <LandingWrapper>
-          <VideoWrapper>
-            <Video autoPlay muted loop >
-              <source src="/assets/videos/main.mp4" type="video/mp4" />
-            </Video>
-          </VideoWrapper>
-          <LoginWrapper>
-            <LogSection />
-          </LoginWrapper>
-        </LandingWrapper>
+        <LandingComponent />
       </PublicRoute>
     </>
   );
