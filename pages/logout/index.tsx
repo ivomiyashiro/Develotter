@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import { NextPage } from 'next';
 
 import { logout } from 'actions/auth';
 
@@ -11,7 +12,7 @@ import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 import { theme } from 'styles/theme';
 import { Div, Wrapper, LogoWrapper, Section, H2, P, ButtonsWrapper, ButtonWrapper } from './styles';
 
-const Logout = () => {
+const Logout:NextPage = () => {
 
   const { userDispatch } = useContext(AppContext);
   const router = useRouter();
