@@ -132,7 +132,7 @@ export const MainSection = ({
             isOpen={isDeleteModalOpen}
           >
             <DeleteDevitToast
-              id={id}
+              devitId={id}
               handleDeleteModalOpen={setDeleteModalOpen}
             />
           </Modal>
