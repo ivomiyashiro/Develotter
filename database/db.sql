@@ -1,4 +1,3 @@
-
 /* USERS */
 
 CREATE TABLE IF NOT EXISTS dev (

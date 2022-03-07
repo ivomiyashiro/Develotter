@@ -4,12 +4,12 @@ let conn: any;
 
 if (!conn) {
   conn = new Pool ({
-    user: 'ejcwirxzqqizsu',
+    user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
-    host: 'ec2-3-227-195-74.compute-1.amazonaws.com',
+    host: process.env.DATABASE_HOST,
     port: 5432,
-    database: 'dd7d3pde4q3cvp'
-  });
+    database: process.env.DATABASE
+  }); 
 }
 
 export { conn };

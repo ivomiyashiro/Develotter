@@ -16,7 +16,7 @@ const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const query = 'INSERT INTO dev (name, username, email, password, birth_date) VALUES ($1, $2, $3, $4, $5) RETURNING *';
     const values = [reqName, newUsername, reqEmail, newPassword, reqBirth_date];
-    
+
     const resp = await conn.query(query, values);
     const {id, username, name, bio, email, profile_picture, cover_picture, birth_date, website, location, created_at, first_edit} = resp.rows[0];
     
