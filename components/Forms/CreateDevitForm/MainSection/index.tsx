@@ -1,4 +1,4 @@
-import { useState, DragEvent, ChangeEvent, Dispatch, SetStateAction, useContext } from 'react';
+import { useState, DragEvent, ChangeEvent, Dispatch, SetStateAction, useContext, useRef } from 'react';
 
 import { AppContext } from 'context/AppContext';
 import { ImageSection } from '../ImageSection';
@@ -16,10 +16,12 @@ interface IProps {
   imageUrl: string
   textAreaPlaceholder: string
   isLoading: boolean
+  handleValidForm: any
 }
 
 export const MainSection = ({
   handleTextAreaValue,
+  handleValidForm,
   handleImageUrl,
   isSubmitButtonDisabled,
   textAreaValue,
@@ -28,8 +30,23 @@ export const MainSection = ({
   isLoading
 }: IProps) => {
 
+  const textareaRef = useRef<any>(null);
+
   const {userState} = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
+
+  const handleTextarea = () => {
+    if (textareaRef.current !== null) {
+      textareaRef.current.style.height = '1px';
+      textareaRef.current.style.height = (textareaRef.current.scrollHeight)+'px';
+    }
+
+    if (textAreaValue.length !== 0) {
+      handleValidForm(true);
+    } else {
+      handleValidForm(false);
+    }
+  };
 
   const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     handleTextAreaValue(e.target.value);
@@ -44,6 +61,7 @@ export const MainSection = ({
       });
     }
     setDragState(false);
+    handleValidForm(true);
   };
 
   const handleDragEnter = (e: DragEvent<HTMLTextAreaElement>) => {
@@ -66,11 +84,13 @@ export const MainSection = ({
         <Section>
           <TextArea
             placeholder={textAreaPlaceholder}
+            onKeyUp={handleTextarea}
             onChange={handleTextAreaChange}
             onDrop={handleDrop}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             value={textAreaValue}
+            ref={textareaRef}
             style={ 
               dragState 
                 ? { border: `2px dashed ${theme.hack}`}
@@ -84,12 +104,14 @@ export const MainSection = ({
                 src={imageUrl}
                 alt={'develotter'}
                 handleImageUrl={handleImageUrl}
+                handleValidForm={handleValidForm}
               />
           }
           <MediaButtons
             isDisabled={isSubmitButtonDisabled}
             handleImageUrl={handleImageUrl}
             isLoading={isLoading}
+            handleValidForm={handleValidForm}
           />
         </Section>
       </Div>

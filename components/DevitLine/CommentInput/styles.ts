@@ -40,10 +40,10 @@ export const Textarea = styled.textarea`
   color: ${theme.white};
   font-size: 1.15rem;
   height: 25px;
+  margin-top: 0.5em;
   overflow: hidden;
   resize: none;
   width: 100%;
-  margin-top: 0.5em;
   
   :focus {
     outline: none;

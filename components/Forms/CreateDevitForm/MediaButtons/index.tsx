@@ -16,9 +16,10 @@ interface IProps {
   isDisabled: boolean,
   handleImageUrl: (value: fileState | ((prev: fileState) => fileState)) => void
   isLoading: boolean
+  handleValidForm: any
 }
 
-export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading }: IProps) => {
+export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading, handleValidForm }: IProps) => {
 
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -35,6 +36,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading }: IProps) 
         fileUrl: URL.createObjectURL(e.target.files[0])
       });
     }
+    handleValidForm(true);
   };
 
   return (

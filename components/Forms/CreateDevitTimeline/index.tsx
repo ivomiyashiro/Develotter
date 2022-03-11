@@ -1,4 +1,4 @@
-import { ChangeEvent, DragEvent, FormEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, DragEvent, FormEvent, useContext, useRef, useState } from 'react';
 
 import { AppContext } from '../../../context/AppContext';
 import { ProfileImage } from 'components/ProfileImage';
@@ -7,7 +7,6 @@ import { MediaButtons } from '../CreateDevitForm/MediaButtons';
 
 import { theme } from 'styles/theme';
 import { Div, Form, Textarea } from './styles';
-import { useValidDevit } from 'hooks/useValidDevit';
 import { createDevit } from 'actions/devit';
 
 export const CreateDevitTimeline = () => {
@@ -20,7 +19,9 @@ export const CreateDevitTimeline = () => {
     file: '',
     fileUrl: ''
   });
-  const { isDevitValid } = useValidDevit(textAreaValue, imageUrl.fileUrl);
+  const [isValidForm, setValidForm] = useState(false);
+
+  const textareaRef = useRef<any>(null);
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +39,20 @@ export const CreateDevitTimeline = () => {
     setImageUrl({file: '', fileUrl: ''});
   };
 
+  const handleTextarea = () => {
+    if (textareaRef.current !== null) {
+      console.log('hoal');
+      textareaRef.current.style.height = '1px';
+      textareaRef.current.style.height = (textareaRef.current.scrollHeight)+'px';
+    }
+
+    if (textAreaValue.length !== 0) {
+      setValidForm(true);
+    } else {
+      setValidForm(false);
+    }
+  };
+
   const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextAreaValue(e.target.value);
   };
@@ -51,6 +66,7 @@ export const CreateDevitTimeline = () => {
       });
     }
     setDragState(false);
+    setValidForm(true);
   };
 
   const handleDragEnter = (e: DragEvent<HTMLTextAreaElement>) => {
@@ -73,11 +89,13 @@ export const CreateDevitTimeline = () => {
         <Form onSubmit={handleSubmit}>
           <Textarea
             placeholder="What&apos;s happening"
+            onKeyUp={handleTextarea}
             onChange={handleTextAreaChange}
             onDrop={handleDrop}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             value={textAreaValue}
+            ref={textareaRef}
             style={ 
               dragState 
                 ? { border: `2px dashed ${theme.hack}`}
@@ -88,13 +106,15 @@ export const CreateDevitTimeline = () => {
             !!imageUrl.fileUrl
             &&
             <ImageSection
+              handleValidForm={setValidForm}
               src={imageUrl.fileUrl}
               alt={'develotter'}
               handleImageUrl={setImageUrl}
             />
           }
           <MediaButtons
-            isDisabled={isDevitValid}
+            handleValidForm={setValidForm}
+            isDisabled={isValidForm}
             handleImageUrl={setImageUrl}
             isLoading={isLoading}
           />

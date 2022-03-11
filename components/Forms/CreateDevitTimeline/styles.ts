@@ -20,15 +20,16 @@ export const Form = styled.form`
 
 export const Textarea = styled.textarea`
   background: transparent;
+  border-radius: 10px;
   border: none;
   color: ${theme.white};
   font-size: 1.35rem;
   min-height: 28px;
   outline: none;
+  overflow: hidden;
   padding: .5em 0;
   resize: none;
   width: 100%;
-  border-radius: 10px;
 
   ::placeholder {
     color: #9897A9;

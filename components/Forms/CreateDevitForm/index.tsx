@@ -20,7 +20,7 @@ export const CreateDevitForm = () => {
     file: '',
     fileUrl: ''
   });
-  const { isDevitValid } = useValidDevit(textAreaValue, imageUrl.fileUrl); 
+  const [isValidForm, setValidForm] = useState(false);
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ export const CreateDevitForm = () => {
     <>
       <Form onSubmit={handleSubmit}>
         <FormHeader
-          isSubmitButtonDisabled={isDevitValid}
+          isSubmitButtonDisabled={isValidForm}
           isLoading={isLoading}
           buttonChild="Devit"
         />
@@ -50,7 +50,8 @@ export const CreateDevitForm = () => {
           <MainSection
             handleTextAreaValue={setTextAreaValue}
             handleImageUrl={setImageUrl}
-            isSubmitButtonDisabled={isDevitValid}
+            handleValidForm={setValidForm}
+            isSubmitButtonDisabled={isValidForm}
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="What's happening?"
