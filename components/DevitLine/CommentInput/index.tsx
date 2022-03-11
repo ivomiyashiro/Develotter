@@ -2,7 +2,7 @@ import { ChangeEvent, DragEvent, FormEvent, useContext, useRef, useState } from 
 import Image from 'next/image';
 
 import { AppContext } from 'context/AppContext';
-import { IComment, IUser } from 'interfaces';
+import { IUser } from 'interfaces';
 
 import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
 import { HoverableButton } from 'components/Buttons/HoverableButton';
