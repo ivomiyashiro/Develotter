@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { AppContext } from '../../../context/AppContext';
 
 import { createComment } from 'actions/devit';
@@ -39,7 +39,7 @@ export const CommentForm = ({
     file: '',
     fileUrl: ''
   });
-  const { isDevitValid }: any = useValidDevit(textAreaValue, imageUrl.fileUrl);
+  const [isValidForm, setValidForm] = useState(false);
   
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
@@ -68,7 +68,7 @@ export const CommentForm = ({
       <Form onSubmit={handleSubmit}>
         <FormHeader 
           handleOpenModal={handleOpenModal}
-          isSubmitButtonDisabled={isDevitValid}
+          isSubmitButtonDisabled={isValidForm}
           isLoading={isLoading}
           buttonChild="Reply"
         />
@@ -100,9 +100,10 @@ export const CommentForm = ({
             </Section>
           </Div>
           <MainSection 
+            handleValidForm={setValidForm}
             handleTextAreaValue={setTextAreaValue}
             handleImageUrl={setImageUrl}
-            isSubmitButtonDisabled={isDevitValid}
+            isSubmitButtonDisabled={isValidForm}
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="Devit your reply"
