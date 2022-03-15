@@ -25,6 +25,7 @@ interface IProps {
   created_at: Date
   img: string
   isLoading: boolean
+  handleValidForm: any
 }
 
 export const MainSection = ({
@@ -39,6 +40,7 @@ export const MainSection = ({
   img,
   created_at,
   isLoading,
+  handleValidForm,
   handleTextAreaValue,
 }: IProps) => {
 
@@ -98,6 +100,7 @@ export const MainSection = ({
             !!imageUrl
             &&
             <ImageSection
+              handleValidForm={ handleValidForm }
               src={imageUrl}
               alt={'develotter'}
               handleImageUrl={handleImageUrl}
@@ -112,6 +115,7 @@ export const MainSection = ({
             img={img}
           />
           <MediaButtons
+            handleValidForm={ handleValidForm }
             isDisabled={isSubmitButtonDisabled}
             handleImageUrl={handleImageUrl}
             isLoading={isLoading}

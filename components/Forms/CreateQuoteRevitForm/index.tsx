@@ -35,7 +35,7 @@ export const CreateQuoteDevitForm = ({
     file: '',
     fileUrl: ''
   });
-  const {isDevitValid} = useValidDevit(textAreaValue, imageUrl.file);
+  const [isValidForm, setValidForm] = useState(false);
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,12 +55,13 @@ export const CreateQuoteDevitForm = ({
       <Form onSubmit={handleSubmit}>
         <FormHeader
           handleOpenModal={handleOpenModal}
-          isSubmitButtonDisabled={isDevitValid}
+          isSubmitButtonDisabled={isValidForm}
           isLoading={isLoading}
           buttonChild="Devit"
         />
         <Div>
           <MainSection
+            handleValidForm={setValidForm}
             user={user}
             content={content}
             created_at={created_at}
@@ -70,7 +71,7 @@ export const CreateQuoteDevitForm = ({
             imageUrl={imageUrl.fileUrl}
             img={img}
             isLoading={isLoading}
-            isSubmitButtonDisabled={isDevitValid}
+            isSubmitButtonDisabled={isValidForm}
             textAreaPlaceholder="Add a comment"
             textAreaValue={textAreaValue}
           />
